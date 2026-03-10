@@ -2,9 +2,36 @@
 Theme Name: Kliper - Custom
 Author: admin
 Version: 1.0 
-*/*{
-    box-sizing: border-box;
+*/
+
+:root {
+    --primary: #1D2D44;
+    --primary-lt: #3E5C76;
+    --secondary: #B58B4C;
+    --bg: #F0EBD8;
+    --bg-lt: #F2F2F2;
+    --text-primary: #0D0D0D;
+    --text-secondary: #F2F2F2;
+    --text-muted: #4D4D4D;
+    --secondary-font: 'Brygada 1918', serif;
+    --sides: 2rem;
+    --blob-radius: 200px;
+    --blob-shadow: 3px 2px 10.1px 3px rgba(0,0,0,0.24);
+    --blob-rotation: 32deg;
+    --blob-translate: translate(-20%, -50%);
+    --transition-fade: .15s ease;
 }
+
+* {
+    font-family: 'Bricolage Grotesque', sans-serif;
+}
+
 body {
+    background-color: var(--bg);
+    font-size: 16px;
+    color: var(--text-primary);
     margin: 0;
+}
+.container {
+    padding-inline: calc(var(--sides) / 2 );
 }

@@ -4,7 +4,7 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        gap: clamp(1rem, 5vw, 5rem);
+        gap: clamp(1rem, 8vw, 12rem);
         min-height: 100vh;
         width: 100%;
         overflow: hidden;
@@ -55,7 +55,7 @@
     }
     .hero__animation-container {
         z-index: -1;
-        flex: 0 0 500px;
+        flex: 0 500px;
         position: relative;
     }
     @media (max-width: 1024px) {
@@ -191,7 +191,7 @@
         get_template_directory_uri() . '/assets/images/icons/microphone.png',
         get_template_directory_uri() . '/assets/images/icons/note.png',
         get_template_directory_uri() . '/assets/images/icons/pirate.png',
-        get_template_directory_uri() . '/assets/images/icons/play.png',
+        get_template_directory_uri() . '/assets/images/icons/gituar.png',
         get_template_directory_uri() . '/assets/images/icons/ship.png',
         get_template_directory_uri() . '/assets/images/icons/wave.png',
     ];

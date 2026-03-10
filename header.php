@@ -7,7 +7,7 @@
 
 <body <?php body_class(); ?>>
 
-<header class="site-header">
+<!-- <header class="site-header">
   <div class="header__container">
 
     <a href="<?php echo esc_url(home_url('/')); ?>" class="logo">
@@ -24,4 +24,4 @@
     ?>
 
   </div>
-</header>
+</header> -->

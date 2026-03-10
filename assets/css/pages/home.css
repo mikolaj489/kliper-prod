@@ -1,0 +1,41 @@
+/* Logo width reference */
+.logo {
+    display: inline-block;
+    width: auto;
+    white-space: nowrap;
+}
+
+/* Main content - responsive text scaling */
+main {
+    padding: 2rem;
+}
+
+main h1 {
+    /* Responsive heading - scales between 2rem (mobile) and 3.5rem (desktop) */
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+}
+
+main p {
+    /* Paragraph width matches logo width */
+    max-width: 150px;
+    /* Responsive paragraph - scales between 1rem (mobile) and 1.5rem (desktop) */
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+    main {
+        padding: 1.5rem;
+    }
+}
+
+/* Tablet and larger */
+@media (min-width: 1024px) {
+    main {
+        padding: 3rem;
+    }
+}
