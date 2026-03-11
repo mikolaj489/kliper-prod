@@ -181,7 +181,7 @@
 </style>
 
 <?php
-    $obrazek = get_field('obrazek_glowny');
+    $img = get_field('obrazek_glowny');
 
     $slogans = [];
     for ($i = 1; $i <= 7; $i++) {
@@ -204,8 +204,8 @@
 
 <section class="hero">
     <div class="hero__content container">
-        <?php if($obrazek): ?>
-            <img class="hero__logo" src="<?php echo esc_url($obrazek['url']); ?>" alt="<?php echo esc_attr($obrazek['alt']); ?>" width="350" height="auto">
+        <?php if($img): ?>
+            <img class="hero__logo" src="<?php echo esc_url($img['url']); ?>" alt="<?php echo esc_attr($img['alt']); ?>" width="350" height="auto">
         <?php endif; ?>
         <span class="hero__subtext"><?php the_field('sub_tekst'); ?></span>
         <p class="hero__text"><?php the_field('tekst_powitalny'); ?></p>
