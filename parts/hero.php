@@ -8,8 +8,10 @@
         min-height: 100vh;
         width: 100%;
         overflow: hidden;
-        padding-block-end: 10rem;
+        padding-block-end: var(--sand-effect-height);
         box-sizing: border-box;
+        position: relative;
+        z-index: 1;
     }
     .hero__content {
         display: grid;
@@ -20,13 +22,14 @@
         max-width: 800px;
         align-self: center;
         gap: clamp(0.5rem, 2vw, 1.5rem);
+        margin-block-start: 5rem;
     }
     .hero__logo {
         min-width: 100%;
         height: auto;
     }
     .hero__subtext {
-        font-family: var(--secondary-font);
+        font-family: var(--font-secondary);
         font-style: italic;
         letter-spacing: 0.1em;
         font-size: 2rem;
@@ -39,7 +42,7 @@
             content: '';
             flex: 1;
             height: 1px;
-            background-color: var(--text-primary);
+            background-color: var(--c-text-primary);
         }
         &::before { margin-inline-start: 4rem; }
         &::after  { margin-inline-end: 4rem; }
@@ -48,13 +51,12 @@
         text-align: center;
         letter-spacing: 0.05em;
         line-height: 1.25;
-        color: var(--text-muted);
+        color: var(--c-text-muted);
         max-width: 715px;
         font-size: 1.25rem;
         margin: 0 auto;
     }
     .hero__animation-container {
-        z-index: -1;
         flex: 0 500px;
         position: relative;
     }
@@ -90,7 +92,7 @@
         position: relative;
         width: var(--blob-w);
         height: var(--blob-h);
-        background-color: var(--primary);
+        background-color: var(--c-primary);
         top: 50%; left: 20%;
         animation: blob-shake 8s ease-in-out infinite;
         transform-origin: center center;
@@ -151,23 +153,23 @@
         left: 105%;
     }
     .blob--1, .blob--2, .blob--5, .blob--7 {
-        background-color: var(--secondary);
+        background-color: var(--c-secondary);
     }
     .blob--3, .blob--4, .blob--6 {
-        background-color: var(--primary-lt);
+        background-color: var(--c-primary-lt);
     }
     .blob__slogan {
         margin: 0;
-        color: var(--text-secondary);
+        color: var(--c-text-secondary);
         transform: rotate(calc(var(--blob-rotation) * -1));
-        font-size: 4rem;
+        font-size: var(--fs-lg);
         letter-spacing: 0.05em;
         line-height: 1.3;
         text-align: center;
         max-width: 15rem;
-        transition: opacity var(--transition-fade);
+        transition: opacity var(--slogan-transition-fade);
     }
-    @media (max-width: 1200px) {
+    @media (max-width: 1300px) {
         .blob--main {
             --blob-w: 300px;
             --blob-h: 480px;

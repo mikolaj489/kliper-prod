@@ -4,7 +4,6 @@
 <?php get_header(); ?>
 
 <?php get_template_part('parts/hero'); ?>
-<?php get_template_part('parts/about'); ?>
-<?php get_template_part('parts/gallery'); ?>
+<?php get_template_part('parts/albums'); ?>
 
 <?php get_footer(); ?>

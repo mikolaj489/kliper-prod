@@ -5,33 +5,55 @@ Version: 1.0
 */
 
 :root {
-    --primary: #1D2D44;
-    --primary-lt: #3E5C76;
-    --secondary: #B58B4C;
-    --bg: #F0EBD8;
-    --bg-lt: #F2F2F2;
-    --text-primary: #0D0D0D;
-    --text-secondary: #F2F2F2;
-    --text-muted: #4D4D4D;
-    --secondary-font: 'Brygada 1918', serif;
+    --c-primary: #1D2D44;
+    --c-primary-lt: #3E5C76;
+    --c-secondary: #B58B4C;
+    --c-bg: #F0EBD8;
+    --c-bg-lt: #F2F2F2;
+    --c-text-primary: #0D0D0D;
+    --c-text-secondary: #F2F2F2;
+    --c-text-muted: #4D4D4D;
+    --c-title: #B3B3B3;
+
+    --fs-sm: 0.875rem;
+    --fs-base: 1rem;
+    --fs-md: 1.25rem;
+    --fs-lg: 4rem;
+    
+    --font-primary: 'Bricolage Grotesque', sans-serif;
+    --font-secondary: 'Brygada 1918', serif;
+
     --sides: 2rem;
+
     --blob-radius: 200px;
     --blob-shadow: 3px 2px 10.1px 3px rgba(0,0,0,0.24);
     --blob-rotation: 32deg;
     --blob-translate: translate(-20%, -50%);
-    --transition-fade: .15s ease;
+    --slogan-transition-fade: .15s ease;
+
+    --sand-effect-height: 20rem;
 }
 
 * {
-    font-family: 'Bricolage Grotesque', sans-serif;
+    font-family: var(--font-primary);
 }
 
 body {
-    background-color: var(--bg);
+    background-color: var(--c-bg);
+    color: var(--c-text-primary);
     font-size: 16px;
-    color: var(--text-primary);
     margin: 0;
 }
 .container {
     padding-inline: calc(var(--sides) / 2 );
+}
+
+.section-title {
+    font-family: var(--font-secondary);
+    color: var(--c-title);
+    font-size: var(--fs-lg);
+    font-weight: bold;
+    letter-spacing: .20em;
+    text-align: center;
+    margin: 0;
 }
