@@ -24,6 +24,8 @@ Version: 1.0
     --font-secondary: 'Brygada 1918', serif;
 
     --sides: 2rem;
+    --section-spacing: 5rem;
+    --title-padding: 0 3rem;
 
     --blob-radius: 200px;
     --blob-shadow: 3px 2px 10.1px 3px rgba(0,0,0,0.24);
@@ -46,8 +48,8 @@ body {
 }
 .container {
     padding-inline: calc(var(--sides) / 2 );
+    padding-block-start: var(--section-spacing);
 }
-
 .section-title {
     font-family: var(--font-secondary);
     color: var(--c-title);
@@ -55,5 +57,5 @@ body {
     font-weight: bold;
     letter-spacing: .20em;
     text-align: center;
-    margin: 0;
+    margin-block: var(--title-padding); 
 }

@@ -1,6 +1,7 @@
 <?php
 
 function my_theme_assets() {
+  add_image_size('album_cover', 600, 600, true);
   wp_enqueue_style(
       'theme-style',
       get_stylesheet_uri(),

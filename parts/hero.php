@@ -22,7 +22,6 @@
         max-width: 800px;
         align-self: center;
         gap: clamp(0.5rem, 2vw, 1.5rem);
-        margin-block-start: 5rem;
     }
     .hero__logo {
         min-width: 100%;
