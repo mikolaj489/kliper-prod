@@ -20,13 +20,25 @@
         justify-content: center;
         align-items: center;
     }
+    .album-card {
+        background: linear-gradient(to bottom, var(--c-text-muted) 0%, color-mix(in srgb, var(--c-primary), white 3%) 100%);
+        padding: 20px;
+        border-radius: 12px;
+    }
     .album-card__cover {
         width: 400px;
         height: 400px;
         border-radius: 12px;
     }
-    .album-card__year {
-
+    .album-card__year,
+    .album-card__label {
+        color: var(--c-secondary);
+    }
+    .album-card__title {
+        color: var(--c-text-secondary);
+    }
+    .album-card__tracks {
+        color:  color-mix(in srgb, var(--c-text-muted), white 45%);
     }
 </style>
 <?php
@@ -41,7 +53,7 @@
             <?php endif; ?>
             <div class="album-card__info">
                 <span class="album-card__year"><?php echo get_field('album_release_year'); ?></span>
-                <span class="album-card__badge"><?php echo get_field('album_sub_text'); ?></span>
+                <span class="album-card__label"><?php echo get_field('album_label'); ?></span>
                 <h3 class="album-card__title"><?php echo get_field('album_title'); ?></h3>
                 <p class="album-card__tracks"><?php echo get_field('album_track_count'); ?></p>
             </div>

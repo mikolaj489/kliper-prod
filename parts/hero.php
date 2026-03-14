@@ -180,7 +180,7 @@
 </style>
 
 <?php
-    $img = get_field('obrazek_glowny');
+    $img = get_field('hero_logo');
 
     $slogans = [];
     for ($i = 1; $i <= 7; $i++) {
@@ -206,8 +206,8 @@
         <?php if($img): ?>
             <img class="hero__logo" src="<?php echo esc_url($img['url']); ?>" alt="<?php echo esc_attr($img['alt']); ?>" width="350" height="auto">
         <?php endif; ?>
-        <span class="hero__subtext"><?php the_field('sub_tekst'); ?></span>
-        <p class="hero__text"><?php the_field('tekst_powitalny'); ?></p>
+        <span class="hero__subtext"><?php the_field('hero_greeting'); ?></span>
+        <p class="hero__text"><?php the_field('hero_description'); ?></p>
     </div>
 
     <div class="hero__animation-container">
