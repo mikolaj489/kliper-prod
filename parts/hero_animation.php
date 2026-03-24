@@ -1,61 +1,5 @@
 <style>
-    .hero {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: clamp(1rem, 8vw, 12rem);
-        min-height: 100vh;
-        width: 100%;
-        overflow: hidden;
-        padding-block-end: var(--sand-effect-height);
-        box-sizing: border-box;
-        position: relative;
-        z-index: 1;
-    }
-    .hero__content {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto;
-        width: fit-content;
-        flex: 0 1000px;
-        max-width: 800px;
-        align-self: center;
-        gap: clamp(0.5rem, 2vw, 1.5rem);
-    }
-    .hero__logo {
-        min-width: 100%;
-        height: auto;
-    }
-    .hero__subtext {
-        font-family: var(--font-secondary);
-        font-style: italic;
-        letter-spacing: 0.1em;
-        font-size: 2rem;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        &::before,
-        &::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background-color: var(--c-text-primary);
-        }
-        &::before { margin-inline-start: 4rem; }
-        &::after  { margin-inline-end: 4rem; }
-    }
-    .hero__text {
-        text-align: center;
-        letter-spacing: 0.05em;
-        line-height: 1.25;
-        color: var(--c-text-muted);
-        max-width: 715px;
-        font-size: 1.25rem;
-        margin: 0 auto;
-    }
-    .hero__animation-container {
+        .hero__animation-container {
         flex: 0 500px;
         position: relative;
     }
@@ -180,8 +124,6 @@
 </style>
 
 <?php
-    $img = get_field('hero_logo');
-
     $slogans = [];
     for ($i = 1; $i <= 7; $i++) {
         $slogans[] = get_field('slogan_' . $i);
@@ -201,28 +143,18 @@
     shuffle($shuffled_icons);
 ?>
 
-<section class="hero">
-    <div class="hero__content container">
-        <?php if($img): ?>
-            <img class="hero__logo" src="<?php echo esc_url($img['url']); ?>" alt="<?php echo esc_attr($img['alt']); ?>" width="350" height="auto">
-        <?php endif; ?>
-        <span class="hero__subtext"><?php the_field('hero_greeting'); ?></span>
-        <p class="hero__text"><?php the_field('hero_description'); ?></p>
-    </div>
-
-    <div class="hero__animation-container">
-        <div class="hero__animation-content">
-            <div class="blob blob--main">
-                <p class="blob__slogan"><?= esc_html($slogans[0]) ?></p>
-                <?php for ($i = 1; $i <= 7; $i++): ?>
-                <div class="blob blob--<?= $i ?>">
-                    <img src="<?= esc_url($shuffled_icons[$i - 1]) ?>" alt="">
-                </div>
-                <?php endfor; ?>
+<div class="hero__animation-container">
+    <div class="hero__animation-content">
+        <div class="blob blob--main">
+            <p class="blob__slogan"><?= esc_html($slogans[0]) ?></p>
+            <?php for ($i = 1; $i <= 7; $i++): ?>
+            <div class="blob blob--<?= $i ?>">
+                <img src="<?= esc_url($shuffled_icons[$i - 1]) ?>" alt="">
             </div>
+            <?php endfor; ?>
         </div>
     </div>
-</section>
+</div>
 
 <script>
     const slogans = <?= json_encode(array_values(array_filter($slogans))) ?>;

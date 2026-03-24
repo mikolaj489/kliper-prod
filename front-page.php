@@ -3,7 +3,7 @@
 ?>
 <?php get_header(); ?>
 
-<?php get_template_part('parts/hero'); ?>
-<?php get_template_part('parts/releases'); ?>
+<?php get_template_part('sections/hero'); ?>
+<?php get_template_part('sections/releases'); ?>
 
 <?php get_footer(); ?>
