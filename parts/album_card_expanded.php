@@ -3,52 +3,90 @@
         background-color: red;
     }
     .carousel {
-        display: flex;
-        align-items: center;
+        display: grid;
+        grid-template-columns: 48px 1fr 48px;
+        grid-template-rows: auto auto;
         gap: 16px;
     }
-
     .carousel__card {
         flex: 1;
     }
-
     .carousel__btn {
-        flex-shrink: 0;
-        width: 48px;
-        height: 48px;
+        width: 55px; height: 55px;
         font-size: 24px;
         cursor: pointer;
-        background: rgba(0,0,0,0.5);
-        color: #fff;
-        border: none;
+        background-color: #414750;
+        color: #919191;
+        border: 2px solid transparent;
         border-radius: 50%;
+        align-self: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: border stroke-width  .3s;
+        stroke-width: 2;
+        &:hover {
+            stroke-width: 2.5;
+            border: 2px solid #919191;
+        }
+       &:active {
+            transform: scale(.97);
+        }
     }
 
     .carousel__btn:disabled {
         opacity: 0.3;
-        cursor: default;
+        pointer-events: none;
     }
     .carousel__status {
+        grid-column: 2 / 3;
+        grid-row: 2;
         display: flex;
-        justify-content: center;
-        gap: 8px;
-        margin-top: 16px;
+        justify-self: center;
+        gap: 10px;
+        margin-block-start: 16px;
     }
 
-.carousel__dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    border: none;
-    background: rgba(255,255,255,0.3);
-    cursor: pointer;
-    transition: background 0.2s;
-}
+    .carousel__dot {
+        padding-inline: 5px;
+        padding-block: 5px;
+        border-radius: 20px;
+        border: none;
+        background-color: #5C5C5C;
+        cursor: pointer;
+        transition: background-color 0.2s, padding-inline 0.2s;
+        &:hover {
+            filter: brightness(1.3);
+        }
 
-.carousel__dot--active {
-    background: #fff;
-    transform: scale(1.3);
-}
+    }
+    .carousel__dots,
+    .carousel__close {
+        background-color: #414750;
+        border-radius: 20px;
+        padding-inline: 15px;
+        padding-block: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        gap: 10px;
+        color: #919191;
+    }
+    .carousel__close {
+        cursor: pointer;
+        &:hover {
+            color: #bbbbbb;
+        };
+        &:active {
+            transform: scale(.97);
+        }
+    }
+    .carousel__dot--active {
+        background-color: #919191;
+        padding-inline: 10px;
+        pointer-events: none;
+    }
 </style>
 <?php
     if (!defined('ABSPATH')) exit;

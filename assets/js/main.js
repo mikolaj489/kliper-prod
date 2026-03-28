@@ -12,26 +12,49 @@ async function fetchCardHTML(albumId) {
     return data.success ? data.data.html : null;
 }
 
+function updateDots() {
+    document.querySelectorAll('.carousel__dot').forEach((dot, i) => {
+        dot.classList.toggle('carousel__dot--active', i === currentIndex);
+    });
+}
+
+function updateButtons() {
+    document.querySelector('.carousel__btn--prev').disabled = currentIndex === 0;
+    document.querySelector('.carousel__btn--next').disabled = currentIndex === allCards.length - 1;
+}
+const iconNext = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`;
+const iconPrev = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>`;
+
 function renderCarousel(container, activeHTML) {
     container.innerHTML = `
         <div class="carousel">
-            <button class="carousel__btn carousel__btn--prev" ${currentIndex === 0 ? 'disabled' : ''}>&#8592;</button>
+            <button class="carousel__btn carousel__btn--prev" ${currentIndex === 0 ? 'disabled' : ''}>
+                ${iconPrev}
+            </button>
             <div class="carousel__card">${activeHTML}</div>
-            <button class="carousel__btn carousel__btn--next" ${currentIndex === allCards.length - 1 ? 'disabled' : ''}>&#8594;</button>
-        </div>
-        <div class="carousel__status">
-            ${allCards.map((_, i) => `
-                <button class="carousel__dot ${i === currentIndex ? 'carousel__dot--active' : ''}" data-index="${i}"></button>
-            `).join('')}
-            <button class="carousel__close">Wróć</button>
+            <button class="carousel__btn carousel__btn--next" ${currentIndex === allCards.length - 1 ? 'disabled' : ''}>
+                ${iconNext}
+            </button>
+            <div class="carousel__status">
+                <div class="carousel__dots">
+                    ${allCards.map((_, i) => `
+                        <button class="carousel__dot ${i === currentIndex ? 'carousel__dot--active' : ''}" data-index="${i}"></button>
+                    `).join('')}
+                </div>
+                <button class="carousel__close">Wróć</button>
+            </div>
         </div>
     `;
 }
 
 async function goTo(index, container) {
     currentIndex = index;
+    updateDots();
+    updateButtons();
     const html = await fetchCardHTML(allCards[currentIndex].albumId);
-    if (html) renderCarousel(container, html);
+    if (html) {
+        document.querySelector('.carousel__card').innerHTML = html;
+    }
 }
 
 document.addEventListener('click', async (e) => {
