@@ -1,40 +1,38 @@
-document.addEventListener('click', async (e) => {
+// document.addEventListener('click', async (e) => {
+//     // --- ZAMKNIĘCIE ---
+//     if (e.target.closest('.album-card__close')) {
+//         window.location.reload();
+//         return;
+//     }
 
-    // --- ZAMKNIĘCIE ---
-    if (e.target.closest('.album-card__close')) {
-        window.location.reload();
-        return;
-    }
+//     // --- OTWARCIE ---
+//     const card = e.target.closest('.album-card:not(.album-card--expanded)');
+//     if (!card) return;
+//     const albumId = card.dataset.albumId;
+//     if (!albumId) return;
 
-    // --- OTWARCIE ---
-    const card = e.target.closest('.album-card:not(.album-card--expanded)');
-    if (!card) return;
+//     card.classList.add('album-card--loading');
 
-    const albumId = card.dataset.albumId;
-    if (!albumId) return;
+//     const formData = new FormData();
+//     formData.append('action',   'get_album_detail');
+//     formData.append('nonce',    AlbumAjax.nonce);
+//     formData.append('album_id', albumId);
 
-    card.classList.add('album-card--loading');
+//     try {
+//         const res  = await fetch(AlbumAjax.url, { method: 'POST', body: formData });
+//         const data = await res.json();
 
-    const formData = new FormData();
-    formData.append('action',   'get_album_detail');
-    formData.append('nonce',    AlbumAjax.nonce);
-    formData.append('album_id', albumId);
+//         if (data.success) {
+//             // Podmień klikniętą kartę na rozszerzoną
+//             card.outerHTML = data.data.html;
 
-    try {
-        const res  = await fetch(AlbumAjax.url, { method: 'POST', body: formData });
-        const data = await res.json();
-
-        if (data.success) {
-            // Usuń wszystkie pozostałe karty
-            document.querySelectorAll('.album-card').forEach(c => {
-                if (c !== card) c.remove();
-            });
-
-            // Podmień klikniętą na rozszerzoną
-            card.outerHTML = data.data.html;
-        }
-    } catch (err) {
-        console.error('Album AJAX error:', err);
-        card.classList.remove('album-card--loading');
-    }
-});
+//             // Dodaj klasę expanded do wszystkich pozostałych kart
+//             document.querySelectorAll('.album-card:not(.album-card--expanded)').forEach(c => {
+//                 c.classList.add('album-card--expanded');
+//             });
+//         }
+//     } catch (err) {
+//         console.error('Album AJAX error:', err);
+//         card.classList.remove('album-card--loading');
+//     }
+// });
