@@ -4,13 +4,11 @@
     }
     .carousel {
         display: grid;
-        grid-template-columns: 48px 1fr 48px;
+        grid-template-columns: 55px 1fr 55px;
         grid-template-rows: auto auto;
         gap: 16px;
     }
-    .carousel__card {
-        flex: 1;
-    }
+    .carousel__card {}
     .carousel__btn {
         width: 55px; height: 55px;
         font-size: 24px;
@@ -23,7 +21,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: border stroke-width  .3s;
+        transition: border, stroke-width  .3s;
         stroke-width: 2;
         &:hover {
             stroke-width: 2.5;
@@ -46,7 +44,6 @@
         gap: 10px;
         margin-block-start: 16px;
     }
-
     .carousel__dot {
         padding-inline: 5px;
         padding-block: 5px;
@@ -58,7 +55,6 @@
         &:hover {
             filter: brightness(1.3);
         }
-
     }
     .carousel__dots,
     .carousel__close {
@@ -87,6 +83,35 @@
         padding-inline: 10px;
         pointer-events: none;
     }
+    .carousel__track {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: visible;
+        gap: 0;
+    }
+    .carousel__card {
+        flex-shrink: 0;
+        width: 600px;
+        transition: transform 0.35s ease, opacity 0.35s ease, filter 0.35s ease;
+        position: relative;
+        z-index: 2;
+    }
+    .carousel__card--prev {
+        transform: translateX(-40px) scale(0.88);
+        opacity: 0.5;
+        filter: brightness(0.6);
+        z-index: 1;
+        pointer-events: none;
+    }
+    .carousel__card--next {
+        transform: translateX(40px) scale(0.88);
+        opacity: 0.5;
+        filter: brightness(0.6);
+        z-index: 1;
+        pointer-events: none;
+}
 </style>
 <?php
     if (!defined('ABSPATH')) exit;
