@@ -52,7 +52,34 @@ function getDominantColor(imgElement) {
 
     return { r: fallback[0], g: fallback[1], b: fallback[2] };
 }
+function applyDescriptionToggle(container) {
+    const descriptions = container.querySelectorAll('.album-card__description--expanded');
+    descriptions.forEach(desc => {
+        const p = desc.querySelector('.album-card__description-text');
+        const toggle = desc.querySelector('.album-card__description-toggle');
+        if (!p || !toggle) return;
 
+        // Poczekaj na następną klatkę żeby DOM był wyrenderowany
+        requestAnimationFrame(() => {
+            if (p.scrollHeight > p.clientHeight + 2) {
+                toggle.classList.add('album-card__description-toggle--visible');
+            }
+        });
+
+        toggle.onclick = () => {
+            const expanded = toggle.dataset.expanded === 'true';
+            if (!expanded) {
+                p.style.webkitLineClamp = 'unset';
+                toggle.textContent = 'Zwiń';
+                toggle.dataset.expanded = 'true';
+            } else {
+                p.style.webkitLineClamp = '';
+                toggle.textContent = 'Czytaj więcej';
+                toggle.dataset.expanded = 'false';
+            }
+        };
+    });
+}
 function applyAlbumShadow(container) {
     const imgs = container.querySelectorAll('.album-card__cover--expanded');
     imgs.forEach(img => {
@@ -67,6 +94,7 @@ function applyAlbumShadow(container) {
         if (img.complete) apply();
         else img.addEventListener('load', apply);
     });
+    applyDescriptionToggle(container);
 }
 
 async function fetchCardHTML(albumId) {

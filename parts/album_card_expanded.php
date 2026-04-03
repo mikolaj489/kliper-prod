@@ -11,7 +11,7 @@
         gap: 5px;
     }
     .carousel__track {
-        min-height: 520px;
+        min-height: 525px;
         overflow: visible;
         display: flex;
         align-items: center;
@@ -196,6 +196,36 @@
         border-color: #bbbbbb;
     }
 }
+
+/* Na to: */
+.album-card__description--expanded .album-card__description-text {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4; /* ← zawsze zaciśnięty domyślnie */
+}
+
+.album-card__description-toggle {
+    background: none;
+    border: 1px solid var(--c-bg-lt);
+    border-radius: 20px;
+    color: color-mix(in srgb, var(--c-text-secondary), rgb(0,0,0) 20%);
+    font-size: 0.8em;
+    padding: 2px 10px;
+    cursor: pointer;
+    margin-block-start: 6px;
+    display: none;
+    transition: border-color 0.2s, color 0.2s;
+
+    &:hover {
+        color: #bbbbbb;
+        border-color: #bbbbbb;
+    }
+}
+
+.album-card__description-toggle--visible {
+    display: inline-block;
+}
 </style>
 
 <?php
@@ -223,15 +253,16 @@
             <span class="album-card__label"><?= esc_html($label) ?></span>
         </div>
         <div class="album-card__description--expanded">
-            <p><?= esc_html($description) ?></p>
+            <p class="album-card__description-text"><?= esc_html($description) ?></p>
+            <button class="album-card__description-toggle" data-expanded="false">Czytaj więcej</button>
         </div>
        <?php
-        $tracks = array_filter(explode("\n", $tracklist));
-        $tracks = array_values($tracks);
-        $count = count($tracks);
-        $limit = 18;
-        $has_more = $count > $limit;
-        $rows = ceil(min($count, $limit) / 2);
+            $tracks = array_filter(explode("\n", $tracklist));
+            $tracks = array_values($tracks);
+            $count = count($tracks);
+            $limit = 18;
+            $has_more = $count > $limit;
+            $rows = ceil(min($count, $limit) / 2);
         ?>
 
         <div class="album-card__tracks--expanded">
