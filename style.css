@@ -36,8 +36,11 @@ Version: 1.0
     --sand-effect-height: 20rem;
 }
 
-* {
+*, *::before, *::after {
     font-family: var(--font-primary);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {

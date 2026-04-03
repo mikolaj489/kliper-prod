@@ -2,7 +2,7 @@
 function enqueue_google_fonts() {
     wp_enqueue_style(
         'bricolage-grotesque',
-        'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700&display=swap',
+        'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,700&display=swap',
         [],
         null
     );

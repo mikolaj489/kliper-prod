@@ -73,16 +73,25 @@ function renderCarousel(container) {
         </div>
     `;
 }
-
 async function goTo(index, container) {
     currentIndex = index;
     updateDots();
     updateButtons();
-    renderCarousel(container);
+
+    const track = container.querySelector('.carousel__track');
+    track.innerHTML = allCards.map((card, i) => {
+        const offset = i - currentIndex;
+        if (Math.abs(offset) > 1) return '';
+        const html = cachedHTML[card.albumId] ?? '<div class="carousel__card-placeholder"></div>';
+        let className = 'carousel__card';
+        if (offset === -1) className += ' carousel__card--prev';
+        if (offset === 1)  className += ' carousel__card--next';
+
+        return `<div class="${className}" data-index="${i}">${html}</div>`;
+    }).join('');
 }
 
 document.addEventListener('click', async (e) => {
-    // --- ZAMKNIĘCIE ---
     if (e.target.closest('.carousel__close')) {
         window.location.reload();
         return;
@@ -132,4 +141,40 @@ document.addEventListener('click', async (e) => {
 
     const container = card.closest('.releases__content');
     renderCarousel(container, html);
+});
+
+
+document.addEventListener('click', function(e) {
+    const toggle = e.target.closest('.album-card__tracks-toggle');
+    if (toggle) {
+        const expanded = toggle.dataset.expanded === 'true';
+        const list = toggle.closest('.album-card__tracks--expanded').querySelector('.album-card__tracks-list');
+        const allTracks = list.querySelectorAll('li');
+        const limit = 18;
+
+       if (!expanded) {
+        allTracks.forEach(li => {
+            li.style.display = '';
+            li.classList.remove('album-card__track--hidden'); // ← dodaj
+        });
+        const rows = Math.ceil(allTracks.length / 2);
+        list.style.gridTemplateRows = `repeat(${rows}, auto)`;
+        toggle.textContent = 'Zwiń';
+        toggle.dataset.expanded = 'true';
+        } else {
+            allTracks.forEach((li, i) => {
+                if (i >= limit) {
+                    li.style.display = 'none';
+                    li.classList.add('album-card__track--hidden'); 
+                } else {
+                    li.style.display = '';
+                    li.classList.remove('album-card__track--hidden');
+                }
+            });
+            const rows = Math.ceil(limit / 2);
+            list.style.gridTemplateRows = `repeat(${rows}, auto)`;
+            toggle.textContent = `+ ${allTracks.length - limit - 1} więcej`;
+            toggle.dataset.expanded = 'false';
+        }
+    }
 });

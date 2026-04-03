@@ -81,7 +81,7 @@
         <span class="album-card__label"><?= esc_html(get_field('album_label', $album->ID)) ?></span>
     </div>
     <h3 class="album-card__title"><?= esc_html(get_field('album_title', $album->ID)) ?></h3>
-    <p class="album-card__tracks"><?= esc_html(get_field('album_track_count', $album->ID)) ?>&nbsp;utworów</p>
+    <p class="album-card__tracks"><?= esc_html(get_field('album_trackcount', $album->ID)) ?>&nbsp;utworów</p>
 </div>
 
 <?php endforeach; ?>

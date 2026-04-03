@@ -1,14 +1,39 @@
 <style>
     .album-card--expanded {
-        background-color: red;
+        display: flex;
+        gap: 50px;
+        max-width: 950px;
     }
     .carousel {
         display: grid;
         grid-template-columns: 55px 1fr 55px;
         grid-template-rows: auto auto;
         gap: 16px;
+    }2
+    .carousel__track {
+        height: 512px;
+        overflow: visible;
+        display: flex;
+        align-items: center;
     }
-    .carousel__card {}
+    .carousel__card {
+        width: auto;
+    }
+    .carousel__card--prev,
+    .carousel__card--next {
+        opacity: 0.5;
+        filter: brightness(0.6);
+        z-index: 1;
+        pointer-events: none;
+        display: none;
+    }
+    .carousel__card--prev {
+        transform: translateX(-40px) scale(0.88);
+    }
+    .carousel__card--next {
+        transform: translateX(40px) scale(0.88);
+    }
+
     .carousel__btn {
         width: 55px; height: 55px;
         font-size: 24px;
@@ -83,36 +108,93 @@
         padding-inline: 10px;
         pointer-events: none;
     }
-    .carousel__track {
+
+    .album-card__content {
+        width: 500px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, min-content);
+        gap: 10px;
+        color: #E6E6E6;
+    }
+    .album-card__cover--expanded {
+        width: 400px; height: 400px;
+        place-self: center;
+        border-radius: 12px;
+        box-shadow: 4px 4px 12px rgba(0,0,0,0.3);
+    }
+    .album-card__title--expanded {
+        color: var(--c-secondary);
+        font-size: var(--fs-lg);
+        letter-spacing: 5%;
+        text-transform: uppercase;
+        line-height: 60px;
+        font-weight: bold;
+        margin: 0;
+    }
+    .album-card__meta--expanded {
+        color: color-mix(in srgb, var(--c-text-secondary), rgb(0,0,0) 20%);
+        font-weight: 300;
+        padding-block-end: 10px;
         position: relative;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: visible;
-        gap: 0;
+         &::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 1px;
+            background-color:  var(--c-bg-lt);
+        }
     }
-    .carousel__card {
-        flex-shrink: 0;
-        width: 600px;
-        transition: transform 0.35s ease, opacity 0.35s ease, filter 0.35s ease;
-        position: relative;
-        z-index: 2;
+    .album-card__year--expanded::after {
+        content: '';
+        display: inline-block;
+        transform: translateY(-50%);
+        width: 5px; height: 5px;
+        clip-path: circle(50%);
+        margin-inline: .5em;
+        background-color: color-mix(in srgb, var(--c-text-secondary), rgb(0,0,0) 20%);
+   }
+   .album-card__description--expanded,
+   .album-card__tracks-title  {
+        letter-spacing: 5%;
+   }
+   .album-card__tracks--expanded {
+        padding: .5em;
+        border-radius: 12px;
+        background-color: color-mix(in srgb, var(--c-primary-lt), transparent 70%);
+        margin-block-start: 10px;
+   }
+   .album-card__tracks-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-flow: column;
+        grid-template-rows: repeat(9, auto);
+        gap: .1em;
+        padding-inline-start: 30px;
+        padding-block-start: 10px;
+   }
+   .album-card__track--hidden {
+    display: none;
+}
+
+.album-card__tracks-toggle {
+    background: none;
+    border: 1px solid var(--c-bg-lt);
+    border-radius: 20px;
+    color: color-mix(in srgb, var(--c-text-secondary), rgb(0,0,0) 20%);
+    font-size: 0.8em;
+    padding: 2px 10px;
+    cursor: pointer;
+    margin-inline-start: 8px;
+    transition: border-color 0.2s, color 0.2s;
+    &:hover {
+        color: #bbbbbb;
+        border-color: #bbbbbb;
     }
-    .carousel__card--prev {
-        transform: translateX(-40px) scale(0.88);
-        opacity: 0.5;
-        filter: brightness(0.6);
-        z-index: 1;
-        pointer-events: none;
-    }
-    .carousel__card--next {
-        transform: translateX(40px) scale(0.88);
-        opacity: 0.5;
-        filter: brightness(0.6);
-        z-index: 1;
-        pointer-events: none;
 }
 </style>
+
 <?php
     if (!defined('ABSPATH')) exit;
 
@@ -123,17 +205,48 @@
     $year   = get_field('album_release_year', $album_id);
     $label  = get_field('album_label', $album_id);
     $title  = get_field('album_title', $album_id);
+    $description = get_field('album_description', $album_id);
+    $tracklist = get_field('album_tracklist', $album_id);
 ?>
 
 <div class="album-card--expanded" data-album-id="<?= esc_attr($album_id) ?>">
     <?php if ($img): ?>
-        <img class="album-card__cover" src="<?= esc_url($img['url']) ?>" alt="<?= esc_attr($img['alt']) ?>">
+        <img class="album-card__cover--expanded" src="<?= esc_url($img['url']) ?>" alt="<?= esc_attr($img['alt']) ?>">
     <?php endif; ?>
-    <div class="album-card__meta">
-        <span class="album-card__year"><?= esc_html($year) ?></span>
-        <span class="album-card__label"><?= esc_html($label) ?></span>
+    <div class="album-card__content">
+        <h3 class="album-card__title--expanded"><?= esc_html($title) ?></h3>
+        <div class="album-card__meta--expanded">
+            <span class="album-card__year--expanded"><?= esc_html($year) ?></span>
+            <span class="album-card__label"><?= esc_html($label) ?></span>
+        </div>
+        <div class="album-card__description--expanded">
+            <p><?= esc_html($description) ?></p>
+        </div>
+       <?php
+        $tracks = array_filter(explode("\n", $tracklist));
+        $tracks = array_values($tracks);
+        $count = count($tracks);
+        $limit = 18;
+        $has_more = $count > $limit;
+        $rows = ceil(min($count, $limit) / 2);
+        ?>
+
+        <div class="album-card__tracks--expanded">
+            <p class="album-card__tracks-title">
+                Spis utworów:
+                <?php if ($has_more): ?>
+                    <button class="album-card__tracks-toggle" data-expanded="false">
+                        + <?= $count - $limit ?> więcej
+                    </button>
+                <?php endif; ?>
+            </p>
+            <ol class="album-card__tracks-list" style="grid-template-rows: repeat(<?= $rows ?>, auto)">
+                <?php foreach ($tracks as $i => $track): ?>
+                    <li class="<?= $i >= $limit ? 'album-card__track--hidden' : '' ?>">
+                        <?= esc_html(trim($track)) ?>
+                    </li>
+                <?php endforeach; ?>
+            </ol>
+        </div>
     </div>
-    <h3 class="album-card__title"><?= esc_html($title) ?></h3>
-     <div></div>
-    {{-- tutaj możesz dodać dodatkowe pola: opis, tracklista itp. --}}
 </div>
