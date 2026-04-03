@@ -9,9 +9,10 @@
         grid-template-columns: minmax(55px, 80px) 1fr minmax(55px, 80px);
         grid-template-rows: auto auto;
         gap: 5px;
+        margin-inline: auto;
     }
     .carousel__track {
-        min-height: 525px;
+        min-height: 540px;
         overflow: visible;
         display: flex;
         align-items: center;
@@ -197,12 +198,11 @@
     }
 }
 
-/* Na to: */
 .album-card__description--expanded .album-card__description-text {
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4; /* ← zawsze zaciśnięty domyślnie */
+    -webkit-line-clamp: 5;
 }
 
 .album-card__description-toggle {
