@@ -1,11 +1,76 @@
 // Stan karuzeli
 let allCards = [];
 let currentIndex = 0;
-let cachedHTML = {}; // Cache dla załadowanych HTML-i
+let cachedHTML = {};
+
+function getDominantColor(imgElement) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = 80; canvas.height = 80;
+    ctx.drawImage(imgElement, 0, 0, 80, 80);
+    const data = ctx.getImageData(0, 0, 80, 80).data;
+    const buckets = {};
+    for (let i = 0; i < data.length; i += 4) {
+        if (data[i + 3] < 128) continue;
+        const r = Math.round(data[i] / 32) * 32;
+        const g = Math.round(data[i + 1] / 32) * 32;
+        const b = Math.round(data[i + 2] / 32) * 32;
+        const key = `${r},${g},${b}`;
+        buckets[key] = (buckets[key] || 0) + 1;
+    }
+
+    const sorted = Object.entries(buckets).sort((a, b) => b[1] - a[1]);
+
+    const minBrightness = 80;  // minimalna jasność (0-255), podnieś jeśli za ciemne
+    const minSaturation = 40;  // minimalne nasycenie, żeby unikać szarości/brązów
+
+    function getBrightness(r, g, b) {
+        return 0.299 * r + 0.587 * g + 0.114 * b;
+    }
+
+    function getSaturation(r, g, b) {
+        const max = Math.max(r, g, b);
+        const min = Math.min(r, g, b);
+        if (max === 0) return 0;
+        return ((max - min) / max) * 255;
+    }
+
+    // Szukaj pierwszego koloru który jest jasny i nasycony
+    for (const [key] of sorted) {
+        const [r, g, b] = key.split(',').map(Number);
+        if (getBrightness(r, g, b) >= minBrightness && getSaturation(r, g, b) >= minSaturation) {
+            return { r, g, b };
+        }
+    }
+
+    // Fallback — jeśli żaden nie spełnia kryteriów, weź najjaśniejszy
+    const fallback = sorted.sort((a, b) => {
+        const [ar, ag, ab] = a[0].split(',').map(Number);
+        const [br, bg, bb] = b[0].split(',').map(Number);
+        return getBrightness(br, bg, bb) - getBrightness(ar, ag, ab);
+    })[0][0].split(',').map(Number);
+
+    return { r: fallback[0], g: fallback[1], b: fallback[2] };
+}
+
+function applyAlbumShadow(container) {
+    const imgs = container.querySelectorAll('.album-card__cover--expanded');
+    imgs.forEach(img => {
+        const apply = () => {
+            const { r, g, b } = getDominantColor(img);
+            img.style.boxShadow = `
+                4px 4px 12px rgba(0,0,0,0.3),
+                16px 30px 40px rgba(${r}, ${g}, ${b}, .6),
+                -16px -30px 40px rgba(${r}, ${g}, ${b}, .6)
+            `;
+        };
+        if (img.complete) apply();
+        else img.addEventListener('load', apply);
+    });
+}
 
 async function fetchCardHTML(albumId) {
-    if (cachedHTML[albumId]) return cachedHTML[albumId]; // Zwróć z cache jeśli już załadowany
-
+    if (cachedHTML[albumId]) return cachedHTML[albumId];
     const fd = new FormData();
     fd.append('action',   'get_album_detail');
     fd.append('nonce',    AlbumAjax.nonce);
@@ -13,12 +78,11 @@ async function fetchCardHTML(albumId) {
     const res  = await fetch(AlbumAjax.url, { method: 'POST', body: fd });
     const data = await res.json();
     const html = data.success ? data.data.html : null;
-    if (html) cachedHTML[albumId] = html; // Zapisz do cache
+    if (html) cachedHTML[albumId] = html;
     return html;
 }
 
 async function prefetchAllCards() {
-    // Ładuj wszystkie albumy równolegle
     await Promise.all(
         allCards.map(({ albumId }) => fetchCardHTML(albumId))
     );
@@ -41,13 +105,11 @@ const iconPrev = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 function renderCarousel(container) {
     const cards = allCards.map((card, i) => {
         const offset = i - currentIndex;
-        if (Math.abs(offset) > 1) return ''; // Pokaż tylko ±1 sąsiada
-
+        if (Math.abs(offset) > 1) return '';
         const html = cachedHTML[card.albumId] ?? '<div class="carousel__card-placeholder"></div>';
         let className = 'carousel__card';
         if (offset === -1) className += ' carousel__card--prev';
         if (offset === 1)  className += ' carousel__card--next';
-
         return `<div class="${className}" data-index="${i}">${html}</div>`;
     }).join('');
 
@@ -72,12 +134,14 @@ function renderCarousel(container) {
             </div>
         </div>
     `;
+
+    applyAlbumShadow(container);
 }
+
 async function goTo(index, container) {
     currentIndex = index;
     updateDots();
     updateButtons();
-
     const track = container.querySelector('.carousel__track');
     track.innerHTML = allCards.map((card, i) => {
         const offset = i - currentIndex;
@@ -86,9 +150,10 @@ async function goTo(index, container) {
         let className = 'carousel__card';
         if (offset === -1) className += ' carousel__card--prev';
         if (offset === 1)  className += ' carousel__card--next';
-
         return `<div class="${className}" data-index="${i}">${html}</div>`;
     }).join('');
+
+    applyAlbumShadow(container);
 }
 
 document.addEventListener('click', async (e) => {
@@ -96,18 +161,21 @@ document.addEventListener('click', async (e) => {
         window.location.reload();
         return;
     }
+
     // --- PREV ---
     if (e.target.closest('.carousel__btn--prev')) {
         const container = e.target.closest('.releases__content');
         if (currentIndex > 0) await goTo(currentIndex - 1, container);
         return;
     }
+
     // --- NEXT ---
     if (e.target.closest('.carousel__btn--next')) {
         const container = e.target.closest('.releases__content');
         if (currentIndex < allCards.length - 1) await goTo(currentIndex + 1, container);
         return;
     }
+
     // --- DOT ---
     const dot = e.target.closest('.carousel__dot');
     if (dot) {
@@ -116,6 +184,7 @@ document.addEventListener('click', async (e) => {
         if (index !== currentIndex) await goTo(index, container);
         return;
     }
+
     // --- OTWARCIE ---
     const card = e.target.closest('.album-card:not(.album-card--expanded)');
     if (!card) return;
@@ -128,21 +197,16 @@ document.addEventListener('click', async (e) => {
     currentIndex = allCards.findIndex(c => c.albumId === albumId);
 
     card.classList.add('album-card--loading');
-
-    // Pobierz klikniętą kartę + prefetch wszystkich pozostałych równolegle
     const [html] = await Promise.all([
         fetchCardHTML(albumId),
-        prefetchAllCards() // Wszystkie inne ładują się w tle
+        prefetchAllCards()
     ]);
-
     card.classList.remove('album-card--loading');
-
     if (!html) return;
 
     const container = card.closest('.releases__content');
-    renderCarousel(container, html);
+    renderCarousel(container);
 });
-
 
 document.addEventListener('click', function(e) {
     const toggle = e.target.closest('.album-card__tracks-toggle');
@@ -151,21 +215,20 @@ document.addEventListener('click', function(e) {
         const list = toggle.closest('.album-card__tracks--expanded').querySelector('.album-card__tracks-list');
         const allTracks = list.querySelectorAll('li');
         const limit = 18;
-
-       if (!expanded) {
-        allTracks.forEach(li => {
-            li.style.display = '';
-            li.classList.remove('album-card__track--hidden'); // ← dodaj
-        });
-        const rows = Math.ceil(allTracks.length / 2);
-        list.style.gridTemplateRows = `repeat(${rows}, auto)`;
-        toggle.textContent = 'Zwiń';
-        toggle.dataset.expanded = 'true';
+        if (!expanded) {
+            allTracks.forEach(li => {
+                li.style.display = '';
+                li.classList.remove('album-card__track--hidden');
+            });
+            const rows = Math.ceil(allTracks.length / 2);
+            list.style.gridTemplateRows = `repeat(${rows}, auto)`;
+            toggle.textContent = 'Zwiń';
+            toggle.dataset.expanded = 'true';
         } else {
             allTracks.forEach((li, i) => {
                 if (i >= limit) {
                     li.style.display = 'none';
-                    li.classList.add('album-card__track--hidden'); 
+                    li.classList.add('album-card__track--hidden');
                 } else {
                     li.style.display = '';
                     li.classList.remove('album-card__track--hidden');

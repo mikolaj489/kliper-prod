@@ -1,17 +1,17 @@
 <style>
     .album-card--expanded {
         display: flex;
-        gap: 50px;
+        gap: 70px;
         max-width: 950px;
     }
     .carousel {
         display: grid;
-        grid-template-columns: 55px 1fr 55px;
+        grid-template-columns: minmax(55px, 80px) 1fr minmax(55px, 80px);
         grid-template-rows: auto auto;
-        gap: 16px;
-    }2
+        gap: 5px;
+    }
     .carousel__track {
-        height: 512px;
+        min-height: 520px;
         overflow: visible;
         display: flex;
         align-items: center;
@@ -48,6 +48,7 @@
         align-items: center;
         transition: border, stroke-width  .3s;
         stroke-width: 2;
+        z-index: 2;
         &:hover {
             stroke-width: 2.5;
             border: 2px solid #919191;
@@ -55,11 +56,13 @@
        &:active {
             transform: scale(.97);
         }
+        &:disabled {
+            opacity: 0.3;
+            pointer-events: none;
     }
-
-    .carousel__btn:disabled {
-        opacity: 0.3;
-        pointer-events: none;
+    }
+    .carousel__btn--next {
+        justify-self: end;
     }
     .carousel__status {
         grid-column: 2 / 3;
@@ -67,7 +70,7 @@
         display: flex;
         justify-self: center;
         gap: 10px;
-        margin-block-start: 16px;
+        margin-block-start: 30px;
     }
     .carousel__dot {
         padding-inline: 5px;
@@ -121,7 +124,7 @@
         width: 400px; height: 400px;
         place-self: center;
         border-radius: 12px;
-        box-shadow: 4px 4px 12px rgba(0,0,0,0.3);
+         box-shadow: 4px 4px 12px rgba(0,0,0,0.3);
     }
     .album-card__title--expanded {
         color: var(--c-secondary);
