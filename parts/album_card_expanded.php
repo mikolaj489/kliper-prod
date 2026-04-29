@@ -3,8 +3,8 @@
         display: grid;
         grid-template-columns: auto 1fr;
         grid-template-rows: auto 1fr;
-        grid-template-areas: "title   title" "cover   content";
-        gap: clamp(40px, 3vw, 50px);
+        grid-template-areas: "cover   title" "cover   content";
+        gap: 20px;
         max-width: 950px;
     }
     .carousel {
@@ -83,6 +83,7 @@
     }
     .album-card__cover--expanded {
         grid-area: cover;
+        margin-inline-end: 40px;
         width: 400px; height: 400px;
         place-self: center;
         border-radius: 12px;
@@ -90,7 +91,6 @@
     }
     .album-card__title--expanded {
         grid-area: title;
-        text-align: center;
         color: var(--c-secondary);
         font-size: var(--fs-lg);
         letter-spacing: 5%;
@@ -194,6 +194,7 @@
             justify-items: center;
         }
         .album-card__cover--expanded {
+            margin-inline-end: 0;
             max-width: 300px;
             max-height: 300px;
         }

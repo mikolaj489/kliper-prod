@@ -12,27 +12,14 @@ add_action('wp_enqueue_scripts', 'enqueue_google_fonts');
 function my_theme_assets() {
     add_image_size('album_cover', 600, 600, true);
 
-    wp_enqueue_style(
-        'theme-style',
-        get_stylesheet_uri(),
-        [],
-        filemtime(get_template_directory() . '/style.css')
-    );
-    wp_enqueue_style(
-        'main-style',
-        get_template_directory_uri() . '/assets/css/main.css',
-        [],
-        filemtime(get_template_directory() . '/assets/css/main.css')
-    );
-    wp_enqueue_script(
-        'main-js',
-        get_template_directory_uri() . '/assets/js/main.js',
-        [],
-        filemtime(get_template_directory() . '/assets/js/main.js'),
-        true
-    );
+    wp_enqueue_style('theme-style', get_stylesheet_uri(), [], filemtime(get_template_directory() . '/style.css'));
+    wp_enqueue_style('main-style', get_template_directory_uri() . '/assets/css/main.css', [], filemtime(get_template_directory() . '/assets/css/main.css'));
 
-    // Przekazuje dane do JS
+    if (is_page_template('front-page.php')) {
+        wp_enqueue_script('album', get_template_directory_uri() . '/assets/js/modules/album.js', [], '1.0', true);
+    }
+    wp_enqueue_script('main-js', get_template_directory_uri() . '/assets/js/main.js', [], filemtime(get_template_directory() . '/assets/js/main.js'), true);
+
     wp_localize_script('main-js', 'AlbumAjax', [
         'url'   => admin_url('admin-ajax.php'),
         'nonce' => wp_create_nonce('album_nonce'),
