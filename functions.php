@@ -14,11 +14,14 @@ function my_theme_assets() {
 
     wp_enqueue_style('theme-style', get_stylesheet_uri(), [], filemtime(get_template_directory() . '/style.css'));
     wp_enqueue_style('main-style', get_template_directory_uri() . '/assets/css/main.css', [], filemtime(get_template_directory() . '/assets/css/main.css'));
+    wp_enqueue_script('main-js', get_template_directory_uri() . '/assets/js/main.js', [], filemtime(get_template_directory() . '/assets/js/main.js'), true);
 
     if (is_page_template('front-page.php')) {
+        wp_enqueue_style('album-card', get_template_directory_uri() . '/assets/css/components/album_card.css', [], filemtime(get_template_directory() . '/assets/css/components/album_card.css'));
+        wp_enqueue_style('album-card-expanded', get_template_directory_uri() . '/assets/css/components/album_card_expanded.css', [], filemtime(get_template_directory() . '/assets/css/components/album_card_expanded.css'));
         wp_enqueue_script('album', get_template_directory_uri() . '/assets/js/modules/album.js', [], '1.0', true);
     }
-    wp_enqueue_script('main-js', get_template_directory_uri() . '/assets/js/main.js', [], filemtime(get_template_directory() . '/assets/js/main.js'), true);
+
 
     wp_localize_script('main-js', 'AlbumAjax', [
         'url'   => admin_url('admin-ajax.php'),
