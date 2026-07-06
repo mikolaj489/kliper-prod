@@ -2,7 +2,8 @@
     background: linear-gradient( to bottom, var(--c-text-muted) 0%, color-mix(in srgb, var(--c-primary), white 3%) 100%);
     display: grid;
     gap: 5px;
-    min-width: 440px;
+    width: 372px;
+    height: auto;
     box-sizing: border-box;
     padding: 20px;
     border-radius: 12px;
@@ -17,10 +18,10 @@
     }
 }
 .album-card__cover {
-    min-width: 400px;
-    height: 400px;
+    width: 100%;
+    height: 100%;
     border-radius: 12px;
-    place-self: center;
+    /* place-self: center; */
 }
 .album-card__meta {
     color: var(--c-secondary);
@@ -48,10 +49,23 @@
     }
 }
 .album-card__title {
-    font-family : var(--font-secondary);
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: var(--c-text-secondary);
+}
+.album-card__title-text {
+    font-family : var(--font-secondary);
     font-size: 2rem;
     letter-spacing: 5%;
     font-weight: bold;
     margin: 0;
+    white-space: nowrap;
+}
+
+@media (max-width: 500px) {
+    .album-card {
+        width: 320px;
+        /* height: 445px; */
+    }
 }

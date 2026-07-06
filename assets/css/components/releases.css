@@ -29,12 +29,7 @@
     display: flex;
     align-items: center;
     gap: 3rem;
-    &::after {
-        content: '';
-        min-width: 1px;
-        display: block;
-        height: 100px
-    }
+    padding-inline: var(--sides);
      &.releases__after--hidden::after {
         content: none; 
     }
@@ -45,7 +40,7 @@
 .releases__nav {
     display: flex;
     justify-content: center;
-    gap: .7rem;
+    gap: 1rem;
     margin-block-start: 2rem;
 }
 .releases__nav--hidden {
@@ -53,20 +48,17 @@
 }
 .carousel__btn {
     width: 55px; height: 55px;
-    font-size: 24px;
     cursor: pointer;
     background-color: #414750;
     color: #919191;
     border: 2px solid transparent;
     border-radius: 50%;
-    align-self: center;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: border, stroke-width  .3s;
     stroke-width: 2;
-    z-index: 2;
-    margin-inline: calc(var(--sides) / 2 );
+    /* margin-inline: 8px; */
     &:hover {
         stroke-width: 2.5;
         border: 2px solid #919191;
@@ -81,4 +73,10 @@
 }
 .carousel__btn--next {
     justify-self: end;
+}
+
+@media (max-width: 500px) {
+    .releases__content {
+        gap: 1rem;
+    }
 }

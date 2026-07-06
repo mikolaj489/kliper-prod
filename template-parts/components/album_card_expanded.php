@@ -15,7 +15,7 @@
 <div class="album-card--expanded" data-album-id="<?= esc_attr($album_id) ?>">
     <h3 class="album-card__title--expanded"><?= esc_html($title) ?></h3>
     <?php if ($img): ?>
-        <img class="album-card__cover--expanded" src="<?= esc_url($img['url']) ?>" alt="<?= esc_attr($img['alt']) ?>">
+        <img class="album-card__cover--expanded" src="<?= esc_url($img['url']) ?>" alt="<?= esc_attr($img['alt']) ?>" crossOrigin="anonymous">
     <?php endif; ?>
     <div class="album-card__content">
         <div class="album-card__meta--expanded">

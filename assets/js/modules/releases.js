@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function () {
             nav.classList.remove('releases__nav--hidden');
             wrapper.style.justifyContent = 'left';
             wrapper.style.overflowX = 'auto';
-            content.style.marginInlineStart = '3rem';
             content.classList.remove('releases__after--hidden');
         }
     }

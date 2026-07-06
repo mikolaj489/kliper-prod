@@ -23,7 +23,7 @@ Version: 1.0
     --font-primary: 'Bricolage Grotesque', sans-serif;
     --font-secondary: 'Brygada 1918', serif;
 
-    --sides: 2rem;
+    --sides: 1rem;
     --section-spacing: 5rem 5rem;
     --title-padding: 0 3rem;
 
@@ -51,7 +51,7 @@ body {
     overflow-x: hidden;
 }
 .container {
-    padding-inline: calc(var(--sides) / 2 );
+    padding-inline: var(--sides);
     padding-block: var(--section-spacing);
 }
 .section-title {
@@ -62,4 +62,10 @@ body {
     letter-spacing: .20em;
     text-align: center;
     margin-block: var(--title-padding); 
+}
+
+@media (max-width: 500px) {
+    .section-title {
+        font-size: calc(var(--fs-lg) - 1rem);
+    }
 }

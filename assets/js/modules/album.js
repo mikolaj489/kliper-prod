@@ -6,52 +6,57 @@ let originalHTML = null; // zapisujemy oryginalny HTML kontenera
 // ─── Kolor dominujący ───────────────────────────────────────────────────────
 
 function getDominantColor(imgElement) {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = 80;
-    canvas.height = 80;
-    ctx.drawImage(imgElement, 0, 0, 80, 80);
-    const data = ctx.getImageData(0, 0, 80, 80).data;
-    const buckets = {};
+    try {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 80;
+        canvas.height = 80;
+        ctx.drawImage(imgElement, 0, 0, 80, 80);
+        const data = ctx.getImageData(0, 0, 80, 80).data;
+        const buckets = {};
 
-    for (let i = 0; i < data.length; i += 4) {
-        if (data[i + 3] < 128) continue;
-        const r = Math.round(data[i] / 32) * 32;
-        const g = Math.round(data[i + 1] / 32) * 32;
-        const b = Math.round(data[i + 2] / 32) * 32;
-        const key = `${r},${g},${b}`;
-        buckets[key] = (buckets[key] || 0) + 1;
-    }
-
-    const sorted = Object.entries(buckets).sort((a, b) => b[1] - a[1]);
-    const minBrightness = 80;
-    const minSaturation = 40;
-
-    function getBrightness(r, g, b) {
-        return 0.299 * r + 0.587 * g + 0.114 * b;
-    }
-
-    function getSaturation(r, g, b) {
-        const max = Math.max(r, g, b);
-        const min = Math.min(r, g, b);
-        if (max === 0) return 0;
-        return ((max - min) / max) * 255;
-    }
-
-    for (const [key] of sorted) {
-        const [r, g, b] = key.split(',').map(Number);
-        if (getBrightness(r, g, b) >= minBrightness && getSaturation(r, g, b) >= minSaturation) {
-            return { r, g, b };
+        for (let i = 0; i < data.length; i += 4) {
+            if (data[i + 3] < 128) continue;
+            const r = Math.round(data[i] / 32) * 32;
+            const g = Math.round(data[i + 1] / 32) * 32;
+            const b = Math.round(data[i + 2] / 32) * 32;
+            const key = `${r},${g},${b}`;
+            buckets[key] = (buckets[key] || 0) + 1;
         }
+
+        const sorted = Object.entries(buckets).sort((a, b) => b[1] - a[1]);
+        const minBrightness = 80;
+        const minSaturation = 40;
+
+        function getBrightness(r, g, b) {
+            return 0.299 * r + 0.587 * g + 0.114 * b;
+        }
+
+        function getSaturation(r, g, b) {
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            if (max === 0) return 0;
+            return ((max - min) / max) * 255;
+        }
+
+        for (const [key] of sorted) {
+            const [r, g, b] = key.split(',').map(Number);
+            if (getBrightness(r, g, b) >= minBrightness && getSaturation(r, g, b) >= minSaturation) {
+                return { r, g, b };
+            }
+        }
+
+        const fallback = sorted.sort((a, b) => {
+            const [ar, ag, ab] = a[0].split(',').map(Number);
+            const [br, bg, bb] = b[0].split(',').map(Number);
+            return getBrightness(br, bg, bb) - getBrightness(ar, ag, ab);
+        })[0][0].split(',').map(Number);
+
+        return { r: fallback[0], g: fallback[1], b: fallback[2] };
+    } catch (error) {
+        // Fallback na błąd CORS lub insecure canvas (kolor srebrny)
+        return { r: 180, g: 180, b: 200 };
     }
-
-    const fallback = sorted.sort((a, b) => {
-        const [ar, ag, ab] = a[0].split(',').map(Number);
-        const [br, bg, bb] = b[0].split(',').map(Number);
-        return getBrightness(br, bg, bb) - getBrightness(ar, ag, ab);
-    })[0][0].split(',').map(Number);
-
-    return { r: fallback[0], g: fallback[1], b: fallback[2] };
 }
 
 // ─── Opis "Czytaj więcej" ───────────────────────────────────────────────────
@@ -160,19 +165,19 @@ function updateButtons(container) {
 function renderCarousel(container) {
     container.innerHTML = `
         <div class="carousel">
-            <button class="carousel__btn carousel__btn--prev" ${currentIndex === 0 ? 'disabled' : ''}>
-                ${iconPrev}
-            </button>
             <div class="carousel__track">
                 ${buildTrackHTML()}
             </div>
-            <button class="carousel__btn carousel__btn--next" ${currentIndex === allCards.length - 1 ? 'disabled' : ''}>
-                ${iconNext}
-            </button>
             <div class="carousel__status">
+                <button class="carousel__btn carousel__btn--prev" ${currentIndex === 0 ? 'disabled' : ''}>
+                    ${iconPrev}
+                </button>
                 <div class="carousel__dots">
                     ${buildDotsHTML()}
                 </div>
+                <button class="carousel__btn carousel__btn--next" ${currentIndex === allCards.length - 1 ? 'disabled' : ''}>
+                    ${iconNext}
+                </button>
                 <button class="carousel__close">Wróć</button>
             </div>
         </div>
@@ -290,7 +295,3 @@ document.addEventListener('click', async (e) => {
 
     renderCarousel(container);
 });
-
-window.Album = {
-    init: initAlbum,
-};
