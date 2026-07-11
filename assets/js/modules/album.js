@@ -25,6 +25,12 @@ function getDominantColor(imgElement) {
         }
 
         const sorted = Object.entries(buckets).sort((a, b) => b[1] - a[1]);
+        
+        if (sorted.length === 0) {
+            console.warn('getDominantColor: no opaque pixels found');
+            return { r: 180, g: 180, b: 200 };
+        }
+
         const minBrightness = 80;
         const minSaturation = 40;
 
@@ -39,21 +45,21 @@ function getDominantColor(imgElement) {
             return ((max - min) / max) * 255;
         }
 
+        // Szukaj koloru spełniającego kryteria
         for (const [key] of sorted) {
             const [r, g, b] = key.split(',').map(Number);
             if (getBrightness(r, g, b) >= minBrightness && getSaturation(r, g, b) >= minSaturation) {
+                console.log('getDominantColor: found color', { r, g, b });
                 return { r, g, b };
             }
         }
 
-        const fallback = sorted.sort((a, b) => {
-            const [ar, ag, ab] = a[0].split(',').map(Number);
-            const [br, bg, bb] = b[0].split(',').map(Number);
-            return getBrightness(br, bg, bb) - getBrightness(ar, ag, ab);
-        })[0][0].split(',').map(Number);
-
-        return { r: fallback[0], g: fallback[1], b: fallback[2] };
+        // Jeśli żaden kolor nie spełnia, zwróć najjaśniejszy
+        const [r, g, b] = sorted[0][0].split(',').map(Number);
+        console.log('getDominantColor: using brightest fallback', { r, g, b });
+        return { r, g, b };
     } catch (error) {
+        console.error('getDominantColor error:', error);
         // Fallback na błąd CORS lub insecure canvas (kolor srebrny)
         return { r: 180, g: 180, b: 200 };
     }

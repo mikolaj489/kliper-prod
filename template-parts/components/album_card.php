@@ -12,7 +12,7 @@
 
 <div class="album-card" data-album-id="<?= esc_attr($album->ID) ?>">
     <?php if ($img) : ?>
-        <img class="album-card__cover" src="<?= esc_url($img['url']) ?>" alt="<?= esc_attr($img['alt']) ?>" crossOrigin="anonymous">
+        <img class="album-card__cover" src="<?= esc_url($img['url']) ?>" alt="<?= esc_attr($img['alt']) ?>">
     <?php endif; ?>
     <div class="album-card__meta">
         <span class="album-card__year"><?= esc_html(get_field('album_release_year', $album->ID)) ?></span>
