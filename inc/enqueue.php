@@ -20,6 +20,8 @@ function my_theme_assets() {
         wp_enqueue_style('releases', get_template_directory_uri() . '/assets/css/components/releases.css', [], filemtime(get_template_directory() . '/assets/css/components/releases.css'));
         wp_enqueue_style('hero-animation', get_template_directory_uri() . '/assets/css/components/hero_animation.css', [], filemtime(get_template_directory() . '/assets/css/components/hero_animation.css'));
         wp_enqueue_style('hero', get_template_directory_uri() . '/assets/css/components/hero.css', [], filemtime(get_template_directory() . '/assets/css/components/hero.css'));
+        wp_enqueue_style('news', get_template_directory_uri() . '/assets/css/components/news.css', [], filemtime(get_template_directory() . '/assets/css/components/news.css'));
+
         wp_enqueue_script('album', get_template_directory_uri() . '/assets/js/modules/album.js', [], filemtime(get_template_directory() . '/assets/js/modules/album.js'), true);
         wp_enqueue_script('releases', get_template_directory_uri() . '/assets/js/modules/releases.js', [], filemtime(get_template_directory() . '/assets/js/modules/releases.js'), true);
         wp_enqueue_script('hero-animation', get_template_directory_uri() . '/assets/js/modules/hero_animation.js', [], filemtime(get_template_directory() . '/assets/js/modules/hero_animation.js'), true);

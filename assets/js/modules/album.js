@@ -5,65 +5,65 @@ let originalHTML = null; // zapisujemy oryginalny HTML kontenera
 
 // ─── Kolor dominujący ───────────────────────────────────────────────────────
 
-function getDominantColor(imgElement) {
-    try {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = 80;
-        canvas.height = 80;
-        ctx.drawImage(imgElement, 0, 0, 80, 80);
-        const data = ctx.getImageData(0, 0, 80, 80).data;
-        const buckets = {};
+// function getDominantColor(imgElement) {
+//     try {
+//         const canvas = document.createElement('canvas');
+//         const ctx = canvas.getContext('2d');
+//         canvas.width = 80;
+//         canvas.height = 80;
+//         ctx.drawImage(imgElement, 0, 0, 80, 80);
+//         const data = ctx.getImageData(0, 0, 80, 80).data;
+//         const buckets = {};
 
-        for (let i = 0; i < data.length; i += 4) {
-            if (data[i + 3] < 128) continue;
-            const r = Math.round(data[i] / 32) * 32;
-            const g = Math.round(data[i + 1] / 32) * 32;
-            const b = Math.round(data[i + 2] / 32) * 32;
-            const key = `${r},${g},${b}`;
-            buckets[key] = (buckets[key] || 0) + 1;
-        }
+//         for (let i = 0; i < data.length; i += 4) {
+//             if (data[i + 3] < 128) continue;
+//             const r = Math.round(data[i] / 32) * 32;
+//             const g = Math.round(data[i + 1] / 32) * 32;
+//             const b = Math.round(data[i + 2] / 32) * 32;
+//             const key = `${r},${g},${b}`;
+//             buckets[key] = (buckets[key] || 0) + 1;
+//         }
 
-        const sorted = Object.entries(buckets).sort((a, b) => b[1] - a[1]);
+//         const sorted = Object.entries(buckets).sort((a, b) => b[1] - a[1]);
         
-        if (sorted.length === 0) {
-            console.warn('getDominantColor: no opaque pixels found');
-            return { r: 180, g: 180, b: 200 };
-        }
+//         if (sorted.length === 0) {
+//             console.warn('getDominantColor: no opaque pixels found');
+//             return { r: 180, g: 180, b: 200 };
+//         }
 
-        const minBrightness = 80;
-        const minSaturation = 40;
+//         const minBrightness = 80;
+//         const minSaturation = 40;
 
-        function getBrightness(r, g, b) {
-            return 0.299 * r + 0.587 * g + 0.114 * b;
-        }
+//         function getBrightness(r, g, b) {
+//             return 0.299 * r + 0.587 * g + 0.114 * b;
+//         }
 
-        function getSaturation(r, g, b) {
-            const max = Math.max(r, g, b);
-            const min = Math.min(r, g, b);
-            if (max === 0) return 0;
-            return ((max - min) / max) * 255;
-        }
+//         function getSaturation(r, g, b) {
+//             const max = Math.max(r, g, b);
+//             const min = Math.min(r, g, b);
+//             if (max === 0) return 0;
+//             return ((max - min) / max) * 255;
+//         }
 
-        // Szukaj koloru spełniającego kryteria
-        for (const [key] of sorted) {
-            const [r, g, b] = key.split(',').map(Number);
-            if (getBrightness(r, g, b) >= minBrightness && getSaturation(r, g, b) >= minSaturation) {
-                console.log('getDominantColor: found color', { r, g, b });
-                return { r, g, b };
-            }
-        }
+//         // Szukaj koloru spełniającego kryteria
+//         for (const [key] of sorted) {
+//             const [r, g, b] = key.split(',').map(Number);
+//             if (getBrightness(r, g, b) >= minBrightness && getSaturation(r, g, b) >= minSaturation) {
+//                 console.log('getDominantColor: found color', { r, g, b });
+//                 return { r, g, b };
+//             }
+//         }
 
-        // Jeśli żaden kolor nie spełnia, zwróć najjaśniejszy
-        const [r, g, b] = sorted[0][0].split(',').map(Number);
-        console.log('getDominantColor: using brightest fallback', { r, g, b });
-        return { r, g, b };
-    } catch (error) {
-        console.error('getDominantColor error:', error);
-        // Fallback na błąd CORS lub insecure canvas (kolor srebrny)
-        return { r: 180, g: 180, b: 200 };
-    }
-}
+//         // Jeśli żaden kolor nie spełnia, zwróć najjaśniejszy
+//         const [r, g, b] = sorted[0][0].split(',').map(Number);
+//         console.log('getDominantColor: using brightest fallback', { r, g, b });
+//         return { r, g, b };
+//     } catch (error) {
+//         console.error('getDominantColor error:', error);
+//         // Fallback na błąd CORS lub insecure canvas (kolor srebrny)
+//         return { r: 180, g: 180, b: 200 };
+//     }
+// }
 
 // ─── Opis "Czytaj więcej" ───────────────────────────────────────────────────
 

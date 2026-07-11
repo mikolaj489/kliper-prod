@@ -1,6 +1,8 @@
 .hero__animation-container {
     flex: 0 500px;
     position: relative;
+    z-index: 20;
+    isolation: isolate;
 }
 @media (max-width: 1024px) {
     .hero__animation-container {
@@ -12,6 +14,7 @@
     height: 100%;
     width: 100%;
     top: 0; left: 0;
+    z-index: 21;
 }
 .blob {
     display: flex;
@@ -20,6 +23,7 @@
     justify-content: center;
     border-radius: var(--blob-radius);
     box-shadow: var(--blob-shadow);
+    z-index: 22;
     & img {
         width: 60%;
         height: 60%;
