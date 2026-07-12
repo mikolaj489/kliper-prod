@@ -1,4 +1,5 @@
 <?php
+    if (!defined('ABSPATH')) exit;
     $albumy = get_posts([
         'post_type'      => 'album',
         'posts_per_page' => -1,
@@ -7,7 +8,6 @@
     ]);
     foreach ($albumy as $album) : 
         $img = get_field('album_cover', $album->ID);
-    if (!defined('ABSPATH')) exit;
 ?>
 
 <div class="album-card" data-album-id="<?= esc_attr($album->ID) ?>">
