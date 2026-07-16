@@ -10,3 +10,7 @@
     flex-direction: column;
     gap: 2rem;
 }
+.news__buttton-container {
+    display: flex;
+    justify-content: center;
+}

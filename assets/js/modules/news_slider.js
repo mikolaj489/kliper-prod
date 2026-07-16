@@ -24,15 +24,15 @@ function initNewsSlider() {
             }
         });
 
-        // Remove active class from all cards
-        cards.forEach((card) => card.classList.remove('news__card--active'));
+        // Remove in-view marker from all cards (do not affect expansion)
+        cards.forEach((card) => card.classList.remove('news__card--inview'));
 
         if (!activeCard) {
             return;
         }
 
-        // Add active class to the closest card
-        activeCard.classList.add('news__card--active');
+        // Mark closest card as in-view for slider UI only
+        activeCard.classList.add('news__card--inview');
 
         const activeRect = activeCard.getBoundingClientRect();
         const topOffset = (activeRect.top - sliderRect.top) + (activeRect.height / 2) - (anchor.offsetHeight / 2);

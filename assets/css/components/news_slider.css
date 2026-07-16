@@ -8,6 +8,7 @@
     position: relative;
     --news__slider-anchor-padding: 8px;
     padding-inline: var(--news__slider-anchor-padding);
+    overflow: hidden;
 }
 .news__slider-anchor {
     display: flex;
