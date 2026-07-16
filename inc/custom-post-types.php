@@ -26,7 +26,6 @@ function register_aktualnosci_cpt() {
         'menu_icon'    => 'dashicons-megaphone',
         'has_archive'  => true,
         'rewrite'      => ['slug' => 'aktualnosci'],
-
     ]);
 }
 add_action('init', 'register_aktualnosci_cpt');

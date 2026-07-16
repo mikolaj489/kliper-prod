@@ -90,7 +90,7 @@
 .album-card__title--expanded {
     grid-area: title;
     color: var(--c-secondary);
-    font-size: var(--fs-lg);
+    font-size: var(--fs-xxl);
     letter-spacing: 5%;
     text-transform: uppercase;
     line-height: 60px;

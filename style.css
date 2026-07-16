@@ -19,7 +19,9 @@ Version: 1.0
     --fs-sm: 0.875rem;
     --fs-base: 1rem;
     --fs-md: 1.25rem;
-    --fs-lg: 4rem;
+    --fs-lg: 2rem;
+    --fs-xl: 3rem;
+    --fs-xxl: 4rem;
     
     --font-primary: 'Bricolage Grotesque', sans-serif;
     --font-secondary: 'Brygada 1918', serif;
@@ -58,7 +60,7 @@ body {
 .section__title {
     font-family: var(--font-secondary);
     color: var(--c-title);
-    font-size: var(--fs-lg);
+    font-size: var(--fs-xxl);
     font-weight: bold;
     text-align: center;
     margin-block: var(--title-padding); 
@@ -66,6 +68,6 @@ body {
 
 @media (max-width: 500px) {
     .section__title {
-        font-size: calc(var(--fs-lg) - 1rem);
+        font-size: var(--fs-xl);
     }
 }

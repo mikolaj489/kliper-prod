@@ -37,6 +37,6 @@
     line-height: 1.25;
     color: var(--c-text-muted);
     max-width: 715px;
-    font-size: 1.25rem;
+    font-size: var(--fs-md);
     margin: 0 auto;
 }

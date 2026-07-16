@@ -4,11 +4,6 @@
     z-index: 20;
     isolation: isolate;
 }
-@media (max-width: 1024px) {
-    .hero__animation-container {
-        display: none;
-    }
-}
 .hero__animation-content {
     position: absolute;
     height: 100%;
@@ -115,12 +110,17 @@
     max-width: 15rem;
     transition: opacity var(--slogan-transition-fade);
 }
+@media (max-width: 1024px) {
+    .hero__animation-container {
+        display: none;
+    }
+}
 @media (max-width: 1300px) {
     .blob--main {
         --blob-w: 300px;
         --blob-h: 480px;
     }      
     .blob__slogan {
-        font-size: 3rem;
+        font-size: var(--fs-xl);
     }
 }

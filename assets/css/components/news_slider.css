@@ -10,6 +10,9 @@
     padding-inline: var(--news__slider-anchor-padding);
 }
 .news__slider-anchor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: var(--c-secondary);
     position: absolute;
     width: calc(100% - 2 * var(--news__slider-anchor-padding));
