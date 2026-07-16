@@ -7,7 +7,8 @@ Version: 1.0
 :root {
     --c-primary: #172336;
     --c-primary-lt: #3E5C76;
-    --c-secondary: #B58B4C;
+    --c-secondary: #B58B4C; 
+    --c-secondary-lt: #E1D0B7;
     --c-bg: #F0EBD8;
     --c-bg-lt: #F2F2F2;
     --c-text-primary: #0D0D0D;
@@ -54,7 +55,7 @@ body {
     padding-inline: var(--sides);
     padding-block: var(--section-spacing);
 }
-.section-title {
+.section__title {
     font-family: var(--font-secondary);
     color: var(--c-title);
     font-size: var(--fs-lg);
@@ -64,7 +65,7 @@ body {
 }
 
 @media (max-width: 500px) {
-    .section-title {
+    .section__title {
         font-size: calc(var(--fs-lg) - 1rem);
     }
 }

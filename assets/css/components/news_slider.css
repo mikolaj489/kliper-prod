@@ -1,0 +1,19 @@
+.news__slider {
+    background-color: var(--c-secondary-lt);
+    box-shadow: inset 0 0 9.3px rgba(0, 0, 0, 0.28);
+    flex: 1 1 90px;
+    min-width: 50px;
+    max-width: 70px;
+    border-radius: 50px;
+    position: relative;
+    --news__slider-anchor-padding: 8px;
+    padding-inline: var(--news__slider-anchor-padding);
+}
+.news__slider-anchor {
+    background-color: var(--c-secondary);
+    position: absolute;
+    width: calc(100% - 2 * var(--news__slider-anchor-padding));
+    height: 100px;
+    transition: transform 0.4s ease;
+    border-radius: 50px;
+}

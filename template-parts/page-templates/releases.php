@@ -1,5 +1,5 @@
 <section class="releases container">
-    <h2 class="section-title">Wydania</h2>
+    <h2 class="section__title">Wydania</h2>
     <div class="releases__scroll-wrapper">
         <div class="releases__content">
             <?php get_template_part('template-parts/components/album_card'); ?>
