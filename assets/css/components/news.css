@@ -1,16 +1,12 @@
 .news__container {
-    max-width: 1200px;
-    margin: 0 auto;
     display: flex;
     justify-content: center;
-    gap: clamp(1rem, 5vw, 2rem);
+    gap: clamp(0.75rem, 6vw, 2rem);
 }
 .news__content {
     display: flex;
+    max-width: 940px;
     flex-direction: column;
-    gap: 2rem;
-}
-.news__buttton-container {
-    display: flex;
-    justify-content: center;
+    gap: clamp(1rem, 4vw, 2rem);
+    flex: 1 1 clamp(250px, 100%, 600px);
 }

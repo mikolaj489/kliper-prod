@@ -17,7 +17,7 @@
         <h3 class="news__card-title"><?php echo esc_html(get_the_title()); ?></h3>
         <div class="news__card-body">
             <p class="news__card-excerpt"><?php echo esc_html(get_the_excerpt()); ?></p>
-            <div class="news__card-content"><?php echo wp_kses_post($content); ?></div>
+            <div class="news__card-content"><?php echo apply_filters('the_content', $content); ?></div>
         </div>
         <button class="news__card-toggle" type="button" aria-expanded="false">Czytaj więcej</button>
     </article>

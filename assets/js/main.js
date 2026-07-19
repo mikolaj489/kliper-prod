@@ -1,10 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.news__card[data-post-id]');
 
+    const setContentHeight = (card) => {
+        const content = card.querySelector('.news__card-content');
+
+        if (!content) return;
+
+        const contentHeight = content.scrollHeight;
+        content.style.setProperty('--content-height', `${contentHeight}px`);
+    };
+
     cards.forEach((card) => {
         const button = card.querySelector('.news__card-toggle');
 
         if (!button) return;
+
+        setContentHeight(card);
+        window.addEventListener('resize', () => setContentHeight(card));
 
         button.addEventListener('click', (event) => {
             event.stopPropagation();
