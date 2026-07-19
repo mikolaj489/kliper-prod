@@ -13,5 +13,4 @@
            </div>
            <?php get_template_part('template-parts/components/news_slider'); ?>
     </div>
-    <div style="height: 1000px;"></div>
 </section>

@@ -20,10 +20,10 @@ function my_theme_assets() {
         wp_enqueue_style('album-card', get_template_directory_uri() . '/assets/css/components/album_card.css', [], filemtime(get_template_directory() . '/assets/css/components/album_card.css'));
         wp_enqueue_style('album-card-expanded', get_template_directory_uri() . '/assets/css/components/album_card_expanded.css', [], filemtime(get_template_directory() . '/assets/css/components/album_card_expanded.css'));
         wp_enqueue_style('welcome', get_template_directory_uri() . '/assets/css/components/welcome.css', [], filemtime(get_template_directory() . '/assets/css/components/welcome.css'));
-        wp_enqueue_style('releases', get_template_directory_uri() . '/assets/css/components/releases.css', [], filemtime(get_template_directory() . '/assets/css/components/releases.css'));
+        wp_enqueue_style('releases', get_template_directory_uri() . '/assets/css/section-styles/releases.css', [], filemtime(get_template_directory() . '/assets/css/section-styles/releases.css'));
         wp_enqueue_style('hero-animation', get_template_directory_uri() . '/assets/css/components/hero_animation.css', [], filemtime(get_template_directory() . '/assets/css/components/hero_animation.css'));
-        wp_enqueue_style('hero', get_template_directory_uri() . '/assets/css/components/hero.css', [], filemtime(get_template_directory() . '/assets/css/components/hero.css'));
-        wp_enqueue_style('news', get_template_directory_uri() . '/assets/css/components/news.css', [], filemtime(get_template_directory() . '/assets/css/components/news.css'));
+        wp_enqueue_style('hero', get_template_directory_uri() . '/assets/css/section-styles/hero.css', [], filemtime(get_template_directory() . '/assets/css/section-styles/hero.css'));
+        wp_enqueue_style('news', get_template_directory_uri() . '/assets/css/section-styles/news.css', [], filemtime(get_template_directory() . '/assets/css/section-styles/news.css'));
         wp_enqueue_style('news-card', get_template_directory_uri() . '/assets/css/components/news_card.css', [], filemtime(get_template_directory() . '/assets/css/components/news_card.css'));
         wp_enqueue_style('news-slider', get_template_directory_uri() . '/assets/css/components/news_slider.css', [], filemtime(get_template_directory() . '/assets/css/components/news_slider.css'));
 
@@ -34,7 +34,7 @@ function my_theme_assets() {
     }
 
     if ($is_news_archive || $is_front_page) {
-        wp_enqueue_style('news', get_template_directory_uri() . '/assets/css/components/news.css', [], filemtime(get_template_directory() . '/assets/css/components/news.css'));
+        wp_enqueue_style('news', get_template_directory_uri() . '/assets/css/section-styles/news.css', [], filemtime(get_template_directory() . '/assets/css/section-styles/news.css'));
         wp_enqueue_style('news-card', get_template_directory_uri() . '/assets/css/components/news_card.css', [], filemtime(get_template_directory() . '/assets/css/components/news_card.css'));
     }
 
