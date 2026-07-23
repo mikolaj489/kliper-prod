@@ -6,5 +6,6 @@
 <?php get_template_part('template-parts/section-templates/hero'); ?>
 <?php get_template_part('template-parts/section-templates/releases'); ?>
 <?php get_template_part('template-parts/section-templates/news'); ?>
+<?php get_template_part('template-parts/section-templates/about'); ?>
 
 <?php get_footer(); ?>

@@ -32,6 +32,7 @@
     display: flex;
     align-items: center;
     gap: 3rem;
+    transition: gap 0.25s ease;
      &.releases__after--hidden::after {
         content: none; 
     }

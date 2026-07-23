@@ -15,26 +15,27 @@ function my_theme_assets() {
 
     // front-page
     if ($is_front_page) {
-        add_image_size('album_cover', 600, 600, true);
-
+        // styles
         wp_enqueue_style('album-card', get_template_directory_uri() . '/assets/css/components/album_card.css', [], filemtime(get_template_directory() . '/assets/css/components/album_card.css'));
         wp_enqueue_style('album-card-expanded', get_template_directory_uri() . '/assets/css/components/album_card_expanded.css', [], filemtime(get_template_directory() . '/assets/css/components/album_card_expanded.css'));
-        wp_enqueue_style('welcome', get_template_directory_uri() . '/assets/css/components/welcome.css', [], filemtime(get_template_directory() . '/assets/css/components/welcome.css'));
-        wp_enqueue_style('releases', get_template_directory_uri() . '/assets/css/section-styles/releases.css', [], filemtime(get_template_directory() . '/assets/css/section-styles/releases.css'));
+        wp_enqueue_style('kliper-welcome', get_template_directory_uri() . '/assets/css/components/welcome.css', [], filemtime(get_template_directory() . '/assets/css/components/welcome.css'));
+        wp_enqueue_style('kliper-releases', get_template_directory_uri() . '/assets/css/section-styles/releases.css', [], filemtime(get_template_directory() . '/assets/css/section-styles/releases.css'));
         wp_enqueue_style('hero-animation', get_template_directory_uri() . '/assets/css/components/hero_animation.css', [], filemtime(get_template_directory() . '/assets/css/components/hero_animation.css'));
-        wp_enqueue_style('hero', get_template_directory_uri() . '/assets/css/section-styles/hero.css', [], filemtime(get_template_directory() . '/assets/css/section-styles/hero.css'));
-        wp_enqueue_style('news', get_template_directory_uri() . '/assets/css/section-styles/news.css', [], filemtime(get_template_directory() . '/assets/css/section-styles/news.css'));
+        wp_enqueue_style('kliper-hero', get_template_directory_uri() . '/assets/css/section-styles/hero.css', [], filemtime(get_template_directory() . '/assets/css/section-styles/hero.css'));
+        wp_enqueue_style('kliper-news', get_template_directory_uri() . '/assets/css/section-styles/news.css', [], filemtime(get_template_directory() . '/assets/css/section-styles/news.css'));
         wp_enqueue_style('news-card', get_template_directory_uri() . '/assets/css/components/news_card.css', [], filemtime(get_template_directory() . '/assets/css/components/news_card.css'));
         wp_enqueue_style('news-slider', get_template_directory_uri() . '/assets/css/components/news_slider.css', [], filemtime(get_template_directory() . '/assets/css/components/news_slider.css'));
-
-        wp_enqueue_script('album', get_template_directory_uri() . '/assets/js/modules/album.js', [], filemtime(get_template_directory() . '/assets/js/modules/album.js'), true);
-        wp_enqueue_script('releases', get_template_directory_uri() . '/assets/js/modules/releases.js', [], filemtime(get_template_directory() . '/assets/js/modules/releases.js'), true);
+        wp_enqueue_style('kliper-about', get_template_directory_uri() . '/assets/css/section-styles/about.css', [], filemtime(get_template_directory() . '/assets/css/section-styles/about.css'));
+        //scripts   
+        wp_enqueue_script('kliper-album', get_template_directory_uri() . '/assets/js/modules/album.js', [], filemtime(get_template_directory() . '/assets/js/modules/album.js'), true);
+        wp_enqueue_script('kliper-releases', get_template_directory_uri() . '/assets/js/modules/releases.js', [], filemtime(get_template_directory() . '/assets/js/modules/releases.js'), true);
         wp_enqueue_script('hero-animation', get_template_directory_uri() . '/assets/js/modules/hero_animation.js', [], filemtime(get_template_directory() . '/assets/js/modules/hero_animation.js'), true);
         wp_enqueue_script('news-slider', get_template_directory_uri() . '/assets/js/modules/news_slider.js', [], filemtime(get_template_directory() . '/assets/js/modules/news_slider.js'), true);
+        wp_enqueue_script('about-image', get_template_directory_uri() . '/assets/js/modules/about_image.js', [], filemtime(get_template_directory() . '/assets/js/modules/about_image.js'), true);
     }
 
     if ($is_news_archive || $is_front_page) {
-        wp_enqueue_style('news', get_template_directory_uri() . '/assets/css/section-styles/news.css', [], filemtime(get_template_directory() . '/assets/css/section-styles/news.css'));
+        wp_enqueue_style('kliper-news', get_template_directory_uri() . '/assets/css/section-styles/news.css', [], filemtime(get_template_directory() . '/assets/css/section-styles/news.css'));
         wp_enqueue_style('news-card', get_template_directory_uri() . '/assets/css/components/news_card.css', [], filemtime(get_template_directory() . '/assets/css/components/news_card.css'));
     }
 

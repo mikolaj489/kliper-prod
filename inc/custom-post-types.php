@@ -33,11 +33,6 @@ function register_aktualnosci_cpt() {
 add_action('init', 'register_aktualnosci_cpt');
 
 function register_zespol_cpt() {
-    // Sprawdzamy, czy użytkownik próbuje dodać nowy wpis przez URL i jeśli tak, to go blokujemy
-    if ( isset($_GET['post_type']) && $_GET['post_type'] == 'zespol' && strpos($_SERVER['REQUEST_URI'], 'post-new.php') !== false ) {
-        wp_die('Możesz edytować tylko istniejący wpis "O nas". Tworzenie nowych jest zablokowane.');
-    }
-
     register_post_type('zespol', [
         'labels' => [
             'name'               => 'O Zespole',

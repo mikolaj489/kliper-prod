@@ -1,10 +1,25 @@
-function initNewsSlider() {
+document.addEventListener('DOMContentLoaded', () => {
     const slider = document.querySelector('.news__slider');
     const anchor = slider?.querySelector('.news__slider-anchor');
-    const cards = Array.from(document.querySelectorAll('.news__card[data-post-id]'));
+    // Wybieramy wszystkie karty (również Archiwum), aby suwak poprawnie reagował na scroll
+    const cards = Array.from(document.querySelectorAll('.news__card'));
 
-    if (!slider || !anchor || !cards.length) return;
+    if (!slider || !anchor || !cards.length) {
+        return;
+    }
 
+    // --- Funkcje pomocnicze ---
+
+    // Oblicza i ustawia wysokość ukrytej treści (dla płynnej animacji CSS)
+    const setContentHeight = (card) => {
+        const content = card.querySelector('.news__card-content');
+        if (!content) return;
+        
+        const contentHeight = content.scrollHeight;
+        content.style.setProperty('--content-height', `${contentHeight}px`);
+    };
+
+    // Aktualizuje pozycję wskaźnika (anchor) na osi czasu/suwaka
     const updateAnchor = () => {
         const sliderRect = slider.getBoundingClientRect();
         const viewportOffset = window.innerHeight * 0.45;
@@ -22,12 +37,15 @@ function initNewsSlider() {
             }
         });
 
+        // Resetowanie klasy podświetlenia slidera
         cards.forEach((card) => card.classList.remove('news__card--inview'));
 
         if (!activeCard) return;
 
+        // Podświetlenie najbliższej karty (w tym Archiwum)
         activeCard.classList.add('news__card--inview');
 
+        // Kalkulacja pozycji translateY dla anchora
         const activeRect = activeCard.getBoundingClientRect();
         const topOffset = (activeRect.top - sliderRect.top) + (activeRect.height / 2) - (anchor.offsetHeight / 2);
         const maxTop = Math.max(0, sliderRect.height - anchor.offsetHeight);
@@ -36,28 +54,27 @@ function initNewsSlider() {
         anchor.style.transform = `translateY(${nextTop}px)`;
     };
 
-    const setAllContentHeights = () => {
-        cards.forEach((card) => {
-            const content = card.querySelector('.news__card-content');
-            if (content) {
-                content.style.setProperty('--content-height', `${content.scrollHeight}px`);
-            }
-        });
+    // --- Inicjalizacja kart i eventów ---
 
-        updateAnchor();
-    };
     cards.forEach((card) => {
         const button = card.querySelector('.news__card-toggle');
+        
+        // Ustawienie początkowej wysokości kontentu (jeśli istnieje)
+        setContentHeight(card);
+
+        // Jeśli karta nie ma przycisku rozwijania (np. Archiwum), pomijamy przypisywanie click eventu
         if (!button) return;
 
+        // Obsługa kliknięcia "Czytaj więcej" / "Zwiń"
         button.addEventListener('click', (event) => {
             event.stopPropagation();
-            const isExpanding = !card.classList.contains('news__card--expanded');
 
+            // Zamknięcie pozostałych otwartych kart
             cards.forEach((otherCard) => {
-                if (otherCard !== card) {
+                if (otherCard !== card && otherCard.classList.contains('news__card--expanded')) {
                     otherCard.classList.remove('news__card--expanded');
                     otherCard.setAttribute('aria-expanded', 'false');
+                    
                     const otherButton = otherCard.querySelector('.news__card-toggle');
                     if (otherButton) {
                         otherButton.setAttribute('aria-expanded', 'false');
@@ -66,20 +83,28 @@ function initNewsSlider() {
                 }
             });
 
-            card.classList.toggle('news__card--expanded', isExpanding);
-            card.setAttribute('aria-expanded', isExpanding ? 'true' : 'false');
-            button.setAttribute('aria-expanded', isExpanding ? 'true' : 'false');
-            button.textContent = isExpanding ? 'Zwiń' : 'Czytaj więcej';
+            // Przełączenie stanu obecnej karty
+            const isExpanded = card.classList.toggle('news__card--expanded');
+            card.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+            button.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+            button.textContent = isExpanded ? 'Zwiń' : 'Czytaj więcej';
 
-            updateAnchor();
-            setTimeout(updateAnchor, 300); 
+            // Po zmianie wysokości karty aktualizujemy pozycję anchora
+            setTimeout(updateAnchor, 300); // Czas dopasowany do transition w CSS (np. 0.3s)
         });
     });
-    setAllContentHeights();
 
+    // --- Listenery globalne ---
+
+    // Pierwsze uruchomienie po załadowaniu
+    updateAnchor();
+
+    // Scroll obsługuje pozycjonowanie anchora
     window.addEventListener('scroll', updateAnchor, { passive: true });
+
+    // Zmiana rozmiaru okna aktualizuje wysokości rozwijanych kart oraz pozycję anchora
     window.addEventListener('resize', () => {
-        setAllContentHeights();
+        cards.forEach(setContentHeight);
+        updateAnchor();
     });
-}
-document.addEventListener('DOMContentLoaded', initNewsSlider);
+});

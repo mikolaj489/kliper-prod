@@ -22,7 +22,7 @@ Version: 1.0
     --fs-lg: 2rem;
     --fs-xl: 3rem;
     --fs-xxl: 4rem;
-    
+    --radius-sm: 12px;
     --font-primary: 'Bricolage Grotesque', sans-serif;
     --font-secondary: 'Brygada 1918', serif;
 
@@ -46,12 +46,27 @@ Version: 1.0
     box-sizing: border-box;
 }
 
+/* html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 2rem;
+} */
+
 body {
     background-color: var(--c-bg);
     color: var(--c-text-primary);
     font-size: 16px;
     margin: 0;
     overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+section,
+.section,
+.releases__content,
+.news__card,
+.album-card {
+    overflow-anchor: none;
+    transition: height 0.35s ease, max-height 0.35s ease, padding 0.35s ease, margin 0.35s ease;
 }
 .container {
     padding-inline: var(--sides);
