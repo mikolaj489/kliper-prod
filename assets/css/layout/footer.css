@@ -1,4 +1,10 @@
-footer {
-    background-color: var(--c-primary);
-    height: 199px;
+.global-footer {
+    background-color: var(--c-dark);
+    box-shadow: inset 0px 4px 25px 0px rgba(255, 255, 255, 0.31);
+    min-height: 400px;
+}
+.footer__wrapper {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 }

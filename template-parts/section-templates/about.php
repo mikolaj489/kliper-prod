@@ -1,14 +1,7 @@
 <?php
-    if (!defined('ABSPATH')) exit;
-    $about_posts = get_posts([
-        'post_type'      => 'zespol',
-        'posts_per_page' => 1,
-        'orderby'        => 'date',
-        'order'          => 'DESC',
-    ]);
-    if (!empty($about_posts)) : 
-        $about_post = $about_posts[0];
-        $post_id = $about_post->ID;   
+$tekst_glowny = get_field('tekst_glowny');
+$zacheta      = get_field('zacheta');
+$zdjecie      = get_field('zdjecie_zespolu'); 
 ?>
 
 <section class="about container">
@@ -16,20 +9,32 @@
     <div class="about__container">
         <div class="about__wrapper">
             <div class="about__content">
-                <p class="about__excerpt"><?php echo esc_html(get_the_excerpt($post_id)); ?></p>
-                <div class="about__text">
-                    <span class="about__arrow">
-                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/icons/read-arrow.svg'); ?>" alt="Strzałka">
-                    </span>
-                    <?php $content = apply_filters('the_content', $about_post->post_content); echo wp_kses_post($content);?>
-                </div>
+
+                <?php if ($zacheta) : ?>
+                    <p class="about__excerpt"><?php echo esc_html($zacheta); ?></p>
+                <?php endif; ?>
+
+                <?php if ($tekst_glowny) : ?>
+                    <div class="about__text">
+                        <span class="about__arrow">
+                            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/icons/read-arrow.svg'); ?>" alt="Strzałka">
+                        </span>
+                        <?php echo wp_kses_post($tekst_glowny); ?>
+                    </div>
+                <?php endif; ?>
+
             </div>
+
             <div class="about__image-container">
-                <?php $image_url = get_the_post_thumbnail_url($post_id, 'full'); if ($image_url) :?>
-                    <img class="about__image" src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr(get_the_title($post_id)); ?>"/>
+                <?php if ($zdjecie) : ?>
+                    <?php 
+                    // Sprawdzamy, w jakim formacie ACF zwraca zdjęcie
+                    $src = is_array($zdjecie) ? $zdjecie['url'] : $zdjecie;
+                    $alt = is_array($zdjecie) ? $zdjecie['alt'] : 'Zdjęcie zespołu';
+                    ?>
+                    <img class="about__image" src="<?php echo esc_url($src); ?>" alt="<?php echo esc_attr($alt); ?>"/>
                 <?php endif; ?>
             </div>
         </div>
     </div>
 </section>
-<?php endif; ?>

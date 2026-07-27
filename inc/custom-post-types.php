@@ -32,22 +32,19 @@ function register_aktualnosci_cpt() {
 }
 add_action('init', 'register_aktualnosci_cpt');
 
-function register_zespol_cpt() {
-    register_post_type('zespol', [
+function register_stopka_cpt() {
+    register_post_type('stopka', [
         'labels' => [
-            'name'               => 'O Zespole',
-            'edit_item'          => 'Edytuj informacje o zespole',
+            'name' => 'Stopka',
         ],
-        'public'       => true,
-        'show_in_menu' => true,
-        'supports'     => ['title', 'editor', 'excerpt', 'thumbnail'], 
-        'menu_icon'    => 'dashicons-groups', 
-        'has_archive'  => false, 
-        'rewrite'      => ['slug' => 'zespol'],
         'capabilities' => [
-            'create_posts' => 'do_not_allow', 
+            'create_posts' => 'do_not_allow',
         ],
         'map_meta_cap' => true,
+        'public'       => true,
+        'show_in_menu' => true,
+        'supports'     => ['title'],
+        'menu_icon'    => 'dashicons-layout',
     ]);
 }
-add_action('init', 'register_zespol_cpt');
+add_action('init', 'register_stopka_cpt');
