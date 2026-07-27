@@ -1,7 +1,8 @@
 <?php
-$tekst_glowny = get_field('tekst_glowny');
-$zacheta      = get_field('zacheta');
-$zdjecie      = get_field('zdjecie_zespolu'); 
+    if (!defined('ABSPATH')) exit;
+    $tekst_glowny = get_field('tekst_glowny');
+    $zacheta      = get_field('zacheta');
+    $zdjecie      = get_field('zdjecie_zespolu'); 
 ?>
 
 <section class="about container">
