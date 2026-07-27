@@ -24,3 +24,4 @@ function ajax_get_album_detail() {
 
     wp_send_json_success(['html' => $html]);
 }
+?>

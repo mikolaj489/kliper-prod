@@ -1,2 +1,15 @@
+@import url('../../style.css');
 @import url('./layout/header.css');
 @import url('./layout/footer.css');
+
+@import url('./components/album_card.css');
+@import url('./components/album_card_expanded.css');
+@import url('./components/hero_animation.css');
+@import url('./components/news_card.css');
+@import url('./components/news_slider.css');
+@import url('./components/welcome.css');
+
+@import url('./section-styles/about.css');
+@import url('./section-styles/hero.css');
+@import url('./section-styles/news.css');
+@import url('./section-styles/releases.css');

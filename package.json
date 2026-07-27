@@ -1,0 +1,26 @@
+{
+  "name": "custom",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build",
+    "watch": "vite build --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikolaj489/kliper-prod.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mikolaj489/kliper-prod/issues"
+  },
+  "homepage": "https://github.com/mikolaj489/kliper-prod#readme",
+  "devDependencies": {
+    "vite": "^8.1.5"
+  }
+}
