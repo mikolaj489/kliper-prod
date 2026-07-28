@@ -4,6 +4,14 @@ Author: admin
 Version: 1.0 
 */
 
+/* do usunięcia */
+#wpadminbar {
+    display: none !important;
+}
+html {
+    margin-top: 0 !important;
+}
+/* do usunięcia */
 :root {
     --c-dark: #0D1321;
     --c-primary: #172336;
@@ -25,7 +33,7 @@ Version: 1.0
     --fs-xl: 3rem;
     --fs-xxl: 4rem;
     --radius-sm: 12px;
-    --radius-lg: 52px;
+    --radius-lg: 32px;
     --font-primary: 'Bricolage Grotesque', sans-serif;
     --font-secondary: 'Brygada 1918', serif;
 
@@ -40,6 +48,8 @@ Version: 1.0
     --slogan-transition-fade: .15s ease;
 
     --sand-effect-height: 15rem;
+    --nav-height: 65px;
+    --nav-spacing-top: 2rem;
 }
 
 *, *::before, *::after {
@@ -49,27 +59,18 @@ Version: 1.0
     box-sizing: border-box;
 }
 
-/* html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 2rem;
-} */
-
+html,
 body {
     background-color: var(--c-bg);
     color: var(--c-text-primary);
     font-size: 16px;
     margin: 0;
     overflow-x: hidden;
+    max-width: 100%;
     scroll-behavior: smooth;
 }
-
-section,
-.section,
-.releases__content,
-.news__card,
-.album-card {
-    overflow-anchor: none;
-    transition: height 0.35s ease, max-height 0.35s ease, padding 0.35s ease, margin 0.35s ease;
+.main-content {
+    padding-block-start: calc(var(--nav-height) + var(--nav-spacing-top));
 }
 .container {
     padding-inline: var(--sides);

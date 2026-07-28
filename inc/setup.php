@@ -8,6 +8,17 @@ function custom_theme_setup() {
         'main-menu' => __('Menu Główne', 'kliper'),
     ]);
 }
+
+function add_menu_link_class($atts, $item, $args) {
+    if (isset($args->items_class)) {
+        $atts['class'] = isset($atts['class']) 
+            ? $atts['class'] . ' ' . $args->items_class 
+            : $args->items_class;
+    }
+    return $atts;
+}
+add_filter('nav_menu_link_attributes', 'add_menu_link_class', 10, 3);
+
 add_action('after_setup_theme', 'custom_theme_setup');
 
 add_action('admin_init', function() {
