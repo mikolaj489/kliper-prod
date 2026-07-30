@@ -79,6 +79,7 @@
         grid-template-columns: 1fr;
     }
     .footer__container {
+        padding-inline: 0;
         height: auto;
     }
 }

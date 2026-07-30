@@ -1,14 +1,23 @@
 <?php
+/*Template Name: Archiwum*/ 
 get_header();
+
+$archiwum_query = new WP_Query([
+    'post_type'      => 'aktualnosci',
+    'posts_per_page' => 10,
+    'paged'          => get_query_var('paged') ? get_query_var('paged') : 1,
+    'orderby'        => 'date',
+    'order'          => 'DESC',
+]);
 ?>
 <main class="content-area">
     <section class="news container">
         <h1 class="section__title">Archiwum</h1>
 
-        <?php if (have_posts()) : ?>
+        <?php if ($archiwum_query->have_posts()) : ?>
             <div class="news__container">
                 <div class="news__content">
-                    <?php while (have_posts()) : the_post(); ?>
+                    <?php while ($archiwum_query->have_posts()) : $archiwum_query->the_post(); ?>
                         <?php
                             $content = apply_filters('the_content', get_the_content('', false, get_the_ID()));
                         ?>
@@ -25,10 +34,20 @@ get_header();
                 </div>
             </div>
 
-            <?php the_posts_pagination(); ?>
+            <?php
+            echo paginate_links([
+                'total'     => $archiwum_query->max_num_pages,
+                'current'   => max(1, get_query_var('paged')),
+                'prev_text' => '←',
+                'next_text' => '→',
+            ]);
+            ?>
+
         <?php else : ?>
             <p>Brak aktualności do wyświetlenia.</p>
         <?php endif; ?>
+
+        <?php wp_reset_postdata(); ?>
     </section>
 </main>
 

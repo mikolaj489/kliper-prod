@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const menu = document.querySelector('.menu');
-    const menuButton = document.querySelector('.menu-button');
-    const menuButtonImg = document.querySelector('.menu-button-img');
+    const menuButton = document.querySelector('.hamburger-toggle');
+    const menuButtonImg = document.querySelector('.hamburger-toggle-img');
 
     const hamburgerSrc = menuButtonImg.src; 
     const closeSrc = hamburgerSrc.replace('hamburger.svg', 'x.svg');

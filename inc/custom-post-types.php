@@ -26,8 +26,8 @@ function register_aktualnosci_cpt() {
         'show_in_menu' => true,
         'supports'     => ['title', 'editor', 'excerpt'],
         'menu_icon'    => 'dashicons-megaphone',
-        'has_archive'  => true,
-        'rewrite'      => ['slug' => 'aktualnosci'],
+        'has_archive'  => false,
+        'rewrite'      => ['slug' => 'wpis-aktualnosci'],
     ]);
 }
 add_action('init', 'register_aktualnosci_cpt');
