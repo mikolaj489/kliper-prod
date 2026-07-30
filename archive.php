@@ -4,7 +4,7 @@ get_header();
 
 $archiwum_query = new WP_Query([
     'post_type'      => 'aktualnosci',
-    'posts_per_page' => 10,
+    'posts_per_page' => 100,
     'paged'          => get_query_var('paged') ? get_query_var('paged') : 1,
     'orderby'        => 'date',
     'order'          => 'DESC',

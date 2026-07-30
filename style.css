@@ -76,7 +76,7 @@ body {
   min-height: 100vh;
 }
 main,
-.main-content {
+.content-area    {
     padding-block-start: calc(var(--nav-height) + var(--nav-spacing-top));
     flex: 1 0 auto;
 }

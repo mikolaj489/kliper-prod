@@ -64,6 +64,13 @@
     z-index: 1;
     text-shadow: 5px 5px 5px var(--c-text-primary);
 }
+.footer__col--links a {
+    color: var(--c-footer);
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;       
+    }
+}
 .footer__wheel {
     position: absolute;
     top: -350px;
