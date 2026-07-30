@@ -29,6 +29,7 @@ html {
     --fs-sm: 0.875rem;
     --fs-base: 1rem;
     --fs-md: 1.2rem;
+    --fs-mdl: 1.4rem;
     --fs-lg: 2rem;
     --fs-xl: 3rem;
     --fs-xxl: 4rem;
@@ -69,8 +70,19 @@ body {
     max-width: 100%;
     scroll-behavior: smooth;
 }
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main,
 .main-content {
     padding-block-start: calc(var(--nav-height) + var(--nav-spacing-top));
+    flex: 1 0 auto;
+}
+footer,
+.global-footer {
+  flex-shrink: 0; 
 }
 .container {
     padding-inline: var(--sides);

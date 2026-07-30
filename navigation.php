@@ -12,7 +12,7 @@
         <a href="' . esc_url(home_url ('/')) . '">
           <img class="menu-logo-item" src="' . esc_url (get_template_directory_uri() . '/assets/images/icons/logo.svg') . '" alt="Logo">
         </a>
-          <span class="menu-button"><img class="menu-button-img" src="' . esc_url (get_template_directory_uri() . '/assets/images/icons/hamburger.svg') . '"></span>
+          <span class="menu-button menu-link"><img class="menu-button-img" src="' . esc_url (get_template_directory_uri() . '/assets/images/icons/hamburger.svg') . '"></span>
         </li>
         %3$s
         </ul>',
