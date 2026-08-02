@@ -7,6 +7,7 @@
     --news__slider-anchor-padding: 8px;
     padding-inline: var(--news__slider-anchor-padding);
     overflow: hidden;
+    user-select: none;
 }
 .news__slider-anchor {
     display: flex;

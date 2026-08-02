@@ -8,3 +8,4 @@ import './modules/navigation.js';
 import './modules/news_card.js';
 import './modules/news_slider.js';
 import './modules/releases.js';
+import './modules/go_top.js';

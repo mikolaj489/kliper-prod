@@ -1,0 +1,26 @@
+.go-top {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    z-index: 99;
+    cursor: pointer;
+    background-color: var(--c-title);
+    user-select: none;
+    padding: .8rem;
+    border-radius: var(--radius-sm);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s ease, visibility .3s ease;
+}
+.go-top.is-above-footer {
+    position: absolute;
+}
+.go-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.go-top__img {
+    width: 20px;
+    height: 20px;
+}

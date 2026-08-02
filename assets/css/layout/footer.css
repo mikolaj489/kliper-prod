@@ -23,10 +23,7 @@
 }
 .footer__col {
     font-size: var(--fs-base);
-    line-height: 1.65em;
-}
-.footer__col--contact {
-    line-height: 1.4em;
+    line-height: 1.7em;
 }
 .footer__title {
     font-family: var(--font-secondary);
