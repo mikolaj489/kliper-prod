@@ -24,13 +24,13 @@
         </div>
         <div class="contact__container">
             <div class="contact__content">
-                <div class="contact__col">
+                <div class="contact__col styled-button">
                     <h3 class="contact__title">E-mail zespołu</h3>
                     <?php if ($team_email) : ?>
                         <p class="contact__email"><?php echo esc_html($team_email); ?></p>
                     <?php endif; ?>
                 </div>
-                <div class="contact__col">
+                <div class="contact__col styled-button">
                     <h3 class="contact__title">Kontakt telefoniczny</h3>
                     <?php if ($phone_number) : ?>
                         <p class="contact__phone">tel. kom.: <?php echo esc_html($phone_number); ?></p>
