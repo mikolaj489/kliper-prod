@@ -1,19 +1,20 @@
 ﻿console.log('HERO_ANIMATION');
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. ZABEZPIECZENIE: Pobierz dane oraz elementy, sprawdź czy istnieją na tej podstronie
     const { slogans = [], icons = [] } = window.HeroAnimationData || {};
-    
+
     const blobMain = document.querySelector('.blob--main');
     const slogan = document.querySelector('.blob__slogan');
     const blobImgs = document.querySelectorAll('.blob--1 img, .blob--2 img, .blob--3 img, .blob--4 img, .blob--5 img, .blob--6 img, .blob--7 img');
 
-    // Jeśli brak danych lub elementów Hero – bezpiecznie wyjdź z funkcji
     if (!blobMain || !slogan || blobImgs.length === 0 || slogans.length === 0) {
         return;
     }
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     let currentSlogan = 0;
+    let changeTimer = null;
 
     function shuffleArray(arr) {
         const a = [...arr];
@@ -24,34 +25,54 @@ document.addEventListener('DOMContentLoaded', () => {
         return a;
     }
 
-    const ANIM_DURATION = 8000;
-    const CHANGE_AT = ANIM_DURATION * 0.90;
-    const FADE_DURATION = 150;
+    function readTimingFromCSS() {
+        const cs = getComputedStyle(blobMain);
+        const cycleSeconds = parseFloat(cs.getPropertyValue('--blob-cycle-seconds')) || 8;
+        const swapPoint = parseFloat(cs.getPropertyValue('--blob-swap-point')) || 0.9;
+        return cycleSeconds * 1000 * swapPoint;
+    }
 
-    let changeTimer = null;
+    function swapContent() {
+        currentSlogan = (currentSlogan + 1) % slogans.length;
+        slogan.textContent = slogans[currentSlogan];
+
+        const newIcons = shuffleArray(icons);
+        blobImgs.forEach((img, i) => {
+            if (newIcons[i]) img.src = newIcons[i];
+        });
+    }
 
     function scheduleChange() {
         clearTimeout(changeTimer);
+        const changeAt = readTimingFromCSS();
 
         changeTimer = setTimeout(() => {
-            slogan.style.opacity = '0';
-            blobImgs.forEach(img => img.style.opacity = '0');
+            blobMain.classList.add('is-swapping');
 
-            setTimeout(() => {
-                currentSlogan = (currentSlogan + 1) % slogans.length;
-                slogan.textContent = slogans[currentSlogan];
-
-                const newIcons = shuffleArray(icons);
-                blobImgs.forEach((img, i) => {
-                    if (newIcons[i]) img.src = newIcons[i];
-                });
-
-                slogan.style.opacity = '1';
-                blobImgs.forEach(img => img.style.opacity = '1');
-            }, FADE_DURATION);
-        }, CHANGE_AT);
+            const onFadeOut = (e) => {
+                if (e.target !== slogan) return;
+                slogan.removeEventListener('transitionend', onFadeOut);
+                swapContent();
+                blobMain.classList.remove('is-swapping');
+            };
+            slogan.addEventListener('transitionend', onFadeOut);
+        }, changeAt);
     }
 
+    if (prefersReducedMotion) {
+        setInterval(swapContent, 6000);
+        return;
+    }
+
+    // KLUCZOWA POPRAWKA:
+    // Nie odpalamy scheduleChange() od razu na DOMContentLoaded, bo w tym momencie
+    // animacja CSS jeszcze realnie nie wystartowała (przeglądarka czeka na paint/layout).
+    // Synchronizujemy się do faktycznego startu animacji przez event 'animationstart',
+    // dzięki czemu pierwszy cykl liczy się od tego samego punktu w czasie co CSS.
+    blobMain.addEventListener('animationstart', function onFirstStart() {
+        blobMain.removeEventListener('animationstart', onFirstStart);
+        scheduleChange();
+    });
+
     blobMain.addEventListener('animationiteration', scheduleChange);
-    scheduleChange();
 });
