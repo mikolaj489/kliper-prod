@@ -1,5 +1,3 @@
-console.log('ALBUM');
-
 document.addEventListener('DOMContentLoaded', () => {
     // 1. ZABEZPIECZENIE: Sprawdź czy na stronie w ogóle istnieje sekcja albumów
     const releasesContainer = document.querySelector('.releases__content');

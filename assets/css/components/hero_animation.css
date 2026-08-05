@@ -30,13 +30,20 @@
 .blob--main {
     --blob-w: 400px;
     --blob-h: 580px;
+    --blob-cycle-seconds: 5s;
+    --blob-upward-start: 0.92;
+    --blob-upward-end: 0.95;
     position: relative;
     width: var(--blob-w);
     height: var(--blob-h);
     background-color: var(--c-primary);
     top: 50%; left: 20%;
-    animation: blob-shake 8s ease-in-out infinite;
     transform-origin: center center;
+    transform: var(--blob-translate) rotate(var(--blob-rotation));
+    animation: none;
+}
+.blob--main.is-ready {
+    animation: blob-shake var(--blob-cycle-seconds) ease-in-out infinite;
 }
 @keyframes blob-shake {
     0%   { transform: var(--blob-translate) rotate(var(--blob-rotation)) translateY(0); }
@@ -51,6 +58,7 @@
     95%  { transform: var(--blob-translate) rotate(var(--blob-rotation)) translateY(-8px); }
     100% { transform: var(--blob-translate) rotate(var(--blob-rotation)) translateY(0); }
 }
+
 .blob--1 {
     width: calc(var(--blob-w) * 0.29);
     height: calc(var(--blob-h) * 0.29);
@@ -108,15 +116,15 @@
     line-height: 1.3;
     text-align: center;
     max-width: 15rem;
-    transition: opacity var(--slogan-transition-fade);
 }
 .blob__slogan,
 .blob img {
-    transition: opacity var(--transition-fade, 150ms) ease;
+    transition: opacity 180ms ease, transform 180ms ease;
 }
 .blob--main.is-swapping .blob__slogan,
 .blob--main.is-swapping img {
     opacity: 0;
+    transform: translateY(8px) scale(0.96) rotate(calc(var(--blob-rotation) * -1));
 }
 @media (max-width: 1024px) {
     .hero__animation-container {

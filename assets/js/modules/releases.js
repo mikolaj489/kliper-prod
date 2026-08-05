@@ -57,5 +57,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const observer = new MutationObserver(checkNav);
     observer.observe(content, { childList: true, subtree: true });
-    console.log('RELEASES')
 });

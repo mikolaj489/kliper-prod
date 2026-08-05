@@ -1,6 +1,4 @@
-﻿console.log('HERO_ANIMATION');
-
-document.addEventListener('DOMContentLoaded', () => {
+﻿document.addEventListener('DOMContentLoaded', () => {
     const { slogans = [], icons = [] } = window.HeroAnimationData || {};
 
     const blobMain = document.querySelector('.blob--main');
@@ -13,8 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    // Musi się zgadzać z czasem trwania transition opacity/transform w CSS
+    // dla .blob--main.is-swapping (obecnie 180ms).
+    const SWAP_FADE_MS = 180;
+
     let currentSlogan = 0;
-    let changeTimer = null;
+    let swapTimer = null;
+    let isSwapping = false;
 
     function shuffleArray(arr) {
         const a = [...arr];
@@ -25,54 +28,112 @@ document.addEventListener('DOMContentLoaded', () => {
         return a;
     }
 
-    function readTimingFromCSS() {
-        const cs = getComputedStyle(blobMain);
-        const cycleSeconds = parseFloat(cs.getPropertyValue('--blob-cycle-seconds')) || 8;
-        const swapPoint = parseFloat(cs.getPropertyValue('--blob-swap-point')) || 0.9;
-        return cycleSeconds * 1000 * swapPoint;
-    }
-
     function swapContent() {
         currentSlogan = (currentSlogan + 1) % slogans.length;
         slogan.textContent = slogans[currentSlogan];
 
         const newIcons = shuffleArray(icons);
         blobImgs.forEach((img, i) => {
-            if (newIcons[i]) img.src = newIcons[i];
+            if (newIcons[i]) {
+                img.src = newIcons[i];
+            }
         });
     }
 
-    function scheduleChange() {
-        clearTimeout(changeTimer);
-        const changeAt = readTimingFromCSS();
+    function startSwap() {
+        if (isSwapping) {
+            return;
+        }
 
-        changeTimer = setTimeout(() => {
-            blobMain.classList.add('is-swapping');
+        isSwapping = true;
+        blobMain.classList.add('is-swapping');
 
-            const onFadeOut = (e) => {
-                if (e.target !== slogan) return;
-                slogan.removeEventListener('transitionend', onFadeOut);
-                swapContent();
-                blobMain.classList.remove('is-swapping');
-            };
-            slogan.addEventListener('transitionend', onFadeOut);
-        }, changeAt);
+        clearTimeout(swapTimer);
+        swapTimer = setTimeout(() => {
+            swapContent();
+            blobMain.classList.remove('is-swapping');
+            isSwapping = false;
+        }, SWAP_FADE_MS);
+    }
+
+    function getCycleDurationMs() {
+        const cs = getComputedStyle(blobMain);
+        const duration = cs.animationDuration;
+
+        if (duration.endsWith('s')) {
+            return parseFloat(duration) * 1000;
+        }
+
+        return parseFloat(duration) || 8000;
+    }
+
+    function getSwapWindowFractions() {
+        const cs = getComputedStyle(blobMain);
+        const start = parseFloat(cs.getPropertyValue('--blob-upward-start'));
+        const end = parseFloat(cs.getPropertyValue('--blob-upward-end'));
+
+        return {
+            start: Number.isFinite(start) ? start : 0.15,
+            end: Number.isFinite(end) ? end : 0.35,
+        };
+    }
+
+    function scheduleSwap() {
+        clearTimeout(swapTimer);
+
+        const cycleDurationMs = getCycleDurationMs();
+        const { start, end } = getSwapWindowFractions();
+
+        // Odejmujemy czas trwania fade'u, żeby widoczna zamiana treści
+        // (która następuje SWAP_FADE_MS po starcie startSwap) trafiła
+        // w docelowe okno, a nie po nim.
+        const windowStartMs = cycleDurationMs * start - SWAP_FADE_MS;
+        const windowEndMs = cycleDurationMs * end - SWAP_FADE_MS;
+
+        const delay = Math.max(
+            0,
+            windowStartMs + Math.random() * (windowEndMs - windowStartMs)
+        );
+
+        swapTimer = setTimeout(() => {
+            startSwap();
+        }, delay);
     }
 
     if (prefersReducedMotion) {
-        setInterval(swapContent, 6000);
-        return;
+      setInterval(swapContent, 60);
+      return;
     }
 
-    // KLUCZOWA POPRAWKA:
-    // Nie odpalamy scheduleChange() od razu na DOMContentLoaded, bo w tym momencie
-    // animacja CSS jeszcze realnie nie wystartowała (przeglądarka czeka na paint/layout).
-    // Synchronizujemy się do faktycznego startu animacji przez event 'animationstart',
-    // dzięki czemu pierwszy cykl liczy się od tego samego punktu w czasie co CSS.
-    blobMain.addEventListener('animationstart', function onFirstStart() {
-        blobMain.removeEventListener('animationstart', onFirstStart);
-        scheduleChange();
+    blobMain.addEventListener('animationstart', () => {
+        scheduleSwap();
     });
 
-    blobMain.addEventListener('animationiteration', scheduleChange);
+    blobMain.addEventListener('animationiteration', () => {
+        scheduleSwap();
+    });
+
+    scheduleSwap();
+    blobMain.classList.add('is-ready');
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            animation.pause();
+            clearTimeout(swapTimer);
+        } else {
+            if (isSwapping) {
+                clearTimeout(swapTimer);
+                swapContent();
+                blobMain.classList.remove('is-swapping');
+                isSwapping = false;
+            }
+            animation.play();
+            const elapsedNow = animation.currentTime;
+            if (typeof elapsedNow === 'number') {
+                lastCycleIndex = Math.floor(elapsedNow / cycleMs);
+            }
+
+            scheduleNextSwap();
+        }
+    });
 });

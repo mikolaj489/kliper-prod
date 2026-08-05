@@ -1,5 +1,3 @@
-console.log('ALBUM_IMG');
-
 document.addEventListener('DOMContentLoaded', () => {
     const aboutImage = document.querySelector('.about__image');
     const aboutImageContainer = document.querySelector('.about__image-container');

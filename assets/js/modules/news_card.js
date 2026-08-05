@@ -1,5 +1,3 @@
-console.log('NEWS_CARD');
-
 document.addEventListener('DOMContentLoaded', () => {
     const cards = Array.from(document.querySelectorAll('.news__card'));
 

@@ -1,5 +1,3 @@
-console.log('NEWS_SLIDER');
-
 document.addEventListener('DOMContentLoaded', () => {
     const slider = document.querySelector('.news__slider');
     const anchor = slider?.querySelector('.news__slider-anchor');

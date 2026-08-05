@@ -116,9 +116,6 @@ box-shadow:
         display: flex;
         justify-content: center;
     }
-    .main-content {
-        padding-block-start: calc(var(--dynamic-nav-height) + var(--nav-spacing-top));
-    }
     .hamburger-toggle {
         display: inline-block;
         padding-inline: 10px;
