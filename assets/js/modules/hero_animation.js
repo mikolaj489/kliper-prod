@@ -117,7 +117,6 @@
         if (e.animationName !== 'blob-shake') {
             return;
         }
-
         scheduleSwap();
     });
 

@@ -73,3 +73,4 @@ function kliper_enqueue_hero_animation() {
     ]);
 }
 add_action('wp_enqueue_scripts', 'kliper_enqueue_hero_animation');
+
