@@ -32,7 +32,6 @@
             $count    = count($tracks);
             $limit    = 18;
             $has_more = $count > $limit;
-            $rows     = ceil(min($count, $limit) / 2);
         ?>
         <div class="album-card__tracks--expanded">
             <p class="album-card__tracks-title">
@@ -43,7 +42,7 @@
                     </button>
                 <?php endif; ?>
             </p>
-            <ol class="album-card__tracks-list" style="grid-template-rows: repeat(<?= $rows ?>, auto)">
+            <ol class="album-card__tracks-list">
                 <?php foreach ($tracks as $i => $track): ?>
                     <li class="<?= $i >= $limit ? 'album-card__track--hidden' : '' ?>">
                         <?= esc_html(trim($track)) ?>

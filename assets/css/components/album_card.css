@@ -66,6 +66,5 @@
 @media (max-width: 500px) {
     .album-card {
         width: 320px;
-        /* height: 445px; */
     }
 }
