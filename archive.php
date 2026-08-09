@@ -58,5 +58,4 @@ $archiwum_query = new WP_Query([
     </section>
     <?php get_template_part('template-parts/components/go_top'); ?>
 </main>
-<?php
-get_footer();
+<?php get_footer();?>

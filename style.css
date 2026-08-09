@@ -99,9 +99,10 @@ footer,
     font-weight: bold;
     text-align: center;
     margin-block: var(--title-spacing); 
+    line-height: .9em;
 }
 .section__title--first {
-    margin-block: 0; 
+    margin-block-end: 1rem; 
 }
 .section__subtext {
     display: flex;
