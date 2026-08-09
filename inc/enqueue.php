@@ -28,7 +28,6 @@ function my_theme_enqueue_assets() {
             'nonce'    => wp_create_nonce('album_nonce')
         )
     );
-
 }
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_assets');
 

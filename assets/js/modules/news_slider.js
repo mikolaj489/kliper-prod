@@ -2,13 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const slider = document.querySelector('.news__slider');
     const anchor = slider?.querySelector('.news__slider-anchor');
     const cards = Array.from(document.querySelectorAll('.news__card'));
-
-    // ZABEZPIECZENIE: Jeśli brak suwaka, anchora lub kart na stronie – przerywamy
     if (!slider || !anchor || !cards.length) {
         return;
     }
-
-    // Aktualizuje pozycję wskaźnika (anchor) na osi czasu/suwaka
     const updateAnchor = () => {
         const sliderRect = slider.getBoundingClientRect();
         const viewportOffset = window.innerHeight * 0.45;

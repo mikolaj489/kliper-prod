@@ -3,11 +3,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const wrapper = document.querySelector('.releases__scroll-wrapper');
     const nav = document.querySelector('.releases__nav');
     const content = document.querySelector('.releases__content');
+    const mainContainer = document.querySelector('.releases__container') || wrapper; 
 
-    // WARUNEK BEZPIECZEŃSTWA: Jeśli brak głównego kontenera na stronie, przerwij wykonywanie
     if (!wrapper || !content) return;
 
-    // --- OBSŁUGA PRZYCISKÓW KARUZELI ---
     (function () {
         const btnNext = document.querySelector('.carousel__btn--next');
         const btnPrev = document.querySelector('.carousel__btn--prev');
@@ -19,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return card.offsetWidth + gap;
         }
 
-        // Dodajemy eventy tylko wtedy, gdy przyciski naprawdę istnieją na stronie
         if (btnNext) {
             btnNext.addEventListener('click', () => {
                 wrapper.scrollBy({ left: getCardWidth(), behavior: 'smooth' });
@@ -53,6 +51,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     checkNav();
+
+    if (mainContainer) {
+        mainContainer.classList.remove('releases--loading');
+    }
+
     window.addEventListener('resize', checkNav);
 
     const observer = new MutationObserver(checkNav);

@@ -63,7 +63,7 @@
         border-color: #919191;
     };
     &:active {
-        transform: scale(.97);
+        transform: scale(.9);
     }
 }
 .carousel__dot--active {

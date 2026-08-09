@@ -137,9 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // ─── Karuzela ───────────────────────────────────────────────────────────────
-    
-    const iconNext = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`;
-    const iconPrev = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>`;
+    const albumIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>';
     
     function buildTrackHTML() {
         return allCards.map((card, i) => {
@@ -183,13 +181,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="carousel__status">
                     <button class="carousel__btn carousel__btn--prev" ${currentIndex === 0 ? 'disabled' : ''}>
-                        ${iconPrev}
+                        ${albumIcon}
                     </button>
                     <div class="carousel__dots">
                         ${buildDotsHTML()}
                     </div>
                     <button class="carousel__btn carousel__btn--next" ${currentIndex === allCards.length - 1 ? 'disabled' : ''}>
-                        ${iconNext}
+                        ${albumIcon}
                     </button>
                     <button class="carousel__close">Wróć</button>
                 </div>
