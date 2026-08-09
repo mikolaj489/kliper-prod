@@ -124,7 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
         fd.append('nonce', AlbumAjax.nonce);
         fd.append('album_id', albumId);
         
-        // POPRAWIONO: AlbumAjax.ajax_url zamiast AlbumAjax.url
         const res = await fetch(AlbumAjax.ajax_url, { method: 'POST', body: fd });
         const data = await res.json();
         const html = data.success ? data.data.html : null;
@@ -180,15 +179,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${buildTrackHTML()}
                 </div>
                 <div class="carousel__status">
-                    <button class="carousel__btn carousel__btn--prev" ${currentIndex === 0 ? 'disabled' : ''}>
+                    <a href="#releases" class="carousel__btn carousel__btn--prev" ${currentIndex === 0 ? 'disabled' : ''}>
                         ${albumIcon}
-                    </button>
+                        </a>
                     <div class="carousel__dots">
                         ${buildDotsHTML()}
                     </div>
-                    <button class="carousel__btn carousel__btn--next" ${currentIndex === allCards.length - 1 ? 'disabled' : ''}>
+                    <a href="#releases" class="carousel__btn carousel__btn--next" ${currentIndex === allCards.length - 1 ? 'disabled' : ''}>
                         ${albumIcon}
-                    </button>
+                    </a>
                     <button class="carousel__close">Wróć</button>
                 </div>
             </div>
@@ -198,11 +197,27 @@ document.addEventListener('DOMContentLoaded', () => {
     
     async function goTo(index, container) {
         if (!container) return;
+
+        // Wykrywamy kierunek przesunięcia przed nadpisaniem obecnego indeksu
+        const movingForward = index > currentIndex;
+
         currentIndex = index;
         updateDots(container);
         updateButtons(container);
         const track = container.querySelector('.carousel__track');
+        
         if (track) {
+            // Definiujemy pozycję startową X: wjazd z prawej (np. 40px) lub z lewej (np. -40px)
+            const startX = movingForward ? '40px' : '-40px';
+
+            track.animate([
+                { opacity: 0, transform: `translateX(${startX})` },
+                { opacity: 1, transform: 'translateX(0)' }
+            ], {
+                duration: 280,      // Czas trwania animacji poziomej w milisekundach
+                easing: 'ease-out'  // Płynne wyhamowanie na końcu ruchu
+            });
+
             track.innerHTML = buildTrackHTML();
             applyAlbumShadow(container);
         }
