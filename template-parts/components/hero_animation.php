@@ -18,8 +18,8 @@
     shuffle($shuffled_icons);
 ?>
 
-<div class="hero__animation-container">
-    <div class="hero__animation-content">
+<div class="hero-animation__container">
+    <div class="hero-animation__content">
         <div class="blob blob--main">
             <p class="blob__slogan"><?= esc_html($slogans[0]) ?></p>
             <?php for ($i = 1; $i <= 7; $i++): ?>
