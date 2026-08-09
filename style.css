@@ -113,9 +113,9 @@ footer,
 .section__subtext-content{
     display: inline-block;
     text-align: center;
-    max-width: 732px;
+    max-width: 715px;
     letter-spacing: .05em;
-    color: var(--c-text-muted)
+    color: var(--c-text-muted);
 }
 @media (max-width: 500px) {
     .section__title,

@@ -8,10 +8,12 @@ get_header();
         <h1 class="section__title--first"><?= esc_html( get_the_title() ); ?></h1>
         <div class="section__subtext">
             <?php
-                $welcome_text = get_field('section_subtext');
-                if ($welcome_text) :
+            $welcome_text = get_field('section_subtext');
+            if ($welcome_text) :
             ?>
-            <p class="section__subtext-content"><?php echo esc_html($welcome_text); ?></p>
+                <div class="section__subtext-content">
+                    <?php echo wp_kses_post($welcome_text); ?>
+                </div>
             <?php endif; ?>
         </div>
     </section>
