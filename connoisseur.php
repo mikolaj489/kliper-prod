@@ -12,25 +12,7 @@ get_header();
         </div>
         <?php endif; ?>
     </div>
-
-    <section class="conno-info container">
-        <div class="conno-info__content">
-            <?php if ( $tytul_1 = get_field('shanty_title-1') ) : ?>
-                <h2 class="conno-info__title"><?php echo esc_html($tytul_1); ?></h2>
-            <?php endif; ?>
-            <?php if ( $tresc_1 = get_field('shanty_content-1') ) : ?>
-                <p class="conno-info__text"><?php echo wp_kses_post($tresc_1); ?></p>
-            <?php endif; ?>
-        </div>
-        <div class="conno-info__content">
-            <?php if ( $tytul_2 = get_field('shanty_title-2') ) : ?>
-                <h2 class="conno-info__title"><?php echo esc_html($tytul_2); ?></h2>
-            <?php endif; ?>
-            <?php if ( $tresc_2 = get_field('shanty_content-2') ) : ?>
-                <p class="conno-info__text"><?php echo wp_kses_post($tresc_2); ?></p>
-            <?php endif; ?>
-        </div>
-    </section>
+    <?php get_template_part('template-parts/section-templates/shanties-about'); ?>
     <?php get_template_part('template-parts/components/go_top'); ?>
 </main>
 

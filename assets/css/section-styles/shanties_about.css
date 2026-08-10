@@ -1,0 +1,46 @@
+.shanties-about {
+    max-width: 1200px;
+    min-width: 300px;
+    margin: 0 auto;
+    position: relative;
+}
+.shanties-about__content {
+    color: var(--c-text-muted);
+    margin-block-end: 5rem;
+    position: relative;
+}
+.shanties-about__title,
+.shanties-about__text::first-letter {
+    font-family: var(--font-secondary);
+    font-size: var(--fs-xlg);
+    font-weight: 400;
+    font-style: italic;
+}
+.shanties-about__title {
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+.shanties-about__text {
+    letter-spacing: 0.1px;
+    font-size: var(--fs-md);
+    &::first-letter {
+        float: left;
+        margin-top: 8px;
+        margin-right: 8px;
+    }
+}
+.shanties-about__icon {
+    position: absolute;
+    top: -60px;
+    right: -10;
+}
+.shanties-about__line {
+    --line-spacing: 44px;
+    position: absolute;
+    top: 0;
+    right: 22px;
+    width: 2px;
+    height: calc(100% - var(--line-spacing));
+    background-color: var(--c-dark-lt);
+    margin-block-start:  var(--line-spacing);
+}

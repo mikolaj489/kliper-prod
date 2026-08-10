@@ -18,6 +18,10 @@
         box-shadow: 0 0 120px 155px #F0EBD8;
     }
 }
+.releases > h2#releases,
+.releases [id="releases"] {
+    scroll-margin-top: calc(var(--nav-height) + var(--nav-spacing-top) + 5px);
+}
 .releases__container {
     opacity: 1;
     transition: opacity 0.4s ease-in-out;

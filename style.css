@@ -14,6 +14,7 @@ html {
 /* do usunięcia */
 :root {
     --c-dark: #0D1321;
+    --c-dark-lt: #1D2D44;
     --c-primary: #172336;
     --c-primary-lt: #3E5C76;
     --c-secondary: #B58B4C; 
