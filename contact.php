@@ -12,18 +12,15 @@
 <?php get_header(); ?>
 
 <main class="content-area">
-    <section class="contact container">
-        <h1 class="section__title--first"><?= esc_html( get_the_title() ); ?></h1>
-        <div class="section__subtext">
-            <?php
-            $welcome_text = get_field('section_subtext');
-            if ($welcome_text) :
-            ?>
-                <div class="section__subtext-content">
-                    <?php echo wp_kses_post($welcome_text); ?>
-                </div>
-            <?php endif; ?>
+    <div class="page-welcome container">
+        <h1 class="page-welcome__title"><?= esc_html( get_the_title() ); ?></h1>
+        <?php $welcome_text = get_field('section_subtext'); if ($welcome_text) : ?>
+        <div class="page-welcome__text">
+            <?php echo wp_kses_post($welcome_text); ?>
         </div>
+        <?php endif; ?>
+    </div>
+    <section class="contact container">
         <div class="contact__container">
             <div class="contact__content">
                 <div class="contact__col styled-button">

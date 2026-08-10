@@ -1,0 +1,29 @@
+.conno-info {
+    max-width: 1200px;
+    min-width: 300px;
+    margin: 0 auto;
+}
+.conno-info__content {
+    color: var(--c-text-muted);
+    margin-block-end: 4rem;
+}
+.conno-info__title,
+.conno-info__text::first-letter {
+    font-family: var(--font-secondary);
+    font-size: var(--fs-xlg);
+    font-weight: 400;
+    font-style: italic;
+}
+.conno-info__title {
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+.conno-info__text {
+    letter-spacing: 0.1px;
+    font-size: var(--fs-md);
+    &::first-letter {
+        float: left;
+        margin-top: 8px;
+        margin-right: 8px;
+    }
+}

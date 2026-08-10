@@ -23,7 +23,7 @@ html {
     --c-text-primary: #0D0D0D;
     --c-text-secondary: #F2F2F2;
     --c-text-muted: #4D4D4D;
-    --c-title: #B3B3B3;
+    --c-text-muted-lt: #B3B3B3;
     --c-footer: #BFBFBF;
     
     --fs-sm: 0.875rem;
@@ -79,7 +79,7 @@ body {
 } 
 main,
 .content-area    {
-    padding-block-start: calc(var(--nav-height) + var(--nav-spacing-top));
+    margin-block-start: calc(var(--nav-height) + var(--nav-spacing-top));
     flex: 1 0 auto;
     position: relative;
 }
@@ -91,35 +91,34 @@ footer,
     padding-inline: var(--sides);
     padding-block: var(--section-spacing);
 }
+.page-welcome {
+    padding-block-end: 0;
+}
 .section__title,
-.section__title--first {
+.page-welcome__title {
     font-family: var(--font-secondary);
-    color: var(--c-title);
+    color: var(--c-text-muted-lt);
     font-size: var(--fs-xxl);
     font-weight: bold;
     text-align: center;
     margin-block: var(--title-spacing); 
     line-height: .9em;
 }
-.section__title--first {
+.page-welcome__title {
     margin-block-end: 1rem; 
 }
-.section__subtext {
-    display: flex;
-    justify-content: center;
-    padding-block-start: .5rem;
-    margin-block: var(--title-spacing);
-}
-.section__subtext-content{
-    display: inline-block;
+.page-welcome__text {
+    display: block;
     text-align: center;
     max-width: 715px;
     letter-spacing: .05em;
+    padding-block: .5rem;
+    margin: 0 auto;
     color: var(--c-text-muted);
 }
 @media (max-width: 500px) {
     .section__title,
-    .section__title--first {
+    .page-welcome__title {
         font-size: var(--fs-xl);
     }
 }

@@ -4,7 +4,7 @@
     right: 20px;
     z-index: 98;
     cursor: pointer;
-    background-color: var(--c-title);
+    background-color: var(--c-text-muted-lt);
     user-select: none;
     padding: .8rem;
     border-radius: var(--radius-sm);
