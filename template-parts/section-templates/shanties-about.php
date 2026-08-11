@@ -9,7 +9,7 @@
             <?php endif; ?>
         </div>
         <div class="shanties-about__content">
-            <img class="shanties-about__icon" src="<?= esc_url(get_template_directory_uri() . '/assets/images/icons/conno-icon2.svg') ?>">
+            <img class="shanties-about__icon shanties-about__icon--second" src="<?= esc_url(get_template_directory_uri() . '/assets/images/icons/conno-icon2.svg') ?>">
             <?php if ( $tytul_2 = get_field('shanty_title-2') ) : ?>
                 <h2 class="shanties-about__title"><?php echo esc_html($tytul_2); ?></h2>
             <?php endif; ?>

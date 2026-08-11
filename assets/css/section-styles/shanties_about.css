@@ -23,15 +23,17 @@
 .shanties-about__text {
     letter-spacing: 0.1px;
     font-size: var(--fs-md);
+    line-height: 1.2;
     &::first-letter {
         float: left;
-        margin-top: 8px;
+        margin-top: 7px;
         margin-right: 8px;
     }
 }
 .shanties-about__icon {
+    --icon-position-y: -60px;
     position: absolute;
-    top: -60px;
+    top: var(--icon-position-y);
     right: -10;   
     visibility: hidden;
     opacity: 0;
@@ -55,4 +57,9 @@
     transform-origin: top center;
     transform: scaleY(var(--scroll-progress));
     will-change: transform;
+}
+@media (max-width: 500px) {
+    .shanties-about__icon--second {
+        top: calc( var(--icon-position-y) - 10px)
+    }
 }
