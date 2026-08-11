@@ -32,15 +32,27 @@
 .shanties-about__icon {
     position: absolute;
     top: -60px;
-    right: -10;
+    right: -10;   
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+.shanties-about__icon.is-visible {
+    visibility: visible;
+    opacity: 1;
 }
 .shanties-about__line {
     --line-spacing: 44px;
+    --scroll-progress: 0;
     position: absolute;
     top: 0;
     right: 22px;
     width: 2px;
     height: calc(100% - var(--line-spacing));
+    max-height: 100%;
     background-color: var(--c-dark-lt);
     margin-block-start:  var(--line-spacing);
+    transform-origin: top center;
+    transform: scaleY(var(--scroll-progress));
+    will-change: transform;
 }
