@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!line || !container) return;
 
     const BASE_WIDTH = 1920;
-    const MIN_MULT = 1;
-    const MAX_MULT = 1.5;
+    const MIN_MULT = 1.1;
+    const MAX_MULT = 2;
 
     let maxScroll = 0;
     let multiplier = 1;
