@@ -13,6 +13,7 @@ get_header();
         <?php endif; ?>
     </div>
     <?php get_template_part('template-parts/section-templates/shanties-about'); ?>
+    <?php get_template_part('template-parts/section-templates/shanties-story'); ?>
     <?php get_template_part('template-parts/components/go_top'); ?>
 </main>
 

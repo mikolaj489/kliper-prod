@@ -23,7 +23,7 @@
 .shanties-about__text {
     letter-spacing: 0.1px;
     font-size: var(--fs-md);
-    line-height: 1.2;
+    line-height: var(--lh-200);
     &::first-letter {
         float: left;
         margin-top: 7px;
