@@ -1,3 +1,141 @@
+.shanties-story {
+    opacity: .92;
+    transition: opacity 0.4s ease;
+    background-color: var(--c-dark);
+    color: var(--c-text-muted-lt-2);
+    min-width: 300px;
+}
+.shanties-story__container {
+    max-width: 1600px;
+    margin: 0 auto;
+    display: flex;
+    overflow-x: hidden;
+    flex-direction: row;
+    position: relative;
+}
+.shanties-story__content {
+    flex: 1.5 1 0;
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    &::after {
+        --gradient-position: 15%;
+        transition: --gradient-position 0.6s ease;
+        content: '';
+        position: absolute;
+        height: 100%; width: 200%;
+        left: 0; top: 0;
+        z-index: -1;
+        background: linear-gradient(
+            90deg,
+            #0D1321 var(--gradient-position),
+            rgba(10, 22, 40, 0.176) 100%
+        );
+    }
+}
+.shanties-story.is-complete {
+    opacity: 1;
+}
+.shanties-story.is-complete .shanties-story__content::after {
+    --gradient-position: 40%;
+}
+@property --gradient-position {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 15%;
+}
+.shanties-story__background {
+    z-index: 1;
+    height: inherit;
+    flex: 1 1 100px;
+    position: relative;
+    background: linear-gradient(
+        90deg,
+         rgba(10, 22, 40, 0.176) 40%,
+        #0D1321 100%
+    );
+}
+.shanties-story__img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    z-index: 0;
+}
+
+.shanties-story__title {
+    text-transform: uppercase;
+    font-family: var(--font-secondary);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--c-text-secondary);
+    margin-block-end: 2px;
+    letter-spacing: .5px;
+    font-size: var(--fs-xlg);
+}
+
+.shanties-story__subtext {
+    display: block;
+    font-family: var(--font-secondary);
+    color: var(--c-text-secondary);
+    font-style: italic;
+    margin-block-end: 24px;
+}
+.shanties-story__text {
+    line-height: var(--lh-200);
+    letter-spacing: .1px;
+    font-size: var(--fs-md);
+    margin-block-end: 28px;
+    &::first-letter {
+        float: left;
+        margin-top: 7px;
+        margin-right: 8px;
+        font-family: var(--font-secondary);
+        font-size: var(--fs-xlg);
+        font-style: italic;
+    }
+}
 .shanties-story__box {
-    background-color: red;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    padding-top: 18px;
+    margin-top: 8px;
+}
+.shanties-story__stats {
+    line-height: 1.7;
+    margin: 0;
+}
+
+@media (max-width: 1200px) {
+    .shanties-story__container {
+        flex-direction: column;
+    }
+    .shanties-story__content {
+        max-width: fit-content;
+    }
+    .shanties-story__background {
+        position: absolute;
+        top: 0; left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 450px;
+        height: 100%;
+        overflow: hidden;
+    }
+    .shanties-story__img {
+        width: 100%;
+        height: auto;
+    }
+    .shanties-story__content::after {
+        position: absolute;
+        height: 300px; width: 100%;
+        background: linear-gradient(
+            0deg,
+            #0D1321 var(--gradient-position),
+            rgba(10, 22, 40, 0.48) 100%
+        );
+    }
+    .shanties-story__title,
+    .shanties-story__subtext {
+        text-align: center;
+    }
 }

@@ -1,10 +1,10 @@
 .global-footer {
     background-color: var(--c-dark);
     box-shadow: inset 0px 4px 25px 0px rgba(255, 255, 255, 0.31);
-    color: var(--c-footer);
     padding-block-start: 2.2rem;
     padding-block-end: 1.5rem;
     overflow: hidden;
+    color: var(--c-text-muted-lt);
 }
 .footer__container {
     display: flex;
@@ -62,7 +62,7 @@
     text-shadow: 5px 5px 5px var(--c-text-primary);
 }
 .footer__col--links a {
-    color: var(--c-footer);
+    color: var(--c-text-muted-lt-2);
     text-decoration: none;
     &:hover {
         text-decoration: underline;       
