@@ -8,7 +8,7 @@ get_header();
         <h1 class="page-welcome__title"><?= esc_html( get_the_title() ); ?></h1>
         <?php $welcome_text = get_field('section_subtext'); if ($welcome_text) : ?>
         <div class="page-welcome__text">
-            <?php echo wp_kses_post($welcome_text); ?>
+            <?php echo apply_filters('the_content', $welcome_text); ?>
         </div>
         <?php endif; ?>
     </div>
