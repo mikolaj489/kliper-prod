@@ -1,82 +1,72 @@
 <?php
-// Custom Post Types
-// ============================================================
-// GALERIE ZDJĘĆ
-// ============================================================
+// function register_galeria_cpt() {
 
-function register_galeria_cpt() {
+//     register_post_type('galeria', [
 
-    register_post_type('galeria', [
+//         'labels' => [
+//             'name'               => 'Albumy zdjęć',
+//             'add_new_item'       => 'Dodaj nowy album zdjęć',
+//         ],
 
-        'labels' => [
-            'name'               => 'Albumy zdjęć',
-            'add_new_item'       => 'Dodaj nowy album zdjęć',
-        ],
+//         'public'       => true,
+//         'show_in_menu' => true,
 
-        'public'       => true,
-        'show_in_menu' => true,
+//         'has_archive'  => false,
 
-        'has_archive'  => false,
+//         'rewrite' => [
+//             'slug' => 'galeria-zdjec',
+//         ],
 
-        'rewrite' => [
-            'slug' => 'galeria-zdjec',
-        ],
+//         'supports' => [
+//             'title',
+//         ],
 
-        'supports' => [
-            'title',
-        ],
+//         'menu_icon' => 'dashicons-format-gallery',
+//     ]);
 
-        'menu_icon' => 'dashicons-format-gallery',
-    ]);
+// }
 
-}
+// add_action('init', 'register_galeria_cpt');
 
-add_action('init', 'register_galeria_cpt');
+// function register_galeria_rok_taxonomy() {
 
+//     register_taxonomy(
+//         'rok_galerii',
+//         ['galeria'],
+//         [
 
-// ============================================================
-// ROK — TAKSONOMIA DLA GALERII ZDJĘĆ
-// ============================================================
+//             'labels' => [
+//                 'name'              => 'Lata',
+//                 'singular_name'     => 'Rok',
+//                 'search_items'      => 'Szukaj lat',
+//                 'all_items'         => 'Wszystkie lata',
+//                 'edit_item'         => 'Edytuj rok',
+//                 'update_item'       => 'Aktualizuj rok',
+//                 'add_new_item'      => 'Dodaj nowy rok',
+//                 'new_item_name'     => 'Nazwa nowego roku',
+//                 'menu_name'         => 'Lata',
+//             ],
 
-function register_galeria_rok_taxonomy() {
+//             // true = hierarchiczna taksonomia, podobna do kategorii
+//             'hierarchical' => true,
 
-    register_taxonomy(
-        'rok_galerii',
-        ['galeria'],
-        [
+//             'public'       => true,
+//             'show_ui'      => true,
 
-            'labels' => [
-                'name'              => 'Lata',
-                'singular_name'     => 'Rok',
-                'search_items'      => 'Szukaj lat',
-                'all_items'         => 'Wszystkie lata',
-                'edit_item'         => 'Edytuj rok',
-                'update_item'       => 'Aktualizuj rok',
-                'add_new_item'      => 'Dodaj nowy rok',
-                'new_item_name'     => 'Nazwa nowego roku',
-                'menu_name'         => 'Lata',
-            ],
+//             // Pokazuje rok w tabeli galerii w panelu WP
+//             'show_admin_column' => true,
 
-            // true = hierarchiczna taksonomia, podobna do kategorii
-            'hierarchical' => true,
+//             'show_in_rest' => true,
 
-            'public'       => true,
-            'show_ui'      => true,
+//             'rewrite' => [
+//                 'slug' => 'rok-galerii',
+//             ],
+//         ]
+//     );
 
-            // Pokazuje rok w tabeli galerii w panelu WP
-            'show_admin_column' => true,
+// }
 
-            'show_in_rest' => true,
-
-            'rewrite' => [
-                'slug' => 'rok-galerii',
-            ],
-        ]
-    );
-
-}
-
-add_action('init', 'register_galeria_rok_taxonomy');
+// add_action('init', 'register_galeria_rok_taxonomy');
 
 
 function register_albumy_cpt() {

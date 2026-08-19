@@ -10,3 +10,4 @@ import './modules/news_slider.js';
 import './modules/releases.js';
 import './modules/go_top.js';
 import './modules/grow_line.js';
+import './modules/gallery.js';

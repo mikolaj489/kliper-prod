@@ -9,7 +9,7 @@ function my_theme_enqueue_assets() {
         'my-theme-styles',
         get_template_directory_uri() . '/dist/css/main.min.css',
         array(),
-        file_exists($css_path) ? filemtime($css_path) : '1.0.0'
+        file_exists($js_path) ? filemtime($js_path) : '1.0.0',
     );
 
     wp_enqueue_script(
@@ -72,4 +72,3 @@ function kliper_enqueue_hero_animation() {
     ]);
 }
 add_action('wp_enqueue_scripts', 'kliper_enqueue_hero_animation');
-

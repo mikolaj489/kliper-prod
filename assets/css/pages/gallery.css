@@ -1,0 +1,62 @@
+/* BLOK */
+.cfg {
+    width: 100%;
+}
+
+/* ELEMENTY: LATA */
+.cfg__years {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.cfg__year-btn {
+    padding: 8px 16px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background: #f5f5f5;
+}
+
+/* MODYFIKATOR: AKTYWNY ROK */
+.cfg__year-btn--active {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+}
+
+/* ELEMENTY: ALBUMY */
+.cfg__albums {
+    margin-bottom: 20px;
+}
+
+
+.cfg__album-content {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.cfg__album-content--active {
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+    overflow: visible;
+}
+
+/* ZDJĘCIA / GALERIA */
+.cfg__gallery-item {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.cfg__gallery-item--active {
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+    overflow: visible;
+}
