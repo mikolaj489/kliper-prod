@@ -1,0 +1,61 @@
+.gallery-button {
+    background-color: var(--c-primary-lt2);
+    border-radius: var(--radius-lg);
+    padding-inline: 10px;
+    padding-block: 5px;
+    border: 2px solid var(--c-gray);
+    color: var(--c-text-secondary);
+    font-family: var(--font-secondary);
+    font-weight: bold;
+    letter-spacing: -0.08em;
+    font-size: var(--fs-md);
+    white-space: nowrap;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+}
+.gallery-button:hover,
+.cfg__year-btn--active,
+.cfg__gallery-btn--active {
+        background-color: var(--c-bg-lt);
+        color: var(--c-primary-lt2);
+}
+
+.cfg__scroll-btn {
+    display: none; 
+    position: absolute;
+    z-index: 2;
+    background: var(--c-primary-lt2);
+    color: var(--c-bg-lt);
+    border-radius: 50%;
+    width: 40px; height: 40px;
+    cursor: pointer;
+    font-size: var(--fs-base);
+    font-weight: bold;
+    box-shadow: -2px 0 10px  var(--c-primary-lt2);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    align-items: center;
+    justify-content: center;
+    opacity: .9;
+    &:hover {
+        transform: scale(1.1);
+    }
+    &:active {
+        transform: scale(0.95);
+    }
+}
+.cfg__scroll-btn--prev {
+    margin-inline-start: .5rem;
+    left: 0;
+    box-shadow: 2px 0 10px  var(--c-primary-lt2);
+}
+.cfg__scroll-btn--next {
+     margin-inline-end: .5rem;
+    right: 0;
+}
+.cfg__years-wrapper--has-overflow .cfg__scroll-btn {
+    display: flex;
+}
+.cfg__years-wrapper:not(.cfg__years-wrapper--can-scroll-left) .cfg__scroll-btn--prev,
+.cfg__years-wrapper:not(.cfg__years-wrapper--can-scroll-right) .cfg__scroll-btn--next {
+    display: none;
+}

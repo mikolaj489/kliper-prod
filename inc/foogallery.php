@@ -65,70 +65,78 @@ function render_custom_foogallery_system() {
         return '<div class="cfg"><p class="cfg__empty">Brak dostępnych galerii.</p></div>';
     }
 
-    $active_gallery_id = ( $requested_gallery_id > 0 && in_array( $requested_gallery_id, $all_galleries, true ) ) 
-                          ? $requested_gallery_id 
-                          : 0;
+    // Walidacja ID galerii przekazanego w URL
+    $active_gallery_id = ( $requested_gallery_id > 0 && in_array( $requested_gallery_id, $all_galleries, true ) ) ? $requested_gallery_id : 0;
+
+    // Ustalamy dokładnie JEDEN aktywny album i JEDNĄ aktywną galerię
+    $active_album_id = 0;
+
+    if ( $active_gallery_id > 0 ) {
+        // Jeśli podano g_id w URL, szukamy PIERWSZEGO albumu, do którego należy ta galeria
+        foreach ( $nav_structure as $item ) {
+            foreach ( $item['galleries'] as $g ) {
+                if ( $g['id'] === $active_gallery_id ) {
+                    $active_album_id = $item['album_id'];
+                    break 2; // Zatrzymujemy szukanie, by nie aktywować kolejnych lat
+                }
+            }
+        }
+    } else {
+        // Domyślnie (brak URL g_id): aktywujemy pierwszy rocznik i jego pierwszą galerię
+        $active_album_id   = $nav_structure[0]['album_id'];
+        $active_gallery_id = $nav_structure[0]['galleries'][0]['id'];
+    }
 
     ob_start();
     ?>
     <div class="cfg">
-        <!-- PRZYCISKI LAT -->
-        <div class="cfg__years">
-            <?php foreach ( $nav_structure as $item ) : 
-                $has_active = false;
-                if ( $active_gallery_id > 0 ) {
-                    foreach ( $item['galleries'] as $g ) {
-                        if ( $g['id'] === $active_gallery_id ) {
-                            $has_active = true;
-                            break;
-                        }
-                    }
-                }
-            ?>
+        <div class="cfg__years-wrapper">
+            <button type="button" class="cfg__scroll-btn cfg__scroll-btn--prev" aria-label="Przewiń w lewo">
+                &#10094;
+            </button>
+            <div class="cfg__years">
+                <?php foreach ( $nav_structure as $item ) : 
+                    $is_active = ( $active_album_id > 0 && $item['album_id'] ===    $active_album_id );
+                ?>
                 <button type="button" 
-                        class="cfg__year-btn <?php echo $has_active ? 'cfg__year-btn--active' : ''; ?>" 
-                        data-target="cfg-album-<?php echo esc_attr( $item['album_id'] ); ?>">
+                    class="cfg__year-btn gallery-button <?php echo $is_active ? 'cfg__year-btn--active' : ''; ?>" 
+                    data-target="cfg-album-<?php echo esc_attr( $item['album_id'] ); ?>">
                     <?php echo $item['year']; ?>
                 </button>
             <?php endforeach; ?>
+            </div>
+            <button type="button" class="cfg__scroll-btn cfg__scroll-btn--next" aria-label="Przewiń w prawo">
+                &#10095;
+            </button>
         </div>
-
-        <!-- ALBUMY W ROKU -->
-        <div class="cfg__albums">
-            <?php foreach ( $nav_structure as $item ) : 
-                $has_active = false;
-                if ( $active_gallery_id > 0 ) {
-                    foreach ( $item['galleries'] as $g ) {
-                        if ( $g['id'] === $active_gallery_id ) {
-                            $has_active = true;
-                            break;
-                        }
-                    }
-                }
-            ?>
-                <div class="cfg__album-content <?php echo $has_active ? 'cfg__album-content--active' : ''; ?>" 
-                     id="cfg-album-<?php echo esc_attr( $item['album_id'] ); ?>">
-                    <div class="cfg__album-buttons">
-                        <?php foreach ( $item['galleries'] as $g ) : ?>
-                            <button type="button" 
-                                    class="cfg__gallery-btn <?php echo ( $g['id'] === $active_gallery_id ) ? 'cfg__gallery-btn--active' : ''; ?>" 
-                                    data-gallery-id="<?php echo esc_attr( $g['id'] ); ?>">
-                                <?php echo $g['title']; ?>
-                            </button>
-                        <?php endforeach; ?>
+        <div class="cfg__container container"> 
+              <div class="cfg__albums">
+                    <?php foreach ( $nav_structure as $item ) : 
+                        $is_active = ( $active_album_id > 0 && $item['album_id'] === $active_album_id );
+                    ?>
+                        <div class="cfg__album-content <?php echo $is_active ? 'cfg__album-content--active' : ''; ?>" 
+                             id="cfg-album-<?php echo esc_attr( $item['album_id'] ); ?>">
+                            <div class="cfg__album-buttons">
+                                <?php foreach ( $item['galleries'] as $g ) : ?>
+                                    <button type="button" 
+                                        class="cfg__gallery-btn gallery-button  <?php echo ( $g['id'] === $active_gallery_id ) ? 'cfg__gallery-btn--active' : ''; ?>" 
+                                        data-gallery-id="<?php echo esc_attr( $g['id'] ); ?>">
+                                    <?php echo $g['title']; ?>
+                                </button>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
+                    <?php endforeach; ?>
                 </div>
-            <?php endforeach; ?>
-        </div>
 
-        <!-- ZDJĘCIA FOOGALLERY -->
-        <div class="cfg__display">
-            <?php foreach ( $all_galleries as $g_id ) : ?>
-                <div class="cfg__gallery-item <?php echo ( $g_id === $active_gallery_id ) ? 'cfg__gallery-item--active' : ''; ?>" 
-                     id="cfg-gallery-item-<?php echo esc_attr( $g_id ); ?>">
-                    <?php echo do_shortcode( '[foogallery id="' . $g_id . '"]' ); ?>
+                <div class="cfg__display">
+                    <?php foreach ( $all_galleries as $g_id ) : ?>
+                        <div class="cfg__gallery-item <?php echo ( $g_id === $active_gallery_id ) ? 'cfg__gallery-item--active' : ''; ?>" 
+                             id="cfg-gallery-item-<?php echo esc_attr( $g_id ); ?>">
+                            <?php echo do_shortcode( '[foogallery id="' . $g_id . '"]' ); ?>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
-            <?php endforeach; ?>
         </div>
     </div>
     <?php

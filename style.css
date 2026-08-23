@@ -15,8 +15,10 @@ html {
 :root {
     --c-dark: #0D1321;
     --c-dark-lt: #1D2D44;
+    --c-gray: #919191;
     --c-primary: #172336;
     --c-primary-lt: #3E5C76;
+    --c-primary-lt2: #414750;
     --c-secondary: #B58B4C; 
     --c-secondary-lt: #E1D0B7;
     --c-bg: #F0EBD8;
@@ -43,8 +45,8 @@ html {
     --lh-200: 1.2;
     --lh-090: .9;
     
-
     --sides: 2rem;
+    --sides-sm: 1.2rem;
     --section-spacing: 3rem 3rem;
     --title-spacing: 0 3rem;
 
@@ -126,5 +128,8 @@ footer,
     .section__title,
     .page-welcome__title {
         font-size: var(--fs-xl);
+    }
+    .container {
+        padding-inline: var(--sides-sm);
     }
 }

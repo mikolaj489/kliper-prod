@@ -11,8 +11,9 @@
 @import url('./components/news_card.css');
 @import url('./components/news_slider.css');
 @import url('./components/welcome.css');
-@import url('./section-styles/shanties_about.css');
-@import url('./section-styles/shanties_story.css');
+@import url('./components/gallery_button.css');
+
+
 
 @import url('./pages/contact.css');
 @import url('./pages/history.css');
@@ -23,3 +24,5 @@
 @import url('./section-styles/hero.css');
 @import url('./section-styles/news.css');
 @import url('./section-styles/releases.css');
+@import url('./section-styles/shanties_about.css');
+@import url('./section-styles/shanties_story.css');

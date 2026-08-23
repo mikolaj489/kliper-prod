@@ -61,7 +61,7 @@
     opacity: 0;
     overflow: hidden;
     margin-block-start: 0;
-    line-height: 1.6; 
+    line-height: var(--lh-200); 
     font-size: var(--fs-md);
     /* max-width: 75ch; */
     transition: max-height 0.35s ease, opacity 0.25s ease, margin-top 0.25s ease;

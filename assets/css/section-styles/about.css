@@ -58,4 +58,7 @@
     .about__image-container {
            margin-block-start: 0;
     }
+    .about__arrow {
+        display: none;
+    }
 }
