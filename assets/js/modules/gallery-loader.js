@@ -25,7 +25,7 @@ export function createGalleryLoader({ display, loadingElement, errorElement, aja
         gallery.foogallery();
     }
 
-    async function load(galleryId, updateBrowserUrl = true) {
+    async function load(galleryId, galleryTitle = '', updateBrowserUrl = true) {
         galleryId = String(galleryId);
         if (loadedGalleries.has(galleryId)) {
             show(galleryId);
@@ -52,7 +52,13 @@ export function createGalleryLoader({ display, loadingElement, errorElement, aja
             const item = document.createElement('div');
             item.className = 'cfg__gallery-item cfg__gallery-item--active';
             item.id = `cfg-gallery-item-${galleryId}`;
-            item.innerHTML = result.data.html;
+            const title = document.createElement('h2');
+            title.className = 'cfg__gallery-title';
+            title.textContent = galleryTitle;
+            item.append(title);
+            const content = document.createElement('div');
+            content.innerHTML = result.data.html;
+            item.append(content);
             display.appendChild(item);
             loadedGalleries.set(galleryId, item);
             item.classList.add('cfg__gallery-item--active');

@@ -62,10 +62,19 @@ function render_custom_foogallery_system() {
         }
 
         if ( $galleries ) {
+            // Pobieramy pole ACF 'opis_albumu' z edytowanego albumu FooGallery
+            $acf_description = get_field( 'opis_albumu', $album_id );
+
+            // Jeśli pole ACF jest puste, jako fallback bierzemy standardową treść posta
+            if ( empty( $acf_description ) ) {
+                $acf_description = get_post_field( 'post_content', $album_id );
+            }
+
             $nav_structure[] = array(
-                'album_id'  => $album_id,
-                'year'      => esc_html( get_the_title() ),
-                'galleries' => $galleries,
+                'album_id'    => $album_id,
+                'year'        => esc_html( get_the_title() ),
+                'description' => wp_kses_post( apply_filters( 'the_content', $acf_description ) ),
+                'galleries'   => $galleries,
             );
         }
     }
@@ -105,7 +114,7 @@ function render_custom_foogallery_system() {
         <div class="cfg__container container">
             <div class="cfg__albums">
                 <?php foreach ( $nav_structure as $item ) : ?>
-                    <?php $has_expand = count( $item['galleries'] ) > 2; ?>
+                    <?php $has_expand = count( $item['galleries'] ) > 3; ?>
                     <div class="cfg__album-content <?php echo $item['album_id'] === $active_album_id ? 'cfg__album-content--active' : ''; ?> <?php echo $has_expand ? 'cfg__album-content--has-expand' : ''; ?>" id="cfg-album-<?php echo esc_attr( $item['album_id'] ); ?>">
                         <div class="cfg__album-buttons">
                             <?php foreach ( $item['galleries'] as $gallery ) : ?>
@@ -113,9 +122,15 @@ function render_custom_foogallery_system() {
                             <?php endforeach; ?>
                         </div>
                         <?php if ( $has_expand ) : ?>
-                            <button type="button" class="cfg__album-expand" aria-expanded="false" aria-label="Rozwiń listę albumów"><span class="cfg__album-expand-icon" aria-hidden="true">&#9660;</span><span class="cfg__album-count"><?php echo count( $item['galleries'] ); ?></span></button>
+                            <button type="button" class="cfg__album-expand" aria-expanded="false" aria-label="Rozwiń listę albumów"><span class="cfg__album-expand-icon" aria-hidden="true">&#10094;</span><span class="cfg__album-count"><?php echo count( $item['galleries'] ); ?></span></button>
                         <?php endif; ?>
                     </div>
+                    <?php if ( $item['description'] ) : ?>
+                        <div class="cfg__album-description <?php echo $item['album_id'] === $active_album_id ? 'cfg__album-description--active' : ''; ?>" data-album-id="<?php echo esc_attr( $item['album_id'] ); ?>">
+                            <?php echo $item['description']; ?>
+                        </div>
+                    <?php endif; ?>
+                    
                 <?php endforeach; ?>
             </div>
             <div class="cfg__display" aria-live="polite">

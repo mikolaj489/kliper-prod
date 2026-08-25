@@ -28,13 +28,24 @@
 }
 
 .cfg__container {
+    max-height: 0;
+    overflow: hidden;
     padding-block-start: 1rem;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: max-height 0.45s ease, opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
+}
+
+.cfg--year-selected .cfg__container {
+    max-height: 100000px;
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .cfg__albums {
-    min-width: 100px;
-    max-width: 500px;
-    margin: 0 auto;
+    padding-block-end: 2rem;
 }
 
 .cfg__album-content {
@@ -43,6 +54,7 @@
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.3s ease, visibility 0.3s ease;
+    margin-inline: 35px;
 }
 
 .cfg__album-content--active {
@@ -54,39 +66,109 @@
 
 .cfg__album-content--has-expand {
     position: relative;
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0;
+        width: 100%; height: 50px;
+        background: linear-gradient(to top, var(--c-bg), transparent);
+        display: block;
+        transition: opacity 0.3s ease;
+    }
+    &.cfg__album-content--expanded::after {
+        opacity: 0;
+        visibility: hidden;
+    }
 }
-
 .cfg__album-buttons {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    min-width: 100px;
+    max-width: 550px;
+    margin: 0 auto;
 }
 
-.cfg__album-content--has-expand .cfg__gallery-btn:nth-child(n + 3) {
+.cfg__album-description {
+    margin-block-start: 1.5rem;
+    color: var(--c-text-muted);
+    font-family: var(--font-secondary);
+    text-align: center;
+    font-size: var(--fs-md);
+}
+.cfg__album-description {
     display: none;
 }
 
-.cfg__album-content--expanded .cfg__gallery-btn:nth-child(n + 3) {
-    display: inline-block;
+.cfg__album-description--active {
+    display: block;
+}
+.cfg__album-buttons .cfg__gallery-btn {
+    margin-bottom: 10px;
+    max-height: 80px;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: 
+        max-height .2s ease, 
+        opacity 0.3s ease, 
+        transform .2s ease, 
+        margin-bottom .2s ease,
+        padding-block .2s ease,
+        border-width .2s ease,
+        visibility 0.3s ease;
+}
+.cfg__album-buttons .cfg__gallery-btn:last-child {
+    margin-bottom: 0;
+}
+.cfg__album-content--has-expand .cfg__gallery-btn:nth-child(n + 4) {
+    max-height: 0 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-8px);
+    margin-bottom: 0 !important;
+    padding-block: 0 !important;
+    border-top-width: 0 !important;
+    border-bottom-width: 0 !important;
+    overflow: hidden;
+    pointer-events: none;
+}
+.cfg__album-content--has-expand:not(.cfg__album-content--expanded) .cfg__gallery-btn:nth-child(3) {
+    margin-bottom: 0;
+}
+.cfg__album-content--expanded .cfg__gallery-btn:nth-child(n + 4) {
+    max-height: 80px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0);
+    padding-block: 5px !important;
+    border-top-width: 2px !important;
+    border-bottom-width: 2px !important;
+    margin-bottom: 10px !important;
+    pointer-events: auto;
+}
+
+/* Ostatni rozwijany przycisk bez marginesu na dole */
+.cfg__album-content--expanded .cfg__gallery-btn:last-child {
+    margin-bottom: 0 !important;
 }
 
 .cfg__album-expand {
+    --album-expand-width: 40px;
     position: absolute;
-    top: 0;
-    right: var(--sides-sm);
+    bottom: 0;
+    width: var(--album-expand-width);
+    right: calc((var(--album-expand-width) * -1 - 5px));
+    height: 70px;
     z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 76px;
-    min-height: 68px;
     border: 2px solid var(--c-gray);
     border-radius: var(--radius-lg);
     background: var(--c-primary-lt2);
     color: var(--c-bg-lt);
     cursor: pointer;
-    font-family: var(--font-secondary);
     font-size: var(--fs-base);
     font-weight: bold;
     transition: background-color 0.2s ease, color 0.2s ease;
@@ -101,10 +183,11 @@
     font-size: 1.5rem;
     line-height: 1;
     transition: transform 0.35s ease;
+    transform: rotate(-90deg);
 }
 
 .cfg__album-content--expanded .cfg__album-expand-icon {
-    transform: rotate(180deg);
+    transform: rotate(90deg);
 }
 
 .cfg__gallery-item {
@@ -120,6 +203,14 @@
     overflow: visible;
     visibility: visible;
     opacity: 1;
+}
+
+.cfg__gallery-title {
+    margin-block: 0 1.5rem;
+    font-family: var(--font-secondary);
+    font-size: var(--fs-xl);
+    color: var(--c-text-muted);
+    text-align: center;
 }
 
 .cfg__gallery-btn {
