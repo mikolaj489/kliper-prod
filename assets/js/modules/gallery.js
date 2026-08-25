@@ -1,61 +1,48 @@
+import { initAlbumControls } from './gallery-albums.js';
+import { createGalleryLoader } from './gallery-loader.js';
+import { initGalleryYears } from './galllery_nav.js';
+
 export function initGallery() {
     const wrapper = document.querySelector('.cfg');
     if (!wrapper) return;
 
-    const yearBtns = wrapper.querySelectorAll('.cfg__year-btn');
-    const albumContents = wrapper.querySelectorAll('.cfg__album-content');
+    const display = wrapper.querySelector('.cfg__display');
+    const loadingElement = wrapper.querySelector('.cfg__gallery-loading');
+    const errorElement = wrapper.querySelector('.cfg__gallery-error');
     const galleryBtns = wrapper.querySelectorAll('.cfg__gallery-btn');
-    const galleryItems = wrapper.querySelectorAll('.cfg__gallery-item');
+    const albumContents = wrapper.querySelectorAll('.cfg__album-content');
 
-    // 1. Kliknięcie w ROK
-    yearBtns.forEach(btn => {
-        btn.addEventListener('click', function () {
-            const isAlreadyActive = this.classList.contains('cfg__year-btn--active');
-            const targetId = this.getAttribute('data-target');
-
-            // Reset stanu
-            yearBtns.forEach(b => b.classList.remove('cfg__year-btn--active'));
-            albumContents.forEach(c => c.classList.remove('cfg__album-content--active'));
-            galleryItems.forEach(item => item.classList.remove('cfg__gallery-item--active'));
-            galleryBtns.forEach(b => b.classList.remove('cfg__gallery-btn--active'));
-
-            if (!isAlreadyActive) {
-                this.classList.add('cfg__year-btn--active');
-                const targetAlbum = wrapper.querySelector('#' + targetId);
-                if (targetAlbum) {
-                    targetAlbum.classList.add('cfg__album-content--active');
-                }
-            }
-        });
+    const loader = createGalleryLoader({
+        display,
+        loadingElement,
+        errorElement,
+        galleryBtns,
+        ajaxUrl: wrapper.dataset.ajaxUrl,
+        nonce: wrapper.dataset.nonce,
     });
 
-    // 2. Kliknięcie w ALBUM
-    galleryBtns.forEach(btn => {
-        btn.addEventListener('click', function () {
-            const galleryId = this.getAttribute('data-gallery-id');
-
-            const parentAlbum = this.closest('.cfg__album-content');
-            if (parentAlbum) {
-                parentAlbum.querySelectorAll('.cfg__gallery-btn').forEach(b => b.classList.remove('cfg__gallery-btn--active'));
-            }
-            this.classList.add('cfg__gallery-btn--active');
-
-            galleryItems.forEach(item => {
-                if (item.id === 'cfg-gallery-item-' + galleryId) {
-                    item.classList.add('cfg__gallery-item--active');
-                } else {
-                    item.classList.remove('cfg__gallery-item--active');
-                }
-            });
-
-            if (history.pushState) {
-                const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?g_id=' + galleryId;
-                window.history.pushState({ path: newUrl }, '', newUrl);
-            }
-        });
+    initAlbumControls({
+        wrapper,
+        albumContents,
+        galleryBtns,
+        loadGallery: loader.load,
+        hideGalleries: loader.hideAll,
     });
+
+    initGalleryYears({
+        yearsWrapper: wrapper.querySelector('.cfg__years-wrapper'),
+        yearsContainer: wrapper.querySelector('.cfg__years'),
+        yearBtns: wrapper.querySelectorAll('.cfg__year-btn'),
+        prevBtn: wrapper.querySelector('.cfg__scroll-btn--prev'),
+        nextBtn: wrapper.querySelector('.cfg__scroll-btn--next'),
+    });
+
+    const initialGallery = wrapper.dataset.initialGallery;
+    if (initialGallery) {
+        const button = wrapper.querySelector(`[data-gallery-id="${CSS.escape(initialGallery)}"]`);
+        button?.classList.add('cfg__gallery-btn--active');
+        loader.load(initialGallery, false);
+    }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    initGallery();
-});
+document.addEventListener('DOMContentLoaded', initGallery);
