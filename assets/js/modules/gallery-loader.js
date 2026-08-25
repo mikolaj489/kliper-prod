@@ -56,9 +56,21 @@ export function createGalleryLoader({ display, loadingElement, errorElement, aja
             title.className = 'cfg__gallery-title';
             title.textContent = galleryTitle;
             item.append(title);
+            if (result.data.description) {
+                const description = document.createElement('div');
+                description.className = 'cfg__gallery-description';
+                description.innerHTML = result.data.description;
+                item.append(description);
+            }
             const content = document.createElement('div');
             content.innerHTML = result.data.html;
             item.append(content);
+            if (result.data.author) {
+                const author = document.createElement('p');
+                author.className = 'cfg__gallery-author';
+                author.textContent = result.data.author;
+                item.append(author);
+            }
             display.appendChild(item);
             loadedGalleries.set(galleryId, item);
             item.classList.add('cfg__gallery-item--active');

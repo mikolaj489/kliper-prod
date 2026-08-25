@@ -12,9 +12,7 @@ get_header();
         </div>
         <?php endif; ?>
     </div>
-
     <?php echo render_custom_foogallery_system(); ?>
-
     <?php get_template_part('template-parts/components/go_top'); ?>
 </main>
 

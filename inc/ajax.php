@@ -23,7 +23,21 @@ function cfg_load_gallery_ajax() {
         wp_send_json_error( array( 'message' => 'Galeria zwróciła pustą zawartość.' ), 500 );
     }
 
-    wp_send_json_success( array( 'gallery_id' => $gallery_id, 'html' => $html ) );
+    $description = get_field( 'opis_galerii', $gallery_id );
+    if ( empty( $description ) ) {
+        $description = get_post_field( 'post_content', $gallery_id );
+    }
+
+    $author = get_field( 'autor_zdjec', $gallery_id );
+
+    wp_send_json_success(
+        array(
+            'gallery_id'  => $gallery_id,
+            'description' => $description ? wp_kses_post( apply_filters( 'the_content', $description ) ) : '',
+            'author'      => $author ? sanitize_textarea_field( $author ) : '',
+            'html'        => $html,
+        )
+    );
 }
 
 add_action( 'wp_ajax_cfg_load_gallery', 'cfg_load_gallery_ajax' );

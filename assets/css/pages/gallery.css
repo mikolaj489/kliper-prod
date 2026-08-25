@@ -46,6 +46,8 @@
 
 .cfg__albums {
     padding-block-end: 2rem;
+    max-width: 738px;
+    margin: 0 auto;
 }
 
 .cfg__album-content {
@@ -55,6 +57,7 @@
     opacity: 0;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     margin-inline: 35px;
+    max-width: 800px;
 }
 
 .cfg__album-content--active {
@@ -89,16 +92,12 @@
 }
 
 .cfg__album-description {
-    margin-block-start: 1.5rem;
+    padding-block-start: 1.5rem;
     color: var(--c-text-muted);
-    font-family: var(--font-secondary);
     text-align: center;
     font-size: var(--fs-md);
-}
-.cfg__album-description {
     display: none;
 }
-
 .cfg__album-description--active {
     display: block;
 }
@@ -211,6 +210,21 @@
     font-size: var(--fs-xl);
     color: var(--c-text-muted);
     text-align: center;
+}
+
+.cfg__gallery-description {
+    margin-block: 0 1.5rem;
+    color: var(--c-text-primary);
+    font-size: var(--fs-md);
+    text-align: center;
+}
+
+.cfg__gallery-author {
+    margin-block: 3rem 0;
+    color: var(--c-text-muted-lt-3);
+    text-align: center;
+    font-weight: bold;
+    white-space: pre-line;
 }
 
 .cfg__gallery-btn {
