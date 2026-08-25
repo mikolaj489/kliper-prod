@@ -33,6 +33,7 @@ export function createGalleryLoader({ display, loadingElement, errorElement, aja
             return;
         }
         if (loadingGalleryId === galleryId) return;
+        hideAll();
         loadingGalleryId = galleryId;
         loadingElement.hidden = false;
         errorElement.hidden = true;
@@ -54,7 +55,6 @@ export function createGalleryLoader({ display, loadingElement, errorElement, aja
             item.innerHTML = result.data.html;
             display.appendChild(item);
             loadedGalleries.set(galleryId, item);
-            hideAll();
             item.classList.add('cfg__gallery-item--active');
             initializeFooGallery(item);
             if (updateBrowserUrl) updateUrl(galleryId);

@@ -1,6 +1,8 @@
 .cfg {
     width: 100%;
     min-width: 200px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .cfg__years-wrapper {
@@ -30,7 +32,9 @@
 }
 
 .cfg__albums {
-    margin-block-end: 2rem;
+    min-width: 100px;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .cfg__album-content {
@@ -55,7 +59,6 @@
 .cfg__album-buttons {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 10px;
 }
 
@@ -122,8 +125,6 @@
 .cfg__gallery-btn {
     display: inline-block;
     width: 100%;
-    min-width: 100px;
-    max-width: 500px;
     overflow: hidden;
     letter-spacing: normal;
     white-space: nowrap;
@@ -133,4 +134,46 @@
 .cfg__gallery-loading[hidden],
 .cfg__gallery-error[hidden] {
     display: none;
+}
+
+.cfg__gallery-loading {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(48px, 86px));
+    justify-content: center;
+    gap: 12px;
+    padding-block: 2rem;
+}
+
+.cfg__gallery-loading span {
+    aspect-ratio: 1;
+    border-radius: var(--radius-sm);
+    background-color: var(--c-text-muted);
+    animation: cfg-gallery-pulse 1s infinite ease-in-out;
+}
+
+.cfg__gallery-loading span:nth-child(2) {
+    animation-delay: 0.12s;
+}
+
+.cfg__gallery-loading span:nth-child(3) {
+    animation-delay: 0.24s;
+}
+
+.cfg__gallery-loading span:nth-child(4) {
+    animation-delay: 0.36s;
+}
+
+@keyframes cfg-gallery-pulse {
+    0%, 100% {
+        opacity: 0.9;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+@media (max-width: 500px) {
+    .cfg__gallery-loading {
+        grid-template-columns: repeat(2, minmax(56px, 86px));
+    }
 }

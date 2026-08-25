@@ -77,7 +77,7 @@ function render_custom_foogallery_system() {
     }
 
     $active_gallery_id = in_array( $requested_gallery_id, $all_galleries, true ) ? $requested_gallery_id : 0;
-    $active_album_id = $nav_structure[0]['album_id'];
+    $active_album_id = 0;
 
     if ( $active_gallery_id ) {
         foreach ( $nav_structure as $item ) {
@@ -92,7 +92,7 @@ function render_custom_foogallery_system() {
 
     ob_start();
     ?>
-    <div class="cfg" data-ajax-url="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'cfg_load_gallery' ) ); ?>" data-initial-gallery="<?php echo esc_attr( $active_gallery_id ); ?>">
+    <div class="cfg" data-ajax-url="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'cfg_load_gallery' ) ); ?>" data-initial-gallery="<?php echo $active_gallery_id ? esc_attr( $active_gallery_id ) : ''; ?>">
         <div class="cfg__years-wrapper">
             <button type="button" class="cfg__scroll-btn cfg__scroll-btn--prev" aria-label="Przewiń w lewo">&#10094;</button>
             <div class="cfg__years">
@@ -119,7 +119,9 @@ function render_custom_foogallery_system() {
                 <?php endforeach; ?>
             </div>
             <div class="cfg__display" aria-live="polite">
-                <p class="cfg__gallery-loading" hidden>Ładowanie galerii...</p>
+                <div class="cfg__gallery-loading" role="status" aria-label="Ładowanie galerii" hidden>
+                    <span></span><span></span><span></span><span></span>
+                </div>
                 <p class="cfg__gallery-error" hidden></p>
             </div>
         </div>
