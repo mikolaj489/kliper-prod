@@ -1,7 +1,7 @@
 .cfg {
     width: 100%;
     min-width: 200px;
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
 }
 
@@ -267,7 +267,6 @@
 .cfg__gallery-loading span:nth-child(4) {
     animation-delay: 0.36s;
 }
-
 @keyframes cfg-gallery-pulse {
     0%, 100% {
         opacity: 0.9;

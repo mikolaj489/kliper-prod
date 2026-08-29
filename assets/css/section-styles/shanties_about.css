@@ -62,4 +62,7 @@
     .shanties-about__icon--second {
         top: calc( var(--icon-position-y) - 10px)
     }
+    .shanties-about__icon {
+        right: calc(var(--icon-position-y) + 63px);
+    }
 }
