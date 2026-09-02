@@ -1,5 +1,6 @@
 .cfg {
     width: 100%;
+    position: relative;
 }
 
 .cfg__years-wrapper {
@@ -17,7 +18,7 @@
     scroll-behavior: smooth;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding-inline: var(--sides);
+    padding-block: 0;
 }
 
 .cfg__years::-webkit-scrollbar {
@@ -276,8 +277,5 @@
 @media (max-width: 500px) {
     .cfg__gallery-loading {
         grid-template-columns: repeat(2, minmax(56px, 86px));
-    }
-    .cfg__years {
-        padding-inline: var(--sides-sm);
     }
 }

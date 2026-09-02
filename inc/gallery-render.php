@@ -102,9 +102,22 @@ function render_custom_foogallery_system() {
     ob_start();
     ?>
     <div class="cfg" data-ajax-url="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'cfg_load_gallery' ) ); ?>" data-initial-gallery="<?php echo $active_gallery_id ? esc_attr( $active_gallery_id ) : ''; ?>">
+        <div class="arrow-line container">
+          <svg class="arrow-line__static-left" viewBox="0 0 419 53">
+            <path d="M316.5 51.8639L316.5 52.8639L316.588 52.8639L316.674 52.8487L316.5 51.8639ZM419 7.36395L419 8.36395L419 7.36395ZM158.25 51.8639L158.25 52.8639V52.8639L158.25 51.8639ZM316.5 51.8639L316.674 52.8487C328.765 50.7119 336.696 46.8152 342.933 42.1497C349.103 37.5349 353.663 32.1073 358.796 27.1684C363.967 22.1935 369.891 17.5152 379.047 14.0656C388.222 10.6088 400.702 8.36395 419 8.36395L419 7.36395L419 6.36395C400.548 6.36395 387.812 8.62621 378.342 12.194C368.854 15.7689 362.705 20.6324 357.41 25.7272C352.077 30.8579 347.779 36.0276 341.735 40.5481C335.76 45.0179 328.122 48.7944 316.326 50.8792L316.5 51.8639ZM6.73196e-09 51.8639L-3.02229e-08 52.8639L158.25 52.8639L158.25 51.8639L158.25 50.8639L4.37159e-08 50.8639L6.73196e-09 51.8639ZM158.25 51.8639L158.25 52.8639L316.5 52.8639L316.5 51.8639L316.5 50.8639L158.25 50.8639L158.25 51.8639Z" fill="#B58B4C"/>
+          </svg>
+    
+          <svg class="arrow-line__flexible-segment" viewBox="0 0 100 2" preserveAspectRatio="none">
+            <rect width="100" height="2" fill="#B58B4C" />
+          </svg>
+        
+          <svg class="arrow-line__static-arrow" viewBox="1310 0 10 15">
+            <path d="M1319.71 8.07106C1320.1 7.68053 1320.1 7.04737 1319.71 6.65685L1313.34 0.292883C1312.95 -0.0976408 1312.32 -0.0976409 1311.93 0.292883C1311.54 0.683408 1311.54 1.31657 1311.93 1.7071L1317.59 7.36395L1311.93 13.0208C1311.54 13.4113 1311.54 14.0445 1311.93 14.435C1312.32 14.8255 1312.95 14.8255 1313.34 14.435L1319.71 8.07106Z" fill="#B58B4C"/>
+          </svg>
+        </div>
         <div class="cfg__years-wrapper">
             <button type="button" class="cfg__scroll-btn cfg__scroll-btn--prev" aria-label="Przewiń w lewo">&#10094;</button>
-            <div class="cfg__years">
+            <div class="cfg__years container">
                 <?php foreach ( $nav_structure as $item ) : ?>
                     <button type="button" class="cfg__year-btn gallery-button <?php echo $item['album_id'] === $active_album_id ? 'cfg__year-btn--active' : ''; ?>" data-target="cfg-album-<?php echo esc_attr( $item['album_id'] ); ?>"><?php echo $item['year']; ?></button>
                 <?php endforeach; ?>
