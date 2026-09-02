@@ -4,13 +4,29 @@
 }
 
 .cfg__years-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin-block: 1rem;
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-block: 1rem;
+        &::after,
+        &::before {
+            content: "";
+            width: 50px;
+            height: 40px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+.cfg__years-wrapper::after {
+    right: -12px;
+    background: linear-gradient(to left, var(--c-bg) 60%, transparent);
 }
-
+.cfg__years-wrapper::before {
+    left: -12px;
+    background: linear-gradient(to right, var(--c-bg) 60%, transparent);
+}
 .cfg__years {
     display: flex;
     gap: 10px;

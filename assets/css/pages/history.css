@@ -12,7 +12,7 @@
         background-size: 100% 100%;
         pointer-events: none;
         clip-path: inset(0 100% 0 0);
-        animation: writeUnderline 1s cubic-bezier(.8,.05,.8,.1) forwards;
+        animation: writeUnderline .5s cubic-bezier(.5,.05,.5,.1) forwards;
     }
 }
 

@@ -35,14 +35,13 @@
     transition: transform 0.2s ease, background-color 0.2s ease;
     align-items: center;
     justify-content: center;
-    opacity: .9;
     &:hover {
         transform: scale(1.1);
     }
     &:active {
         transform: scale(0.95);
     }
-}
+} 
 .cfg__scroll-btn--prev {
     margin-inline-start: .5rem;
     left: 0;
