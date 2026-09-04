@@ -5,9 +5,9 @@
 .plot__wrapper {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(2, minmax(300px, 520px));
+    grid-template-columns: repeat(2, minmax(300px, 600px));
     grid-template-rows: repeat(9, auto);
-    gap: 50px 100px;
+    gap: 10px 100px;
     margin-block-start: 5rem;
     &::after {
         content: '';
@@ -42,18 +42,7 @@
 .plot__box:nth-of-type(8) { grid-column: 2; grid-row: 8; }
 .plot__box:nth-of-type(9) { grid-column: 1; grid-row: 9; }
 
-
-.plot__box {
-    width: 100%;
-    height: fit-content;
-    transition: border-color 0.3s ease;
-    border: 3px solid transparent;
-}
-.plot__box.is-active {
-  border-color: var(--c-secondary);
-}
-
-@media (max-width: 770px) {
+@media (max-width: 850px) {
     .plot__wrapper {
         grid-template-columns: 1fr;
         gap: 50px 0;

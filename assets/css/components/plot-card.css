@@ -1,0 +1,34 @@
+.plot__box {
+    width: 100%;
+    height: fit-content;
+    transition: border-color 0.3s ease;
+    border: 3px solid transparent;
+    box-shadow: inset 0px 4px 4.5px 0px rgba(181, 139, 76, 0.72);
+    background-color: var(--c-bg-lt);
+    padding: 35px;
+    border-radius: var(--radius-sm);
+}
+.plot__box.is-active {
+  border-color: var(--c-secondary);
+}
+.plot__title {
+    text-align: center;
+    font-weight: bold;
+    margin-block-end: 12px;
+    color: var(--c-text-muted);
+    font-size: var(--fs-mdl);
+    line-height: var(--lh-200)
+}
+.plot__content {
+    color: var(--c-text-muted);
+    text-align: justify;
+    font-size: var(--fs-md);
+}
+@media (max-width: 850px) {
+    .plot__box {
+        padding: 20px;
+    }
+    .plot__content {
+        text-align: left;
+    }
+}
