@@ -1,0 +1,22 @@
+.subtext__underline {
+    position: relative;
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 0;
+        width: 100%;
+        height: 15px;
+        background-image: url('../../assets/images/icons/underline.svg');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        pointer-events: none;
+        clip-path: inset(0 100% 0 0);
+        animation: writeUnderline .5s cubic-bezier(.5,.05,.5,.1) forwards;
+    }
+}
+
+@keyframes writeUnderline {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0 0 0 0); }
+}

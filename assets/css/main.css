@@ -14,8 +14,7 @@
 @import url('./components/gallery_button.css');
 @import url('./components/foogallery-overwrite.css');
 @import url('./components/gallery-intro.css');
-
-
+@import url('./components/underline.css');
 
 @import url('./pages/contact.css');
 @import url('./pages/history.css');
