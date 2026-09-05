@@ -11,4 +11,5 @@ import './modules/releases.js';
 import './modules/go_top.js';
 import './modules/grow_line.js';
 import './modules/gallery.js';
-import './modules/plot.js';
+import './modules/plot-slider.js';
+import './modules/plot-animation.js';
