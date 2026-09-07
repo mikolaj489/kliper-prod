@@ -30,11 +30,12 @@
                         if ( $content ) {
                             echo '<div class="plot__content">' . wp_kses_post( $content ) . '</div>';
                         }
-                        if ( 1 === $plot_box_index ) {
-                            $plot_icon_path = get_template_directory() . '/assets/images/plot-icons/plot-icon1.svg';
+                        if ( $plot_box_index >= 1 && $plot_box_index <= 8 ) {
+                            $plot_icon_path = get_template_directory() . "/assets/images/plot-icons/plot-icon{$plot_box_index}.svg";
+    
                             if ( file_exists( $plot_icon_path ) ) {
-                                echo '<span class="plot__icon" aria-hidden="true">' . file_get_contents( $plot_icon_path ) . '</span>';
-                            }
+                                    echo '<span class="plot__icon" aria-hidden="true">' . file_get_contents( $plot_icon_path ) . '</span>';
+                                }
                         }
                         echo '</div>';
                     }
