@@ -4,12 +4,18 @@ function my_theme_enqueue_assets() {
 
     $css_path = get_template_directory() . '/dist/css/main.min.css';
     $js_path  = get_template_directory() . '/dist/js/main.min.js';
+    wp_enqueue_style(
+        'kliper-style',
+        get_stylesheet_uri(),
+        array(),
+        wp_get_theme()->get('Version')
+    );
 
     wp_enqueue_style(
         'my-theme-styles',
         get_template_directory_uri() . '/dist/css/main.min.css',
-        array(),
-        file_exists($js_path) ? filemtime($js_path) : '1.0.0',
+        array( 'kliper-style' ), // ładuje się po kliper-style
+        file_exists($css_path) ? filemtime($css_path) : '1.0.0'
     );
 
     wp_enqueue_script(
