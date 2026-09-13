@@ -20,7 +20,11 @@
                         $plot_icon_path = get_template_directory() . "/assets/images/plot-icons/plot-icon{$plot_box_index}.svg";
 
                         if ( file_exists( $plot_icon_path ) ) {
-                                echo '<span class="plot__icon" aria-hidden="true">' . file_get_contents( $plot_icon_path ) . '</span>';
+                                if ( $plot_box_index === 1 ) {
+                                    echo '<span class="plot__icon plot__icon--first" aria-hidden="true">' . file_get_contents( $plot_icon_path ) . '</span>';
+                                } else {
+                                    echo '<span class="plot__icon" aria-hidden="true">' . file_get_contents( $plot_icon_path ) . '</span>';
+                                }
                             }
                     }
                     echo '</div>';
