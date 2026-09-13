@@ -1,6 +1,6 @@
 import { initAlbumControls } from './gallery-albums.js';
 import { createGalleryLoader } from './gallery-loader.js';
-import { initGalleryYears } from './galllery_nav.js';
+import { initGalleryYears } from './gallery_nav.js';
 
 export function initGallery() {
     const wrapper = document.querySelector('.cfg');

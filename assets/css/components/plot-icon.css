@@ -24,3 +24,14 @@
 @keyframes plot-icon-draw {
     to { stroke-dashoffset: 0; }
 }
+@media (max-width: 850px) {
+    .plot__icon {
+        right: calc(100% - 200px);
+        width: 180px;
+        height: 150px;
+    }
+    .plot__icon svg {
+        width: 100%;
+        height: 100%;
+    }
+}

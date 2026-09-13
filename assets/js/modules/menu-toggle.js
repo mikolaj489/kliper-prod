@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+export function initMenuToggle() {
     const menu = document.querySelector('.menu');
     const menuButton = document.querySelector('.hamburger-toggle');
     const menuButtonImg = document.querySelector('.hamburger-toggle-img');
@@ -12,4 +12,4 @@ document.addEventListener('DOMContentLoaded', () => {
             menuButtonImg.src = isOpen ? closeSrc : hamburgerSrc;
         });
     }
-});
+}

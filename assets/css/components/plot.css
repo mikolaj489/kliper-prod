@@ -56,11 +56,6 @@
     .plot__trigger {
         left: 100%;
     }
-    .plot__icon {
-        right: calc(100% + 10px);
-        width: 180px;
-        height: 150px;
-    }
     .plot__box:nth-of-type(1),
     .plot__box:nth-of-type(2),
     .plot__box:nth-of-type(3),

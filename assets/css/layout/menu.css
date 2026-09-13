@@ -1,11 +1,17 @@
 .main-nav {
     width: 100%;
     position: fixed;
+    transition: transform .8s ease;
+    transform: translateY(0);
     z-index: 99;
     height: auto;
     display: flex;
     justify-content: center;
     margin-block-start: var(--nav-spacing-top);
+}
+
+.main-nav.nav--hidden {
+  transform: translateY(-20vh);
 }
 .menu__wrapper {
     display: inline-block;
