@@ -1,0 +1,11 @@
+.section__title--anniversary {
+    margin-block: 0 1rem !important;
+}
+.anniversary__date {
+    text-align: center;
+    color: var(--c-text-muted);
+    font-family: var(--font-secondary);
+    font-size: var(--fs-mdl);
+    font-style: italic;
+    letter-spacing: .02em;
+}

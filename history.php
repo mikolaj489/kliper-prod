@@ -13,6 +13,7 @@
         <?php endif; ?>
     </div>
     <?php get_template_part('template-parts/section-templates/plot'); ?>
+    <?php get_template_part('template-parts/section-templates/anniversary'); ?>
     <?php get_template_part('template-parts/components/go_top'); ?>
 </main>
 
