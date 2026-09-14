@@ -1,0 +1,49 @@
+:root {
+    --c-dark: #0D1321;
+    --c-dark-lt: #1D2D44;
+    --c-gray: #919191;
+    --c-primary: #172336;
+    --c-primary-lt: #3E5C76;
+    --c-primary-lt2: #414750;
+    --c-secondary: #B58B4C; 
+    --c-secondary-lt: #E1D0B7;
+    --c-bg: #F0EBD8;
+    --c-bg-lt: #F2F2F2;
+    --c-text-primary: #0D0D0D;
+    --c-text-secondary: #F2F2F2;
+    --c-text-muted: #4D4D4D;
+    --c-text-muted-lt: #B3B3B3;
+    --c-text-muted-lt-2: #BFBFBF;
+    --c-text-muted-lt-3: #8b8b8b;
+    
+    --fs-sm: 0.875rem;
+    --fs-base: 1rem;
+    --fs-md: 1.2rem;
+    --fs-mdl: 1.4rem;
+    --fs-lg: 2rem;
+    --fs-xlg: 2.5rem;
+    --fs-xl: 3rem;
+    --fs-xxl: 4rem;
+    --radius-sm: 12px;
+    --radius-lg: 36px;
+    --font-primary: 'Bricolage Grotesque', sans-serif;
+    --font-secondary: 'Brygada 1918', serif;
+
+    --lh-200: 1.2;
+    --lh-090: .9;
+    
+    --sides: 2rem;
+    --sides-sm: 1.2rem;
+    --section-spacing: 3rem 3rem;
+    --title-spacing: 0 3rem;
+
+    --blob-radius: 200px;
+    --blob-shadow: 3px 2px 10.1px 3px rgba(0,0,0,0.24);
+    --blob-rotation: 32deg;
+    --blob-translate: translate(-20%, -50%);
+    --slogan-transition-fade: .15s ease;
+
+    --sand-effect-height: 15rem;
+    --nav-height: 65px;
+    --nav-spacing-top: 2rem;
+}

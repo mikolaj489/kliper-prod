@@ -1,2 +1,6 @@
+/* PLOT */
 @import url('../section-styles/plot.css');
+@import url('../components/plot-card.css');
+@import url('../components/plot-icon.css');
+/* ANNIVERSARY */
 @import url('../section-styles/anniversary.css');

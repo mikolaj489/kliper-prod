@@ -1,3 +1,7 @@
+@import url('../components/gallery_button.css');
+@import url('../components/foogallery-overwrite.css');
+@import url('../components/gallery-intro.css');
+
 .cfg {
     width: 100%;
     position: relative;
