@@ -9,10 +9,6 @@
     justify-content: center;
     margin-block-start: var(--nav-spacing-top);
 }
-
-.main-nav.nav--hidden {
-  transform: translateY(-20vh);
-}
 .menu__wrapper {
     display: inline-block;
     height: 100%;

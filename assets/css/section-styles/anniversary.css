@@ -1,6 +1,11 @@
 .section__title--anniversary {
     margin-block: 0 1rem !important;
 }
+.anniversary__wrapper {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
 .anniversary__date {
     text-align: center;
     color: var(--c-text-muted);
@@ -8,4 +13,43 @@
     font-size: var(--fs-mdl);
     font-style: italic;
     letter-spacing: .02em;
+}
+
+.anniversary__title-wrapper {
+
+}
+
+.anniversary__title {
+    text-align: center;
+    letter-spacing: .02em;
+    font-size: 60px;
+    line-height: 1.25;
+}
+
+.anniversary__content {
+    background-color: var(--c-bg-lt);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    color: var(--c-text-muted);
+    box-shadow: 2px 4px 9.2px rgba(0, 0, 0, 0.25);
+}
+.anniversary__sub-title {
+    text-align: center;
+    font-size: var(--fs-md);
+    letter-spacing: .02em;
+    margin-block: 0 1rem;
+}
+
+.anniversary__text p{
+    margin-block-end: 1rem;
+    letter-spacing: .01em;
+}
+.anniversary__excerpt {
+    font-family: var(--font-secondary);
+    font-style: italic;
+    text-align: center;
+    margin-block-end: 1rem;
+}
+.anniversary__author {
+    text-align: right;
 }

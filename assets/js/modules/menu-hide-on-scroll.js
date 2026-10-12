@@ -1,5 +1,5 @@
 export function initNavHideOnScroll() {
-    const nav = document.querySelector('.main-nav'); // podmień na swój selektor navbara
+    const nav = document.querySelector('.main-nav');
     let lastScrollY = window.scrollY;
     let ticking = false;
     
@@ -7,11 +7,14 @@ export function initNavHideOnScroll() {
       const currentScrollY = window.scrollY;
     
       if (currentScrollY > lastScrollY && currentScrollY > 200) {
-        // scroll w dół -> chowamy
-        nav.classList.add('nav--hidden');
+        let styles = window.getComputedStyle(nav);
+        let baseHeight = nav.offsetHeight;
+        let marginTop = parseFloat(styles.marginTop) || 0;
+        let marginBottom = parseFloat(styles.marginBottom) || 0;
+        let totalHeight = baseHeight + marginTop + marginBottom;
+        nav.style.transform = `translateY(-${totalHeight + 20}px)`;
       } else {
-        // scroll w górę -> pokazujemy
-        nav.classList.remove('nav--hidden');
+        nav.style.transform = 'translateY(0)';
       }
     
       lastScrollY = currentScrollY;
