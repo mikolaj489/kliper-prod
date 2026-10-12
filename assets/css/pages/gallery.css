@@ -238,7 +238,7 @@
 }
 
 .cfg__gallery-author {
-    margin-block: 3rem 0;
+    margin-block: 1rem 0;
     color: var(--c-text-muted-lt-3);
     text-align: center;
     font-weight: bold;

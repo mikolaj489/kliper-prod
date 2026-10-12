@@ -83,3 +83,16 @@
 .anniversary__author {
     text-align: right;
 }
+.section__divider {
+    display: flex;
+    align-items: center;
+    color: var(--c-secondary);
+    padding: 1.5rem 1rem;
+    &::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background-color: var(--c-secondary);
+      margin-block-start: .6rem;
+      }
+}

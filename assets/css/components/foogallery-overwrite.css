@@ -1,4 +1,14 @@
-/* Reset i box-sizing */
+/* Całkowite ukrycie domyślnych spinnerów i loaderów wewnątrz elementów FooGallery */
+.foogallery .fg-loader,
+.foogallery .fg-loading,
+.foogallery [class*="loader"] {
+    display: none !important;
+}
+
+/* Zapewnienie, że kontener nie generuje osobnych punktów ładowania dla każdego kafelka z osobna */
+.foogallery .fg-item.fg-loading {
+    opacity: 0.5 !important;
+}
 .foogallery,
 .foogallery .fg-item,
 .foogallery .fg-item-inner,
@@ -12,7 +22,7 @@
 .foogallery,
 .foogallery.fg-default {
     display: block !important;
-    columns: 3 280px !important; /* 3 kolumny na komputerze, automatyczna szerokość */
+    columns: 4 280px !important; /* 3 kolumny na komputerze, automatyczna szerokość */
     column-gap: 20px !important;   /* Odstęp między kolumnami */
     width: 100% !important;
 }
