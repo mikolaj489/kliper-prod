@@ -1,3 +1,4 @@
+/* Reset i box-sizing */
 .foogallery,
 .foogallery .fg-item,
 .foogallery .fg-item-inner,
@@ -6,17 +7,32 @@
 .foogallery .fg-caption-inner {
     box-sizing: border-box !important;
 }
-.foogallery .fg-item {
-    display: flex !important;
-    align-items: stretch !important;
-    justify-content: flex-start !important;
+
+/* Prawdziwy efekt płynięcia (Masonry) za pomocą kolumn CSS */
+.foogallery,
+.foogallery.fg-default {
+    display: block !important;
+    columns: 3 280px !important; /* 3 kolumny na komputerze, automatyczna szerokość */
+    column-gap: 20px !important;   /* Odstęp między kolumnami */
+    width: 100% !important;
 }
 
+/* Pojedynczy kafelek */
+.foogallery .fg-item {
+    display: inline-block !important; /* Wymagane przy columns, żeby elementy nie dzieliły się w połowie */
+    width: 100% !important;
+    margin-bottom: 20px !important;   /* Odstęp pionowy między kafelkami */
+    break-inside: avoid !important;   /* Zapobiega łamaniu kafelka na pół między kolumnami */
+    float: none !important;
+    height: auto !important;
+}
+
+/* Wnętrze kafelka */
 .foogallery .fg-item-inner {
     display: flex !important;
-    flex-direction: row !important;
+    flex-direction: column !important;
     align-items: center !important;
-    gap: 15px !important;
+    gap: 0px !important;
     width: 100% !important;
     padding: 10px !important; 
     border-radius: var(--radius-sm) !important;
@@ -27,7 +43,9 @@
     border: 1px solid rgba(255, 255, 255, 0.4) !important;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06) !important;
     transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, border-color 0.4s ease !important;
+    position: relative !important;
 }
+
 .foogallery .fg-item-inner::before {
     content: '' !important;
     position: absolute !important;
@@ -38,13 +56,14 @@
     transition: opacity 1s ease !important;
     z-index: -1 !important;
 }
+
 .foogallery .fg-item-inner:hover,
 .foogallery .fg-item-inner:focus-within {
     background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.45), rgba(0, 0, 0, 0.07)) !important;
     border-color: rgba(255, 255, 255, 0.8) !important;
-    transform: translateY(-3px) !important;
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12) !important;
 }
+
 .foogallery .fg-item-inner:hover .fg-image-overlay,
 .foogallery .fg-item-inner:focus-within .fg-image-overlay,
 .foogallery .fg-item-inner:hover .fg-caption-inner,
@@ -59,6 +78,8 @@
     opacity: 1 !important;
     transform: none !important;
 }
+
+/* Miniaturka */
 .foogallery .fg-thumb {
     flex: 0 0 auto !important;
     width: auto !important;
@@ -73,7 +94,10 @@
     max-width: 100% !important;
     height: auto !important;
     transform: none !important;
+    border-radius: var(--radius-sm) !important;
 }
+
+/* Opis i tekst */
 .foogallery .fg-caption {
     position: static !important;
     display: flex !important;
@@ -95,6 +119,7 @@
     transform: none !important;
     transition: none !important;
 }
+
 .foogallery .fg-caption-inner {
     position: static !important;
     display: flex !important;
@@ -127,12 +152,12 @@
     line-height: 1.5 !important;
     max-width: 100% !important;
     color: var(--c-text-muted) !important;
+    padding: 5px !important;
 }
 
 .foogallery .fg-caption-title {
     margin: 0 0 0.5rem !important;
     font-size: var(--fs-lg) !important;
-    font-weight: 600 !important;
     font-weight: 700 !important;
 }
 
@@ -151,6 +176,7 @@
     text-decoration: none !important;
 }
 
+/* Ukrycie domyślnych nakładek i kontrolek FooGallery */
 .foogallery .fg-image-overlay,
 .foogallery .fg-image-overlay:before,
 .foogallery .fg-caption-inner:before,
@@ -159,9 +185,11 @@
     opacity: 0 !important;
     visibility: hidden !important;
 }
+
 .foogallery .fg-image {
     border-radius: var(--radius-sm) !important;
 }
+
 .foogallery.fg-caption-hover .fg-caption .fg-caption-inner,
 .foogallery.fg-caption-always .fg-item.fg-loaded .fg-caption {
     visibility: visible !important;
@@ -180,6 +208,13 @@
     box-shadow: none !important;
 }
 
+/* Responsywność dla kolumn */
+@media (max-width: 1024px) {
+    .foogallery {
+        columns: 2 260px !important; /* 2 kolumny na tabletach */
+    }
+}
+
 @media (max-width: 768px) {
     .foogallery .fg-item-inner {
         flex-direction: column !important;
@@ -189,5 +224,11 @@
     .foogallery .fg-caption {
         max-width: 100% !important;
         min-width: 0 !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .foogallery {
+        columns: 1 100% !important; /* 1 kolumna na telefonach */
     }
 }

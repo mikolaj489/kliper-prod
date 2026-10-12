@@ -16,17 +16,47 @@
 }
 
 .anniversary__title-wrapper {
-
+    position: relative;
+    height: 100px;
 }
 
 .anniversary__title {
+    position: absolute;
+    z-index: 0;
+    top: 20%;
+    left: 50%;
     text-align: center;
     letter-spacing: .02em;
-    font-size: 60px;
+    font-size: 80px;
     line-height: 1.25;
+    font-family: var(--font-secondary);
+    font-style: italic;
+    font-weight: bold;
+    color: transparent;
+    background: linear-gradient(180deg, var(--c-secondary) 0%, rgba(0, 0, 0, 0) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    visibility: hidden;
+    transform: translate(-50%, 0);
+}
+
+@keyframes slideUpTitle {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 40px);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0); 
+    filter: blur(0px);
+  }
 }
 
 .anniversary__content {
+    z-index: 1;
+    position: relative;
     background-color: var(--c-bg-lt);
     border-radius: var(--radius-lg);
     padding: 2rem;

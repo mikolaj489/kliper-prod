@@ -5,6 +5,8 @@
     $text = get_field('anni_text');
     $excerpt = get_field('anni_excerpt');
     $author = get_field('anni_author');
+    $gallery = get_field('anni_gallery');
+    $gallery_id = is_object($gallery) ? $gallery->ID : $gallery;
 ?>
 
 <section class="anniversary container">
@@ -35,6 +37,13 @@
                     <p class="anniversary__author"><?php echo esc_html( $author ); ?></p>
                 <?php endif; ?>
             </div>
+        </div>
+        <div class="anniversary__gallery">
+            <?php if ( $gallery ) : ?>
+                <?php if (function_exists('foogallery_render_gallery')) {
+                    foogallery_render_gallery($gallery_id);
+                }?>
+            <?php endif; ?>
         </div>
     </div>
 </section>
