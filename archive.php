@@ -19,10 +19,12 @@ $archiwum_query = new WP_Query([
         </div>
         <?php endif; ?>
     </div>
+    <?php get_template_part('template-parts/section-templates/archive-content'); ?>
     <section class="news container">
         <?php if ($archiwum_query->have_posts()) : ?>
         <div class="news__container">
             <div class="news__content">
+                <h2 class="section__title section__title--archive">Wszystkie aktualności</h2>
                 <?php while ($archiwum_query->have_posts()) : $archiwum_query->the_post(); ?>
                     <?php
                         $content = apply_filters('the_content', get_the_content('', false, get_the_ID()));
