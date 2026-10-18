@@ -1,4 +1,5 @@
-@import url('../section-styles/archive-links.css');
+@import url('../components/album_card.css');
+@import url('../components/archive-modal-box.css');
 .section__title--archive {
     text-align: left;
     margin-block: 0;
