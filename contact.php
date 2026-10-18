@@ -23,20 +23,34 @@
     <section class="contact container">
         <div class="contact__container">
             <div class="contact__content">
-                <div class="contact__col styled-button">
-                    <h3 class="contact__title">E-mail zespołu</h3>
-                    <?php if ($team_email) : ?>
-                        <p class="contact__email"><?php echo esc_html($team_email); ?></p>
-                    <?php endif; ?>
+                <div class="contact__col">
+                    <div class="contact__card">
+                        <div class="contact__body">
+                            <h3 class="contact__title">Kontakt  telefoniczny:</h3>
+                        <?php if ($phone_number) : ?>
+                            <p class="contact__phone">tel. kom.: <?php  echo esc_html($phone_number); ?></p>
+                        <?php endif; ?>
+                        <?php if ($phone_contact_person) : ?>
+                            <p class="contact__phone-person"><?php echo esc_html($phone_contact_person); ?></p>
+                        <?php endif; ?>
+                        </div>
+                        <div class="contact-icon__container styled-button">
+                            <img class="contact-icon__image" src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/icons/phone.svg'); ?>">
+                        </div>
+                    </div>
                 </div>
-                <div class="contact__col styled-button">
-                    <h3 class="contact__title">Kontakt telefoniczny</h3>
-                    <?php if ($phone_number) : ?>
-                        <p class="contact__phone">tel. kom.: <?php echo esc_html($phone_number); ?></p>
-                    <?php endif; ?>
-                    <?php if ($phone_contact_person) : ?>
-                        <span class="contact__phone-person"><?php echo esc_html($phone_contact_person); ?></span>
-                    <?php endif; ?>
+               <div class="contact__col">
+                    <div class="contact__card contact__card--secondary">
+                        <div class="contact__body">
+                            <h3 class="contact__title">E-mail zespołu:</h3>
+                        <?php if ($team_email) : ?>
+                            <p class="contact__phone"><?php echo esc_html($team_email); ?></p>
+                        <?php endif; ?>
+                        </div>
+                        <div class="contact-icon__container styled-button">
+                            <img class="contact-icon__image" src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/icons/email.svg'); ?>">
+                        </div>
+                    </div>
                 </div>
             </div>
             <?php if ($messenger_note) : ?>

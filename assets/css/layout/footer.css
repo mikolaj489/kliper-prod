@@ -24,6 +24,13 @@
 .footer__col {
     font-size: var(--fs-base);
     line-height: 1.7em;
+    & a {
+        text-decoration: none;
+        color: var(--c-text-muted-lt);
+    }
+    & a:hover {
+        text-decoration: underline;
+    }
 }
 .footer__title {
     font-family: var(--font-secondary);

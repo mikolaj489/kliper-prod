@@ -63,7 +63,6 @@
     margin-block-start: 0;
     line-height: var(--lh-200); 
     font-size: var(--fs-md);
-    /* max-width: 75ch; */
     transition: max-height 0.35s ease, opacity 0.25s ease, margin-top 0.25s ease;
 }
 .news__card--expanded .news__card-excerpt {
@@ -86,7 +85,7 @@
     color: inherit;
     transition: transform 0.5s ease;;
     &:active {
-        transform: scale(.9);
+        transform: scale(.98);
     }
 }
 .news__card iframe,

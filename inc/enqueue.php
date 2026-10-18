@@ -5,6 +5,13 @@ function my_theme_enqueue_assets() {
     $css_path = get_template_directory() . '/dist/css/main.min.css';
     $js_path  = get_template_directory() . '/dist/js/main.min.js';
     wp_enqueue_style(
+        'kliper-fonts',
+        'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Brygada+1918:ital,wght@0,400..700;1,400..700&display=swap',
+        array(),
+        null
+    );
+
+    wp_enqueue_style(
         'kliper-style',
         get_stylesheet_uri(),
         array(),
@@ -14,7 +21,7 @@ function my_theme_enqueue_assets() {
     wp_enqueue_style(
         'my-theme-styles',
         get_template_directory_uri() . '/dist/css/main.min.css',
-        array( 'kliper-style' ), // ładuje się po kliper-style
+        array( 'kliper-style', 'kliper-fonts' ), // ładuje się po kliper-style i fontach
         file_exists($css_path) ? filemtime($css_path) : '1.0.0'
     );
 
@@ -32,6 +39,14 @@ function my_theme_enqueue_assets() {
         array(
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce'    => wp_create_nonce('album_nonce')
+        )
+    );
+
+    wp_localize_script(
+        'my-theme-scripts',
+        'kliperData',
+        array(
+            'themeUrl' => get_template_directory_uri()
         )
     );
 }
