@@ -25,7 +25,6 @@ if ($events->have_posts()) :
     wp_reset_postdata();
     krsort($grouped_events);
     foreach ($grouped_events as $year_name => $year_events) : ?>
-        <div></div>
         <div class="archive-year-block">
             <h3 class="year-title">ROK <?php echo esc_html($year_name); ?></h3>
             
