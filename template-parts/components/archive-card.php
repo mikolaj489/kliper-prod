@@ -41,7 +41,7 @@ if ($events->have_posts()) :
                             <span class="event-dot">•</span>
                             
                             <?php if ($has_content) : ?>
-                                <a href="<?php echo esc_url($event['permalink']); ?>" class="event-link" data-modal-id="modal-<?php echo $event['id']; ?>">
+                                <a href="#modal-<?php echo esc_attr($event['id']); ?>" class="event-link" data-modal-id="modal-<?php echo esc_attr($event['id']); ?>">
                                     <?php echo esc_html($event['title']); ?>
                                 </a>
                                 

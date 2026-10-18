@@ -1,4 +1,5 @@
 @import url('../components/archive-card.css');
+@import url('../components/lightbox.css');
 .section__title--archive {
     text-align: left;
     margin-block: 0;

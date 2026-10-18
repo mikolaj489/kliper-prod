@@ -1,3 +1,36 @@
+document.addEventListener('click', (event) => {
+    if (!(event.target instanceof Element)) return;
+
+    const link = event.target.closest('.event-link');
+    if (link) {
+        event.preventDefault();
+        const modalId = link.dataset.modalId;
+        const modal = modalId ? document.getElementById(modalId) : null;
+
+        if (modal) {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        return;
+    }
+
+    const closeButton = event.target.closest('.modal-box__close');
+    if (closeButton) {
+        const modal = closeButton.closest('.modal-box');
+        if (modal) closeModal(modal);
+        return;
+    }
+
+    if (event.target.classList.contains('modal-box')) {
+        closeModal(event.target);
+    }
+});
+
+function closeModal(modalElement) {
+    modalElement.style.display = 'none';
+    document.body.style.overflow = '';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof GLightbox === 'undefined') return;
     const lightbox = GLightbox({
@@ -6,8 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
         loop: true,
         closeOnOutsideClick: false,
         openEffect: 'none',
-        closeEffect: 'none',
-        slideEffect: 'none',
+        closeEffect: 'fade',
+        slideEffect: 'slide',
     });
 
     let thumbnails = null;
@@ -43,14 +76,14 @@ document.addEventListener('DOMContentLoaded', () => {
         previousButton.className = 'archive-gallery-controls__arrow';
         previousButton.dataset.direction = '-1';
         previousButton.setAttribute('aria-label', 'Poprzednie zdjęcie');
-        previousButton.textContent = '‹';
+        previousButton.innerHTML = '&#8249;';
 
         const nextButton = document.createElement('button');
         nextButton.type = 'button';
         nextButton.className = 'archive-gallery-controls__arrow';
         nextButton.dataset.direction = '1';
         nextButton.setAttribute('aria-label', 'Następne zdjęcie');
-        nextButton.textContent = '›';
+        nextButton.innerHTML= '&#8250;';
 
         thumbnails = document.createElement('div');
         thumbnails.className = 'archive-gallery-thumbnails';
@@ -106,37 +139,4 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.glightbox-container')?.classList.remove('has-archive-thumbnails');
     });
 
-    document.addEventListener('click', (e) => {
-        const link = e.target.closest('.event-link');
-        if (link) {
-            e.preventDefault();
-            const modalId = link.getAttribute('data-modal-id');
-            const targetModal = document.getElementById(modalId);
-            
-            if (targetModal) {
-                targetModal.style.display = 'flex';
-                document.body.style.overflow = 'hidden'; 
-            }
-        }
-    });
-
-    document.addEventListener('click', (e) => {
-        const closeBtn = e.target.closest('.modal-box__close');
-        if (closeBtn) {
-            const modal = closeBtn.closest('.modal-box');
-            if (modal) {
-                closeModal(modal);
-            }
-        }
-    });
-
-    document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('modal-box')) {
-            closeModal(e.target);
-        }
-    });
-    function closeModal(modalElement) {
-        modalElement.style.display = 'none';
-        document.body.style.overflow = '';
-    }
-})
+});
