@@ -22,7 +22,7 @@ $archiwum_query = new WP_Query([
     <section class="archive__content container">
         <?php get_template_part('template-parts/components/archive-card'); ?>
     </section>
-    <section class="news container">
+    <section id="news-all" class="news container">
         <?php if ($archiwum_query->have_posts()) : ?>
         <div class="news__container">
             <div class="news__content">

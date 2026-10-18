@@ -18,6 +18,10 @@
     max-width: 1000px;
     margin: 0 auto;
 }
+#news-all {
+  scroll-margin-top: 50px;
+}
+
 @media (max-width: 500px) {
     .section__title--archive {
         font-size: var(--fs-lg);

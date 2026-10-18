@@ -57,7 +57,6 @@
     justify-content: center;
     overflow-y: auto;
 }
-
 .modal-box__container {
     background-color: var(--c-bg-lt);
     padding: 2rem;
@@ -77,6 +76,17 @@
     cursor: pointer;
     color: #333;
     &:hover {
-        color: #ff0000;
+        color: var(--c-secondary);
+    }
+}
+.modal-box__title {
+    font-size: var(--fs-md);
+    line-height: var(--lh-200);
+    margin-block-end: 1rem;
+}
+.modal-box__body {
+    text-align: center;
+    & img {
+        width: 100%;
     }
 }
