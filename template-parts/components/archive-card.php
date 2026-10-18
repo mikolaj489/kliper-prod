@@ -1,66 +1,69 @@
 <?php
-$years = get_terms([
-    'taxonomy'   => 'rok_archiwum',
-    'hide_empty' => true,
-    'orderby'    => 'name',
-    'order'      => 'DESC',
+$events = new WP_Query([
+    'post_type'      => 'archiwum',
+    'posts_per_page' => -1,
+    'orderby'        => 'date',
+    'order'          => 'ASC',
 ]);
 
-if (!empty($years) && !is_wp_error($years)) :
-    foreach ($years as $year) : ?>
-        
+if ($events->have_posts()) :
+    $grouped_events = [];
+    while ($events->have_posts()) : $events->the_post();
+        $terms = get_the_terms(get_the_ID(), 'rok_archiwum');
+        if ($terms && !is_wp_error($terms)) {
+            foreach ($terms as $term) {
+                $grouped_events[$term->name][] = [
+                    'id'          => get_the_ID(),
+                    'title'       => get_the_title(),
+                    'permalink'   => get_permalink(),
+                    'content'     => get_the_content(),
+                    'event_date'  => get_post_meta(get_the_ID(), 'data_wydarzenia', true),
+                ];
+            }
+        }
+    endwhile;
+    wp_reset_postdata();
+    krsort($grouped_events);
+    foreach ($grouped_events as $year_name => $year_events) : ?>
+        <div></div>
         <div class="archive-year-block">
-            <h3 class="year-title">ROK <?php echo esc_html($year->name); ?></h3>
+            <h3 class="year-title">ROK <?php echo esc_html($year_name); ?></h3>
             
             <div class="events-card">
                 <ul class="events-list">
-                    <?php
-                    // Pobieramy wydarzenia dla danego roku
-                    $events = new WP_Query([
-                        'post_type'      => 'archiwum',
-                        'posts_per_page' => -1,
-                        'tax_query'      => [[
-                            'taxonomy' => 'rok_archiwum',
-                            'field'    => 'term_id',
-                            'terms'    => $year->term_id,
-                        ]],
-                        'orderby'        => 'date',
-                        'order'          => 'ASC',
-                    ]);
-
-                    if ($events->have_posts()) :
-                        while ($events->have_posts()) : $events->the_post();
-                            $event_date = get_post_meta(get_the_ID(), 'data_wydarzenia', true);
-                            ?>
-                            <li class="event-item">
-                                <?php if ($event_date) : ?>
-                                    <span class="event-badge"><?php echo esc_html($event_date); ?></span>
-                                <?php endif; ?>
-                        
-                                <span class="event-dot">•</span>
-                                
-                                <a href="<?php the_permalink(); ?>" class="event-link">
-                                    <?php the_title(); ?>
+                    <?php foreach ($year_events as $event) : 
+                        $has_content = !empty(trim($event['content']));
+                    ?>
+                        <li class="event-item">
+                            <?php if ($event['event_date']) : ?>
+                                <span class="event-badge"><?php echo esc_html($event['event_date']); ?></span>
+                            <?php endif; ?>
+                    
+                            <span class="event-dot">•</span>
+                            
+                            <?php if ($has_content) : ?>
+                                <a href="<?php echo esc_url($event['permalink']); ?>" class="event-link" data-modal-id="modal-<?php echo $event['id']; ?>">
+                                    <?php echo esc_html($event['title']); ?>
                                 </a>
-                                <div id="modal-<?php the_ID(); ?>" class="archive__modal-box" style="display: none;">
-                                    <div class="modal-content">
-                                        <span class="modal-box__close">&times;</span>
-                                        <h2><?php the_title(); ?></h2>
-                                        <div class="modal-body">
-                                            <?php the_content();  ?>
+                                
+                                <div id="modal-<?php echo $event['id']; ?>" class="modal-box container" style="display: none;">
+                                    <div class="modal-box__container">
+                                        <div class="modal-box__content">
+                                            <span class="modal-box__close">&times;</span>
+                                            <h2><?php echo esc_html($event['title']); ?></h2>
+                                            <?php echo apply_filters('the_content', $event['content']); ?>
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                            <?php
-                        endwhile;
-                        wp_reset_postdata();
-                    endif;
-                    ?>
+                            <?php else : ?>
+                             
+                                <span class="event-title-no-link"><?php echo esc_html($event['title']); ?></span>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </div>
-
     <?php endforeach;
 endif;
 ?>

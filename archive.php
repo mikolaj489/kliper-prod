@@ -19,8 +19,9 @@ $archiwum_query = new WP_Query([
         </div>
         <?php endif; ?>
     </div>
-    <?php get_template_part('template-parts/components/archive-card'); ?>
-    <?php get_template_part('template-parts/components/archive-modal-box'); ?>
+    <section class="archive__content container">
+        <?php get_template_part('template-parts/components/archive-card'); ?>
+    </section>
     <section class="news container">
         <?php if ($archiwum_query->have_posts()) : ?>
         <div class="news__container">

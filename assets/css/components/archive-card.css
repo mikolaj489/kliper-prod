@@ -1,0 +1,79 @@
+.year-title {
+    font-family: var(--font-secondary);
+    color: var(--c-secondary);
+    font-size: var(--fs-lg);
+    text-align: center;
+    font-weight: bold;
+    font-style: italic;
+    text-shadow: 0px 2px 4px 0px rgba(171, 144, 103, 1);
+    margin-block-end: .5rem;
+}
+.events-card {
+    border: 2px solid var(--c-text-muted);
+    border-radius: var(--radius-sm);
+    box-shadow: inset 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 1.2rem;
+}
+.archive-year-block {
+    margin-block-end: 2rem;
+    &:last-child {
+        margin-block-end: 0;
+    }
+}
+.events-list {
+    list-style-type: none;
+}
+.event-badge {
+    padding-inline: 12px;
+    padding-block: 5px;
+    background-color: var(--c-secondary);
+    color: var(--c-text-secondary);
+    border-radius: var(--radius-lg);
+}
+.event-item {
+    color: var(--c-text-muted);
+    line-height: 1.5;
+    margin-block-end: .5rem;
+}
+.event-link {
+    color: var(--c-text-muted);
+    transition: .2s;
+    &:hover {
+        color: var(--c-text-primary);
+        margin-inline-start: .5rem;
+    }
+}
+.modal-box {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+}
+
+.modal-box__container {
+    background-color: var(--c-bg-lt);
+    padding: 2rem;
+    border-radius: var(--radius-sm);
+    width: 100%;
+    max-width: 600px;
+    position: relative; 
+    margin: auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+.modal-box__close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    &:hover {
+        color: #ff0000; 
+    }
+}

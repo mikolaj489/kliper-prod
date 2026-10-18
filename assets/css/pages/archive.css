@@ -1,5 +1,4 @@
-@import url('../components/album_card.css');
-@import url('../components/archive-modal-box.css');
+@import url('../components/archive-card.css');
 .section__title--archive {
     text-align: left;
     margin-block: 0;
@@ -12,6 +11,11 @@
         width: 100%; height: 2px;
         background-color: var(--c-text-muted-lt);
     }
+}
+.archive__content {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 @media (max-width: 500px) {
     .section__title--archive {
