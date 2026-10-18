@@ -79,6 +79,11 @@ function kliper_enqueue_hero_animation() {
 }
 add_action('wp_enqueue_scripts', 'kliper_enqueue_hero_animation');
 
+add_action('wp_enqueue_scripts', function () {
+    wp_enqueue_style('glightbox', 'https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css', [], '3.3.0');
+    wp_enqueue_script('glightbox', 'https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/js/glightbox.min.js', [], '3.3.0', true);
+});
+
 // function auto_lightbox_to_images($content) {
 //     // Szuka tagów <img> i owija je w link prowadzący do pełnego obrazu, dodając klasę do obsługi lightboxa
 //     $pattern = '/<img([^>]+)src=[\"\']([^\'\"]+)[\"\']([^>]*)>/i';

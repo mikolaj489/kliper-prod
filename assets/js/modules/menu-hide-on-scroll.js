@@ -12,7 +12,7 @@ export function initNavHideOnScroll() {
         let marginTop = parseFloat(styles.marginTop) || 0;
         let marginBottom = parseFloat(styles.marginBottom) || 0;
         let totalHeight = baseHeight + marginTop + marginBottom;
-        nav.style.transform = `translateY(-${totalHeight + 20}px)`;
+        nav.style.transform = `translateY(-${totalHeight + 50}px)`;
       } else {
         nav.style.transform = 'translateY(0)';
       }

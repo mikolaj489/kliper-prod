@@ -50,7 +50,12 @@ if ($events->have_posts()) :
                                         <div class="modal-box__content">
                                             <span class="modal-box__close">&times;</span>
                                             <h2><?php echo esc_html($event['title']); ?></h2>
-                                            <?php echo apply_filters('the_content', $event['content']); ?>
+                                            <?php
+                                                echo kliper_glightbox_content(
+                                                    apply_filters('the_content', $event['content']),
+                                                    'archive-gallery'
+                                                );
+                                                ?>
                                         </div>
                                     </div>
                                 </div>
