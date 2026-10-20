@@ -86,7 +86,8 @@ box-shadow:
 .menu.is-open .hamburger-toggle-img {
     transform: rotate(90deg); 
 }
-.current_page_item {
+.current_page_item,
+.current-menu-item {
     box-shadow:
         0 2px 10px rgba(181, 139, 76, 0.762),
         0 3px 0px rgba(181, 139, 76, 0.677),

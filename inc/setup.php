@@ -19,6 +19,19 @@ function add_menu_link_class($atts, $item, $args) {
 }
 add_filter('nav_menu_link_attributes', 'add_menu_link_class', 10, 3);
 
+function custom_theme_mark_archive_menu_item($classes, $item, $args) {
+    if (
+        (is_post_type_archive('archiwum') || is_page_template('archive.php'))
+        && 'post_type_archive' === $item->type
+        && 'archiwum' === $item->object
+    ) {
+        $classes[] = 'current-menu-item';
+    }
+
+    return $classes;
+}
+add_filter('nav_menu_css_class', 'custom_theme_mark_archive_menu_item', 10, 3);
+
 add_action('after_setup_theme', 'custom_theme_setup');
 
 add_action('admin_init', function() {
@@ -35,4 +48,3 @@ if (function_exists('acf_add_options_page')) {
         'redirect'      => false
     ));
 }
-

@@ -33,7 +33,7 @@
 .event-item {
     color: var(--c-text-muted);
     line-height: 1.5;
-    margin-block-end: .5rem;
+    margin-block-end: .8rem;
     &:last-child {
         margin-block-end: 0;
     }
