@@ -9,13 +9,17 @@ $archiwum_query = new WP_Query([
     'orderby'        => 'date',
     'order'          => 'DESC',
 ]);
+$archiwum_page = get_page_by_path('archiwum');
+$page_id = $archiwum_page ? $archiwum_page->ID : 0;
+
+$welcome_text = get_field('section_subtext', $page_id);
 ?>
 <main class="content-area">
     <div class="page-welcome container">
         <h1 class="page-welcome__title">
             <?= esc_html( is_post_type_archive('archiwum') ? post_type_archive_title('', false) : get_the_title() ); ?>
         </h1>
-        <?php $welcome_text = get_field('section_subtext'); if ($welcome_text) : ?>
+            <?php if ($welcome_text) : ?>
         <div class="page-welcome__text">
             <?php echo wp_kses_post($welcome_text); ?>
         </div>

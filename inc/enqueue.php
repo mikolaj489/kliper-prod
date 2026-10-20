@@ -99,14 +99,16 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_script('glightbox', 'https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/js/glightbox.min.js', [], '3.3.0', true);
 });
 
-// function auto_lightbox_to_images($content) {
-//     // Szuka tagów <img> i owija je w link prowadzący do pełnego obrazu, dodając klasę do obsługi lightboxa
-//     $pattern = '/<img([^>]+)src=[\"\']([^\'\"]+)[\"\']([^>]*)>/i';
-    
-//     // Zamieniamy na link otaczający obrazek (dostosuj klasę "fslightbox", "lightbox" lub inną w zależności od tego, jakiego lightboxa używa Twój motyw)
-//     $replacement = '<a href="$2" class="lightbox-image" data-fslightbox="archive-gallery"><img$1src="$2"$3></a>';
-    
-//     $content = preg_replace($pattern, $replacement, $content);
-//     return $content;
-// }
-// add_filter('the_content', 'auto_lightbox_to_images', 20);
+function _custom_logo_header_styles() {
+    if ( ! current_theme_supports( 'custom-header', 'header-text' )
+        && get_theme_support( 'custom-logo', 'header-text' )
+        && ! get_theme_mod( 'header_text', true )
+    ) {
+        $classes = (array) get_theme_support( 'custom-logo', 'header-text' );
+        $classes = array_map( 'sanitize_html_class', $classes );
+        $classes = '.' . implode( ', .', $classes );
+        ?>
+        <?php
+    }
+}
+add_action( 'wp_head', '_custom_logo_header_styles', 10 );
