@@ -18,27 +18,23 @@
     box-sizing: border-box !important;
 }
 
-/* CSS columns create a masonry layout that is supported by Safari. */
+/* Prawdziwy efekt płynięcia (Masonry) za pomocą kolumn CSS */
 .foogallery,
 .foogallery.fg-default {
     display: block !important;
-    columns: 4 280px !important;
-    column-gap: 20px !important;
-    column-fill: balance !important;
+    columns: 4 280px !important; /* 3 kolumny na komputerze, automatyczna szerokość */
+    column-gap: 20px !important;   /* Odstęp między kolumnami */
     width: 100% !important;
-    height: auto !important;
 }
 
 /* Pojedynczy kafelek */
 .foogallery .fg-item {
-    display: inline-block !important;
-    position: static !important;
+    display: inline-block !important; /* Wymagane przy columns, żeby elementy nie dzieliły się w połowie */
     width: 100% !important;
-    margin: 0 0 20px !important;
+    margin-bottom: 20px !important;   /* Odstęp pionowy między kafelkami */
+    break-inside: avoid !important;   /* Zapobiega łamaniu kafelka na pół między kolumnami */
     float: none !important;
     height: auto !important;
-    break-inside: avoid !important;
-    -webkit-column-break-inside: avoid !important;
 }
 
 /* Wnętrze kafelka */
@@ -226,7 +222,7 @@
 /* Responsywność dla kolumn */
 @media (max-width: 1024px) {
     .foogallery {
-        columns: 2 260px !important;
+        columns: 2 260px !important; /* 2 kolumny na tabletach */
     }
 }
 
@@ -244,6 +240,6 @@
 
 @media (max-width: 640px) {
     .foogallery {
-        columns: 1 100% !important;
+        columns: 1 100% !important; /* 1 kolumna na telefonach */
     }
 }
